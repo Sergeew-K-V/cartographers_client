@@ -2,7 +2,7 @@ import './globals.css';
 
 export const metadata = {
   title: 'Cartographers',
-  description: 'Cartographers - web version',
+  description: 'Cartographers game',
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {

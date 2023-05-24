@@ -1,3 +1,4 @@
-import Input from './Input';
+import Input from './core/Input';
+import LoginForm from './forms/LoginForm';
 
-export { Input };
+export { Input,LoginForm };
