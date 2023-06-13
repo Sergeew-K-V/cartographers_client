@@ -1,4 +1,4 @@
-import { LoginForm } from '@/components';
+import { LoginForm } from '@/features/Login';
 
 const Home = () => {
   return (

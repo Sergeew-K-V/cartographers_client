@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { IUser } from '@/app/types';
 import { Input } from '@/shared/ui';
+import { IUser } from '../types';
 
 const LoginForm = (): JSX.Element => {
   const [user, setUser] = useState<IUser>({ login: '', password: '' });
