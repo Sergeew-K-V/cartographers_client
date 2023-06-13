@@ -13,6 +13,7 @@ const LoginForm = (): JSX.Element => {
 
   return (
     <form className="p-10 bg-slate-50 border-black border rounded-lg ">
+      <h1 className="font-bold text-2xl mb-3">Login</h1>
       <Input
         labelText={'Your login'}
         placeholder={'Login'}
