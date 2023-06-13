@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { Button, Input } from '@/shared/ui';
 import { IUser } from '../types';
 
@@ -11,8 +11,15 @@ const LoginForm = (): JSX.Element => {
     setUser({ ...user, [fieldName]: value });
   };
 
+  const handleSubmit = (event: FormEvent | React.MouseEvent<HTMLElement>) => {
+    event?.preventDefault();
+  };
+
   return (
-    <form className="p-10 bg-slate-50 border-black border rounded-lg ">
+    <form
+      className="p-10 bg-slate-50 border-black border rounded-lg"
+      onSubmit={handleSubmit}
+    >
       <h1 className="font-bold text-2xl mb-3">Login</h1>
       <Input
         labelText={'Your login'}
@@ -46,7 +53,9 @@ const LoginForm = (): JSX.Element => {
           Remember me
         </label>
       </div>
-      <Button>Login</Button>
+      <Button onClick={handleSubmit} type="submit">
+        Login
+      </Button>
     </form>
   );
 };
