@@ -1,15 +1,5 @@
-interface InputProps {
-  labelText: string;
-  placeholder: string;
-  name: string;
-  value?: string | null;
-  handleChange: (fieldName: string, value: string | number) => void;
-  className?: string;
-  type?: string;
-  required?: boolean;
-  readonly?: boolean;
-  disabled?: boolean;
-}
+import { InputProps } from '../types';
+
 const Input = ({
   labelText,
   name,
@@ -34,7 +24,7 @@ const Input = ({
         id={name.toString()}
         type={type ? type : 'text'}
         value={value ? value : ''}
-        onChange={(event) => handleChange(name.toString(), event.target.value)}
+        onChange={(event) => handleChange(event.target.value, name.toString())}
         placeholder={placeholder}
         required={required}
         disabled={disabled}

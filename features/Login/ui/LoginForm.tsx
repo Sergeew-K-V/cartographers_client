@@ -7,7 +7,7 @@ import { IUser } from '../types';
 const LoginForm = (): JSX.Element => {
   const [user, setUser] = useState<IUser>({ login: '', password: '' });
 
-  const handleChange = (fieldName: string, value: string | number) => {
+  const handleChange = (value: string | number, fieldName: string) => {
     setUser({ ...user, [fieldName]: value });
   };
 
