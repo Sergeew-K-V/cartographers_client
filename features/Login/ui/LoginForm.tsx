@@ -8,7 +8,7 @@ import { Button, Input, LinkButton } from '@/shared/ui';
 const LoginForm = (): JSX.Element => {
   const [user, setUser] = useState<IUser>({ email: '', password: '' });
 
-  const handleChange = (value: string | number, fieldName?: string) => {
+  const handleChange = (value: string, fieldName?: string) => {
     fieldName && setUser({ ...user, [fieldName]: value });
   };
 

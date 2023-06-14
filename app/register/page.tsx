@@ -9,11 +9,11 @@ const RegisterPage = () => {
   const [user, setUser] = useState<IUser>({ email: '', password: '' });
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-  const handleChange = (value: string | number, fieldName?: string) => {
+  const handleChange = (value: string, fieldName?: string) => {
     if (fieldName) {
       setUser({ ...user, [fieldName]: value });
     } else {
-      setConfirmPassword(value as string);
+      setConfirmPassword(value);
     }
   };
 

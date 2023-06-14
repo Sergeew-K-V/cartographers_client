@@ -7,8 +7,8 @@ import { Input, LinkButton } from '@/shared/ui';
 const ForgotPasswordPage = (): JSX.Element => {
   const [recoverEmail, setRecoverEmail] = useState<string>('');
 
-  const handleChange = (value: string | number) => {
-    setRecoverEmail(value as string);
+  const handleChange = (value: string) => {
+    setRecoverEmail(value);
   };
 
   return (
@@ -35,7 +35,7 @@ const ForgotPasswordPage = (): JSX.Element => {
                 labelText="Email"
                 placeholder="Your email"
                 handleChange={handleChange}
-                type="password"
+                type="email"
               />
               <LinkButton
                 className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-primary-600 border border-transparent rounded-lg active:bg-primary-600 hover:bg-primary-700 focus:outline-none focus:shadow-outline-primary"

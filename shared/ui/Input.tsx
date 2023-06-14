@@ -4,8 +4,8 @@ interface InputProps {
   name?: string;
   value?: string | null;
   handleChange:
-    | ((value: string | number, fieldName?: string) => void)
-    | ((value: string | number) => void);
+    | ((value: string, fieldName?: string) => void)
+    | ((value: string) => void);
   className?: string;
   type?: string;
   required?: boolean;
