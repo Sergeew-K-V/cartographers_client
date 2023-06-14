@@ -1,4 +1,15 @@
-import { InputProps } from '../types';
+interface InputProps {
+  labelText: string;
+  placeholder: string;
+  name: string;
+  value?: string | null;
+  handleChange: (value: string | number, fieldName: string) => void;
+  className?: string;
+  type?: string;
+  required?: boolean;
+  readonly?: boolean;
+  disabled?: boolean;
+}
 
 const Input = ({
   labelText,

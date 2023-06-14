@@ -1,4 +1,11 @@
-import { ButtonProps } from '../types';
+import { FormEvent, ReactNode } from 'react';
+
+interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset';
+  className?: string;
+  onClick: (event: FormEvent | React.MouseEvent<HTMLElement>) => void;
+  children: ReactNode;
+}
 
 const Button = ({
   children,

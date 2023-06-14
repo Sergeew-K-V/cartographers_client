@@ -1,11 +1,11 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
+import { IUser } from '@/shared/api';
 import { Button, Input } from '@/shared/ui';
-import { IUser } from '../types';
 
 const LoginForm = (): JSX.Element => {
-  const [user, setUser] = useState<IUser>({ login: '', password: '' });
+  const [user, setUser] = useState<IUser>({ email: '', password: '' });
 
   const handleChange = (value: string | number, fieldName: string) => {
     setUser({ ...user, [fieldName]: value });
@@ -22,15 +22,15 @@ const LoginForm = (): JSX.Element => {
     >
       <h1 className="font-bold text-2xl mb-3">Login</h1>
       <Input
-        labelText={'Your login'}
-        placeholder={'Login'}
-        name={'login'}
-        value={user?.login}
+        labelText={'Email'}
+        placeholder={'Your email'}
+        name={'email'}
+        value={user?.email}
         handleChange={handleChange}
       />
       <Input
-        labelText={'Your password'}
-        placeholder={'Password'}
+        labelText={'Password'}
+        placeholder={'Your password'}
         name={'password'}
         type="password"
         value={user?.password}
