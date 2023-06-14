@@ -1,14 +1,17 @@
 interface InputProps {
   labelText: string;
   placeholder: string;
-  name: string;
+  name?: string;
   value?: string | null;
-  handleChange: (value: string | number, fieldName: string) => void;
+  handleChange:
+    | ((value: string | number, fieldName?: string) => void)
+    | ((value: string | number) => void);
   className?: string;
   type?: string;
   required?: boolean;
   readonly?: boolean;
   disabled?: boolean;
+  id?: string;
 }
 
 const Input = ({
@@ -22,20 +25,21 @@ const Input = ({
   required,
   type,
   className,
+  id,
 }: InputProps): JSX.Element => {
   return (
     <div className="mb-6">
       <label
-        htmlFor={name.toString()}
+        htmlFor={id?.toString()}
         className="block mb-2 text-sm font-medium text-secondary-900"
       >
         {labelText}
       </label>
       <input
-        id={name.toString()}
+        id={id?.toString()}
         type={type ? type : 'text'}
         value={value ? value : ''}
-        onChange={(event) => handleChange(event.target.value, name.toString())}
+        onChange={(event) => handleChange(event.target.value, name?.toString())}
         placeholder={placeholder}
         required={required}
         disabled={disabled}
