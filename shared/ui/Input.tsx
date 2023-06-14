@@ -41,7 +41,7 @@ const Input = ({
         disabled={disabled}
         readOnly={readonly}
         className={
-          'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' +
+          'bg-primary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,255)] ' +
           (className ? className : '')
         }
       />

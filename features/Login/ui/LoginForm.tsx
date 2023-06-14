@@ -17,7 +17,7 @@ const LoginForm = (): JSX.Element => {
 
   return (
     <form
-      className="p-10 bg-slate-50 border-black border rounded-lg"
+      className="p-10 bg-secondary-50 border-secondary-500 border rounded-lg"
       onSubmit={handleSubmit}
     >
       <h1 className="font-bold text-2xl mb-3">Login</h1>
@@ -42,13 +42,13 @@ const LoginForm = (): JSX.Element => {
             id="remember"
             type="checkbox"
             value=""
-            className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+            className="w-4 h-4 border border-secondary-300 rounded bg-secondary-50 focus:ring-3 focus:ring-primary-300"
             required
           />
         </div>
         <label
           htmlFor="remember"
-          className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          className="ml-2 text-sm font-medium text-secondary-900 "
         >
           Remember me
         </label>
