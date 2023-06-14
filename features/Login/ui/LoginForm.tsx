@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from 'react';
 import { IUser } from '@/shared/api';
-import { Button, Input } from '@/shared/ui';
+import { Button, Input, LinkButton } from '@/shared/ui';
 
 const LoginForm = (): JSX.Element => {
   const [user, setUser] = useState<IUser>({ email: '', password: '' });
@@ -52,6 +52,10 @@ const LoginForm = (): JSX.Element => {
         >
           Remember me
         </label>
+      </div>
+      <div className="flex flex-col justify-between mb-3">
+        <LinkButton href="/register">Create account</LinkButton>
+        <LinkButton href="/register">Forgot you password?</LinkButton>
       </div>
       <Button onClick={handleSubmit} type="submit">
         Login
