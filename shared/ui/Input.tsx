@@ -27,7 +27,7 @@ const Input = ({
     <div className="mb-6">
       <label
         htmlFor={name.toString()}
-        className="block mb-2 text-sm font-medium text-gray-900 "
+        className="block mb-2 text-sm font-medium text-secondary-900"
       >
         {labelText}
       </label>
@@ -41,7 +41,7 @@ const Input = ({
         disabled={disabled}
         readOnly={readonly}
         className={
-          'bg-primary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,255)] ' +
+          'bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,255)] ' +
           (className ? className : '')
         }
       />
