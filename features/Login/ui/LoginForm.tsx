@@ -2,13 +2,13 @@
 
 import { FormEvent, useState } from 'react';
 import { IUser } from '@/shared/api';
-import { Button, Input, LinkButton } from '@/shared/ui';
+import { Button, Checkbox, Input, LinkButton } from '@/shared/ui';
 
 const LoginForm = (): JSX.Element => {
   const [user, setUser] = useState<IUser>({ email: '', password: '' });
 
-  const handleChange = (value: string | number, fieldName: string) => {
-    setUser({ ...user, [fieldName]: value });
+  const handleChange = (value: string | number, fieldName?: string) => {
+    fieldName && setUser({ ...user, [fieldName]: value });
   };
 
   const handleSubmit = (event: FormEvent | React.MouseEvent<HTMLElement>) => {
@@ -17,7 +17,7 @@ const LoginForm = (): JSX.Element => {
 
   return (
     <form
-      className="p-10 bg-secondary-50 border-secondary-500 border rounded-lg"
+      className="p-10 bg-white shadow-2xl rounded-lg"
       onSubmit={handleSubmit}
     >
       <h1 className="font-bold text-2xl mb-3">Login</h1>
@@ -25,6 +25,7 @@ const LoginForm = (): JSX.Element => {
         labelText={'Email'}
         placeholder={'Your email'}
         name={'email'}
+        id={'email'}
         value={user?.email}
         handleChange={handleChange}
       />
@@ -32,26 +33,18 @@ const LoginForm = (): JSX.Element => {
         labelText={'Password'}
         placeholder={'Your password'}
         name={'password'}
+        id={'password'}
         type="password"
         value={user?.password}
         handleChange={handleChange}
       />
       <div className="flex items-start mb-6">
         <div className="flex items-center h-5">
-          <input
-            id="remember"
-            type="checkbox"
-            value=""
+          <Checkbox
+            labelText={'Remember me'}
             className="w-4 h-4 border border-secondary-300 rounded bg-secondary-50 focus:ring-3 focus:ring-primary-300"
-            required
           />
         </div>
-        <label
-          htmlFor="remember"
-          className="ml-2 text-sm font-medium text-secondary-900 "
-        >
-          Remember me
-        </label>
       </div>
       <div className="flex flex-col justify-between mb-3">
         <LinkButton href="/register">Create account</LinkButton>
