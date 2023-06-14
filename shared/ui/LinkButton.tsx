@@ -13,10 +13,7 @@ const LinkButton = ({
   className,
 }: LinkButtonProps): JSX.Element => {
   return (
-    <Link
-      href={href}
-      className={`text-primary-600 py-1 hover:underline ${className}`}
-    >
+    <Link href={href} className={`py-1 hover:underline ${className}`}>
       {children}
     </Link>
   );

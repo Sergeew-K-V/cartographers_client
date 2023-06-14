@@ -80,10 +80,14 @@ const LoginForm = (): JSX.Element => {
               Twitter
             </button>
             <p className="mt-4">
-              <LinkButton href="/register">Forgot your password?</LinkButton>
+              <LinkButton href="/forgotPassword" className="text-primary-600">
+                Forgot your password?
+              </LinkButton>
             </p>
             <p className="mt-1">
-              <LinkButton href="/register">Create account</LinkButton>
+              <LinkButton href="/register" className="text-primary-600">
+                Create account
+              </LinkButton>
             </p>
           </div>
         </div>

@@ -61,7 +61,7 @@ const RegisterPage = () => {
                 handleChange={handleChange}
               />
 
-              <div className="flex my-4 text-sm">
+              <div className="flex mb-4 text-sm">
                 <Checkbox labelText="I agree to the privacy policy" />
               </div>
 
