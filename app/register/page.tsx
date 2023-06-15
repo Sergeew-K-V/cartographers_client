@@ -1,14 +1,17 @@
 'use client';
 
+import axios from 'axios';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { FormEvent, useState } from 'react';
+import { useMutation } from 'react-query';
 import { IUser } from '@/shared/api';
 import { Button, Checkbox, Input, LinkButton } from '@/shared/ui';
 
 const RegisterPage = () => {
   const [user, setUser] = useState<IUser>({ email: '', password: '' });
   const [confirmPassword, setConfirmPassword] = useState<string>('');
-
+  const { push } = useRouter();
   const handleChange = (value: string, fieldName?: string) => {
     if (fieldName) {
       setUser({ ...user, [fieldName]: value });
@@ -17,9 +20,26 @@ const RegisterPage = () => {
     }
   };
 
+  const handleSubmit = (event: FormEvent | undefined) => {
+    event?.preventDefault();
+    registerMutation.mutate();
+  };
+
+  const registerMutation = useMutation({
+    mutationFn: () => {
+      return axios.post('http://localhost:8080/register', user);
+    },
+    onSuccess: (response) => {
+      push('/login');
+    },
+  });
+
   return (
     <main className="flex items-center min-h-screen p-6 bg-secondary-50">
-      <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl">
+      <form
+        className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl"
+        onSubmit={handleSubmit}
+      >
         <div className="flex flex-col overflow-y-auto md:flex-row">
           <div className="h-32 md:h-auto md:w-1/2">
             <Image
@@ -58,6 +78,7 @@ const RegisterPage = () => {
                 labelText={'Confirm password'}
                 placeholder={'Confirm password'}
                 value={confirmPassword}
+                type="password"
                 handleChange={handleChange}
               />
 
@@ -65,10 +86,7 @@ const RegisterPage = () => {
                 <Checkbox labelText="I agree to the privacy policy" />
               </div>
 
-              <Button
-                onClick={() => console.log(123)}
-                className="bg-primary-600 block"
-              >
+              <Button className="bg-primary-600 block" onClick={handleSubmit}>
                 Create account
               </Button>
 
@@ -108,7 +126,7 @@ const RegisterPage = () => {
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </main>
   );
 };
