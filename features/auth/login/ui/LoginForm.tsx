@@ -31,7 +31,7 @@ const LoginForm = (): JSX.Element => {
       return axios.post('http://localhost:8080/login', loginUser);
     },
     onSuccess(response) {
-      login(response.data.token, response.data.user);
+      login(response.data.token, response.data.userId);
     },
     onError: ({ response }) => {
       setAlert({
