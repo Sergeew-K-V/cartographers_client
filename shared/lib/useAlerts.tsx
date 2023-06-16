@@ -1,3 +1,5 @@
+'use client';
+
 import {
   ReactNode,
   createContext,
@@ -22,7 +24,7 @@ const AlertContext = createContext<AlertContextType>({ ...defaultValue });
 
 export const useAlertContext = () => useContext(AlertContext);
 interface IAlert {
-  type: string;
+  type: 'danger' | 'success';
   text: string;
   onClose: (index: number) => void;
 }
@@ -35,7 +37,7 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
     setAlerts((alerts) => [...alerts, alert]);
   };
 
-  const removeAlert = (index: number) => {
+  const removeAlert = (index?: number) => {
     clearTimeout(timer);
     setAlerts((prev) => prev.filter((_, i) => i !== index));
   };

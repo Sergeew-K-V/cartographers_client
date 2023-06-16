@@ -1,3 +1,4 @@
+import { AlertProvider, AuthProvider } from '@/shared/lib';
 import { QueryProvider } from './providers';
 import './styles/globals.css';
 
@@ -10,7 +11,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <body>
-        <QueryProvider>{children}</QueryProvider>
+        <AuthProvider>
+          <AlertProvider>
+            <QueryProvider>{children}</QueryProvider>
+          </AlertProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -5,16 +5,28 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { IUser } from '@/shared/api';
-import { Button, Checkbox, Input, LinkButton, Loader } from '@/shared/ui';
+import { useAlertContext } from '@/shared/lib';
+import {
+  AlertList,
+  Button,
+  Checkbox,
+  Input,
+  LinkButton,
+  Loader,
+} from '@/shared/ui';
 
 const RegisterForm = () => {
   const { push } = useRouter();
-  const [user, setUser] = useState<IUser>({ email: '', password: '' });
+  const [registerUser, setRegisterUser] = useState<IUser>({
+    email: '',
+    password: '',
+  });
   const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const { setAlert, removeAlert } = useAlertContext();
 
   const handleChange = (value: string, fieldName?: string) => {
     if (fieldName) {
-      setUser({ ...user, [fieldName]: value });
+      setRegisterUser({ ...registerUser, [fieldName]: value });
     } else {
       setConfirmPassword(value);
     }
@@ -27,10 +39,22 @@ const RegisterForm = () => {
 
   const registerMutation = useMutation({
     mutationFn: () => {
-      return axios.post('http://localhost:8080/register', user);
+      return axios.post('http://localhost:8080/register', registerUser);
     },
     onSuccess: (response) => {
+      setAlert({
+        type: 'success',
+        onClose: removeAlert,
+        text: response.data,
+      });
       push('/login');
+    },
+    onError: ({ response }) => {
+      setAlert({
+        type: 'danger',
+        onClose: removeAlert,
+        text: response.data,
+      });
     },
   });
 
@@ -46,7 +70,7 @@ const RegisterForm = () => {
           name={'email'}
           id="email"
           type="email"
-          value={user.email}
+          value={registerUser.email}
           handleChange={handleChange}
         />
         <Input
@@ -55,7 +79,7 @@ const RegisterForm = () => {
           name={'password'}
           id={'password'}
           type="password"
-          value={user.password}
+          value={registerUser.password}
           handleChange={handleChange}
         />
         <Input
@@ -109,6 +133,7 @@ const RegisterForm = () => {
           </LinkButton>
         </p>
       </form>
+      <AlertList />
       {registerMutation.isLoading && <Loader />}
     </>
   );

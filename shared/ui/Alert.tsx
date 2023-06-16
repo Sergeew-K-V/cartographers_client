@@ -13,7 +13,7 @@ const Alert = ({
 }: AlertProps) => {
   return (
     <div
-      className={` border ${
+      className={`border ${
         type === 'danger'
           ? 'bg-danger-100 border-danger-400 text-danger-700'
           : 'bg-success-100 border-success-400 text-success-700'
