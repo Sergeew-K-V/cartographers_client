@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ForgotPasswordForm } from '@/entities/forgotPassword';
+import { ForgotPasswordForm } from '@/features/auth/forgotPassword';
 
 const ForgotPasswordPage = (): JSX.Element => {
   return (

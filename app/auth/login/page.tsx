@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { LoginForm } from '@/features/login';
+import { LoginForm } from '@/features/auth/login';
 
 const LoginPage = () => {
   return (
