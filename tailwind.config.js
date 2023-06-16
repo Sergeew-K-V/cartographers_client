@@ -13,6 +13,8 @@ module.exports = {
       colors: {
         primary: colors.amber,
         secondary: colors.stone,
+        danger: colors.red,
+        success: colors.green,
       },
     },
   },
