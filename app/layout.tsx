@@ -1,4 +1,4 @@
-import Providers from './providers';
+import { QueryProvider } from './providers';
 import './styles/globals.css';
 
 export const metadata = {
@@ -10,7 +10,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   );
