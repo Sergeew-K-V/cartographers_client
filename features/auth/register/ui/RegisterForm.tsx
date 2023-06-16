@@ -39,7 +39,10 @@ const RegisterForm = () => {
 
   const registerMutation = useMutation({
     mutationFn: () => {
-      return axios.post('http://localhost:8080/register', registerUser);
+      return axios.post(
+        (process.env.NEXT_PUBLIC_SERVER_URL as string) + '/register',
+        registerUser
+      );
     },
     onSuccess: (response) => {
       setAlert({

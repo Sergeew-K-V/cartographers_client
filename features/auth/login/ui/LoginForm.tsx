@@ -28,7 +28,10 @@ const LoginForm = (): JSX.Element => {
 
   const loginMutation = useMutation({
     mutationFn: () => {
-      return axios.post('http://localhost:8080/login', loginUser);
+      return axios.post(
+        (process.env.NEXT_PUBLIC_SERVER_URL as string) + '/login',
+        loginUser
+      );
     },
     onSuccess(response) {
       login(response.data.token, response.data.userId);
