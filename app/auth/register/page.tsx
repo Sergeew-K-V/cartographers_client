@@ -3,7 +3,7 @@
 import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { IUser } from '@/shared/api';
 import { Button, Checkbox, Input, LinkButton, Loader } from '@/shared/ui';
@@ -20,7 +20,7 @@ const RegisterPage = () => {
     }
   };
 
-  const handleSubmit = (event: FormEvent | undefined) => {
+  const handleSubmit = (event: React.FormEvent | undefined) => {
     event?.preventDefault();
     registerMutation.mutate();
   };
@@ -119,7 +119,7 @@ const RegisterPage = () => {
                 <p className="mt-4">
                   <LinkButton
                     className="text-sm font-medium text-primary-600 hover:underline"
-                    href="/login"
+                    href="/auth/login"
                   >
                     Already have an account? Login
                   </LinkButton>
