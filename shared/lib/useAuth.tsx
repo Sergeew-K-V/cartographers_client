@@ -32,4 +32,4 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   );
 };
 
-export { AuthContext, AuthProvider, useAuthContext };
+export { AuthProvider, useAuthContext };
