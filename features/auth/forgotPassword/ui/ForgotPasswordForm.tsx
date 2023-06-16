@@ -1,9 +1,11 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import { Button, Input, LinkButton } from '@/shared/ui';
+import { Button, Input } from '@/shared/ui';
 
 const ForgotPasswordForm = () => {
+  const { back } = useRouter();
   const [recoverEmail, setRecoverEmail] = useState<string>('');
 
   const handleChange = (value: string) => {
@@ -34,13 +36,13 @@ const ForgotPasswordForm = () => {
       >
         Recover password
       </Button>
-      <p className="mt-4">
-        <LinkButton
+      <p className="mt-20 w-28">
+        <Button
           className="text-sm font-medium text-primary-600 hover:underline"
-          href="/auth/login"
+          onClick={() => back()}
         >
-          Already have an account? Login
-        </LinkButton>
+          Go back
+        </Button>
       </p>
     </form>
   );
