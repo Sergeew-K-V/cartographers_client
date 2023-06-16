@@ -8,27 +8,29 @@ import {
   useState,
 } from 'react';
 
-const defaultValue = {
-  alerts: [],
-  setAlert: () => undefined,
-  removeAlert: () => undefined,
-};
-
 interface AlertContextType {
   removeAlert: (index: number) => void;
   setAlert: (alert: IAlert) => void;
   alerts: IAlert[];
 }
 
-const AlertContext = createContext<AlertContextType>({ ...defaultValue });
-
-export const useAlertContext = () => useContext(AlertContext);
 interface IAlert {
   type: 'danger' | 'success';
   text: string;
   onClose: (index: number) => void;
 }
+
+const defaultValue = {
+  alerts: [],
+  setAlert: () => undefined,
+  removeAlert: () => undefined,
+};
+
 let timer: number;
+
+const AlertContext = createContext<AlertContextType>({ ...defaultValue });
+
+export const useAlertContext = () => useContext(AlertContext);
 
 export const AlertProvider = ({ children }: { children: ReactNode }) => {
   const [alerts, setAlerts] = useState<IAlert[]>([]);

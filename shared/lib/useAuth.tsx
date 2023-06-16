@@ -9,6 +9,13 @@ import {
   useState,
 } from 'react';
 
+interface IAuthContext {
+  token: string;
+  login: (token: string, userId: string) => void;
+  logout: () => void;
+  userId: string | null;
+}
+
 const STORAGE_NAME = 'Cartographers-token';
 const STORAGE_DATA =
   JSON.parse(localStorage.getItem(STORAGE_NAME) as string) || null;
@@ -19,12 +26,7 @@ const AuthContext = createContext<IAuthContext>({
   login: () => undefined,
   logout: () => undefined,
 });
-interface IAuthContext {
-  token: string;
-  login: (token: string, userId: string) => void;
-  logout: () => void;
-  userId: string | null;
-}
+
 export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {

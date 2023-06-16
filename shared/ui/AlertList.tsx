@@ -9,7 +9,7 @@ const AlertList = () => {
       {alerts.map((alert, index) => (
         <Alert
           key={index}
-          type={alert.type as 'danger' | 'success'}
+          type={alert.type}
           text={alert.text}
           close={() => removeAlert(index)}
         />
