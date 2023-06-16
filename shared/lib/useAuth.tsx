@@ -8,10 +8,10 @@ import {
   useContext,
   useState,
 } from 'react';
-import { IUser } from '../api';
 
 const STORAGE_NAME = 'Cartographers-token';
-const STORAGE_DATA = JSON.parse(localStorage.getItem(STORAGE_NAME) as string);
+const STORAGE_DATA =
+  JSON.parse(localStorage.getItem(STORAGE_NAME) as string) || null;
 
 const AuthContext = createContext<IAuthContext>({
   token: '',
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem(
         STORAGE_NAME,
         JSON.stringify({
-          user: userId,
+          userId,
           token,
         })
       );
@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = useCallback(() => {
     setToken(null);
     setUserId(null);
-    push('/login');
+    push('/auth/login');
 
     localStorage.removeItem(STORAGE_NAME);
   }, [push]);
