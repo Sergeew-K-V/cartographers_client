@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     (token: string, userId: string) => {
       setToken(token);
       setUserId(userId);
-      push('/playground');
+      push('/hub');
 
       localStorage.setItem(
         STORAGE_NAME,
