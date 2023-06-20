@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import { ForgotPasswordForm } from '@/features/auth/forgotPassword';
+import { ImageCustom } from '@/shared/ui';
 
 const ForgotPasswordPage = (): JSX.Element => {
   return (
@@ -7,7 +7,7 @@ const ForgotPasswordPage = (): JSX.Element => {
       <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl">
         <div className="flex flex-col overflow-y-auto md:flex-row">
           <div className="h-32 md:h-auto md:w-1/2">
-            <Image
+            <ImageCustom
               src={'/images/seasons/summer.jpeg'}
               alt="Logo"
               width={100}

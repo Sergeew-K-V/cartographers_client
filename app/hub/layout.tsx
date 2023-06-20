@@ -1,9 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
-import { LinkButton } from '@/shared/ui';
+import { ImageCustom, LinkButton } from '@/shared/ui';
 
 function PlaygroundLayout({ children }: { children: ReactNode }): JSX.Element {
   const pathname = usePathname();
@@ -19,7 +18,7 @@ function PlaygroundLayout({ children }: { children: ReactNode }): JSX.Element {
         <nav className="bg-white border-secondary-200 ">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <div className="flex items-center">
-              <Image
+              <ImageCustom
                 src="/images/seasons/summer.jpeg"
                 className="w-8 h-8 mr-3 rounded-full"
                 width={100}
