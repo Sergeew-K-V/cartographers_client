@@ -1,18 +1,20 @@
 'use client';
 
-import { useAuthContext } from '@/shared/lib';
-import { Button } from '@/shared/ui';
+import { useAlertContext, useAuthContext } from '@/shared/lib';
+import { AlertList, Button } from '@/shared/ui';
 
 const HubPage = (): JSX.Element => {
   const { logout } = useAuthContext();
+  const { removeAlert, setAlert } = useAlertContext();
+
   return (
     <main className="min-h-screen p-6 bg-secondary-50">
       <h1 className="mb-4 text-xl font-semibold text-secondary-700">
         Welcome to Hub
       </h1>
       <div className="container">
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg my-3">
-          <table className="w-full text-sm text-left text-secondary-500 rounded-full">
+        <div className="relative w-fit overflow-x-auto shadow-md sm:rounded-lg my-3">
+          <table className="text-sm text-left text-secondary-500 rounded-full">
             <thead className="text-xs text-secondary-700 uppercase bg-secondary-200">
               <tr>
                 <th scope="col" className="px-6 py-3">
@@ -67,6 +69,7 @@ const HubPage = (): JSX.Element => {
           </div>
         </div>
       </div>
+      <AlertList />
     </main>
   );
 };

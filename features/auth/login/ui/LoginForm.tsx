@@ -14,6 +14,7 @@ const LoginForm = (): JSX.Element => {
   });
   const { login } = useAuthContext();
   const { setAlert, removeAlert } = useAlertContext();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleChange = (value: string, fieldName?: string) => {
     fieldName && setLoginUser({ ...loginUser, [fieldName]: value });
@@ -28,15 +29,18 @@ const LoginForm = (): JSX.Element => {
 
   const loginMutation = useMutation({
     mutationFn: () => {
+      setIsLoading(true);
       return axios.post(
         (process.env.NEXT_PUBLIC_SERVER_URL as string) + '/login',
         loginUser
       );
     },
     onSuccess(response) {
+      setIsLoading(false);
       login(response.data.token, response.data.userId);
     },
     onError: ({ response }) => {
+      setIsLoading(false);
       setAlert({
         type: 'danger',
         onClose: removeAlert,
@@ -104,7 +108,7 @@ const LoginForm = (): JSX.Element => {
         </p>
       </form>
       <AlertList />
-      {loginMutation.isLoading && <Loader />}
+      {isLoading && <Loader />}
     </>
   );
 };
