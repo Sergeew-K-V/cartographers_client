@@ -1,14 +1,29 @@
 'use client';
 
+import { GameSessionInfoRow } from '@/entities/hub';
+import { GameSessionInfo } from '@/shared/api';
 import { useAlertContext, useAuthContext } from '@/shared/lib';
 import { AlertList, Button } from '@/shared/ui';
+
+const games: GameSessionInfo[] = [
+  {
+    hostName: 'Test1',
+    numberOfPlayers: 3,
+    status: 'In game',
+  },
+  {
+    hostName: 'Test2',
+    numberOfPlayers: 1,
+    status: 'Not started',
+  },
+];
 
 const HubPage = (): JSX.Element => {
   const { logout } = useAuthContext();
   const { removeAlert, setAlert } = useAlertContext();
 
   return (
-    <main className="min-h-screen p-6 bg-secondary-50">
+    <main className="min-h-[calc(100vh-64px)] p-6 bg-secondary-50">
       <h1 className="mb-4 text-xl font-semibold text-secondary-700">
         Welcome to Hub
       </h1>
@@ -30,7 +45,15 @@ const HubPage = (): JSX.Element => {
               </tr>
             </thead>
             <tbody>
-              <tr className="bg-white border-b">
+              {games.map((game, index) => (
+                <GameSessionInfoRow
+                  hostName={game.hostName}
+                  numberOfPlayers={game.numberOfPlayers}
+                  status={game.status}
+                  key={index}
+                />
+              ))}
+              {/* <tr className="bg-white border-b">
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-secondary-900 whitespace-nowrap"
@@ -55,7 +78,7 @@ const HubPage = (): JSX.Element => {
                 <td className="px-6 py-4 w-32">
                   <Button>Connect</Button>
                 </td>
-              </tr>
+              </tr> */}
             </tbody>
           </table>
         </div>

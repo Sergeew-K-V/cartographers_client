@@ -3,4 +3,10 @@ interface IUser {
   password: string;
 }
 
-export type { IUser };
+interface GameSessionInfo {
+  hostName: string;
+  numberOfPlayers: number;
+  status: 'In game' | 'Not started';
+}
+
+export type { IUser, GameSessionInfo };

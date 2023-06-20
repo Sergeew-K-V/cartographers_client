@@ -1,3 +1,3 @@
-import type { IUser } from './models';
+import type { IUser, GameSessionInfo } from './models';
 
-export type { IUser };
+export type { IUser, GameSessionInfo };
