@@ -6,16 +6,16 @@ import { useAlertContext, useAuthContext } from '@/shared/lib';
 import { AlertList, Button } from '@/shared/ui';
 
 const games: GameSessionInfo[] = [
-  {
-    hostName: 'Test1',
-    numberOfPlayers: 3,
-    status: 'In game',
-  },
-  {
-    hostName: 'Test2',
-    numberOfPlayers: 1,
-    status: 'Not started',
-  },
+  // {
+  //   hostName: 'Test1',
+  //   numberOfPlayers: 3,
+  //   status: 'In game',
+  // },
+  // {
+  //   hostName: 'Test2',
+  //   numberOfPlayers: 1,
+  //   status: 'Not started',
+  // },
 ];
 
 const HubPage = (): JSX.Element => {
@@ -53,34 +53,13 @@ const HubPage = (): JSX.Element => {
                   key={index}
                 />
               ))}
-              {/* <tr className="bg-white border-b">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-secondary-900 whitespace-nowrap"
-                >
-                  Test
-                </th>
-                <td className="px-6 py-4">3/4</td>
-                <td className="px-6 py-4">In game</td>
-                <td className="px-6 py-4 w-32">
-                  <Button disabled>Connect</Button>
-                </td>
-              </tr>
-              <tr className="border-b bg-secondary-200">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-secondary-900 whitespace-nowrap"
-                >
-                  Test2
-                </th>
-                <td className="px-6 py-4">1/4</td>
-                <td className="px-6 py-4">Waiting</td>
-                <td className="px-6 py-4 w-32">
-                  <Button>Connect</Button>
-                </td>
-              </tr> */}
             </tbody>
           </table>
+          {games.length === 0 && (
+            <div className="flex justify-center w-full">
+              No games running or not started
+            </div>
+          )}
         </div>
 
         <div className="flex gap-x-3">

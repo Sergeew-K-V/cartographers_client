@@ -13,8 +13,8 @@ function ImageCustom({ alt, src, className, height, width }: ImageCustomProps) {
     <Image
       src={src}
       alt={alt}
-      height={height}
-      width={width}
+      height={height || 100}
+      width={width || 100}
       className={className}
     />
   );

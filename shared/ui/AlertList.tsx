@@ -1,3 +1,5 @@
+'use client';
+
 import { useAlertContext } from '../lib';
 import Alert from './Alert';
 
