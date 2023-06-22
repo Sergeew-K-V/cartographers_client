@@ -100,19 +100,32 @@ function PlaygroundPage(): JSX.Element {
               </div>
             </div>
           </div>
-          <div className="grid items-end">
-            <div>
-              <ImageCustom
-                src="/images/seasons/autumn.png"
-                width={500}
-                alt="Current card"
-              />
+          <div className="grid grid-cols-1 h-fit">
+            <div className="flex">
+              <div>
+                <span>Current card</span>
+                <ImageCustom
+                  src="/images/cards/card_1.png"
+                  width={200}
+                  alt="Current card"
+                />
+              </div>
+              <div>
+                <span>Previous card</span>
+                <ImageCustom
+                  src="/images/cards/card_3.png"
+                  width={200}
+                  alt="Current card"
+                />
+              </div>
             </div>
-            <div className="row-start-3 w-40">
-              <Button>Reset</Button>
-            </div>
-            <div className="row-start-4 w-40">
-              <Button>Submit</Button>
+            <div className="flex gap-x-4">
+              <div className="w-40">
+                <Button>Reset</Button>
+              </div>
+              <div className="w-40">
+                <Button>Submit</Button>
+              </div>
             </div>
           </div>
         </div>
