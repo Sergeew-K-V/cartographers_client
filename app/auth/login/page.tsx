@@ -8,7 +8,7 @@ const LoginPage = () => {
         <div className="flex flex-col overflow-y-auto md:flex-row">
           <div className="h-32 md:h-auto md:w-1/2">
             <ImageCustom
-              src={'/images/summer.jpg'}
+              src={'/images/seasons/summer.jpg'}
               alt="Logo"
               width={1000}
               height={100}
