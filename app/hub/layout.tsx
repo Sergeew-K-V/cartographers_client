@@ -33,7 +33,7 @@ function PlaygroundLayout({ children }: { children: ReactNode }): JSX.Element {
               className="hidden w-full md:block md:w-auto"
               id="navbar-default"
             >
-              <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-secondary-100 rounded-lg bg-secondary-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
+              <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-secondary-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
                 <li>
                   <LinkButton
                     href="/hub"

@@ -1,7 +1,7 @@
 const grid = [
   [
-    { id: 1, image: '/images/other/cell.png' },
-    { id: 2, image: '/images/other/cell.png' },
+    { id: 1, image: '/images/other/ruins.png' },
+    { id: 2, image: '/images/type_card/city_type.png' },
     { id: 3, image: '/images/other/cell.png' },
     { id: 4, image: '/images/other/cell.png' },
     { id: 5, image: '/images/other/cell.png' },
@@ -13,8 +13,8 @@ const grid = [
     { id: 11, image: '/images/other/cell.png' },
   ],
   [
-    { id: 1, image: '/images/other/cell.png' },
-    { id: 2, image: '/images/other/cell.png' },
+    { id: 1, image: '/images/type_card/city_type.png' },
+    { id: 2, image: '/images/type_card/city_type.png' },
     { id: 3, image: '/images/other/cell.png' },
     { id: 4, image: '/images/other/mountain.png' },
     { id: 5, image: '/images/other/cell.png' },

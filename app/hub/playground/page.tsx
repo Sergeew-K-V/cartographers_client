@@ -9,8 +9,25 @@ function PlaygroundPage(): JSX.Element {
       <div className="container min-w-full relative">
         <div className="grid grid-cols-3 w-full justify-items-center">
           <div className="grid grid-rows-4 max-h-fit">
-            <div className="row-start-3 ">
-              <span>Game stats</span>
+            <div className="row-start-2">
+              <div className="mb-2">Game stats</div>
+              {/* <div className="grid grid-cols-2 gap-4">
+                <div className="border-2 border-secondary-900 bg-secondary-50 min-w-fit shadow-2xl">
+                  <h3>Player: Danil</h3>
+                  <p>Score: 33</p>
+                  <p>Ready: Yes</p>
+                </div>
+                <div className="border-2 border-secondary-900 bg-secondary-50 min-w-fit shadow-2xl">
+                  <h3>Player: Vadim</h3>
+                  <p>Score: 23</p>
+                  <p>Ready: No</p>
+                </div>
+                <div className="border-2 border-secondary-900 bg-secondary-50 min-w-fit shadow-2xl">
+                  <h3>Player: Test</h3>
+                  <p>Score: 44</p>
+                  <p>Ready: Yes</p>
+                </div>
+              </div> */}
               <table className="text-sm text-left text-secondary-500 shadow-xl">
                 <thead className="text-xs text-secondary-700 uppercase bg-secondary-200">
                   <tr>
@@ -82,7 +99,7 @@ function PlaygroundPage(): JSX.Element {
                       key={`${indexRow} + ${indexCell}`}
                       src={cell.image}
                       alt="cell"
-                      className="w-[46px] h-[46px] hover:border-2 hover:border-secondary-900 hover:border-dashed"
+                      className="w-[46px] h-[46px] hover:scale-[1.1] hover:border-2 hover:border-secondary-900 hover:border-dashed"
                       onClick={() =>
                         console.log('indexRow,indexCell:', indexRow, indexCell)
                       }
