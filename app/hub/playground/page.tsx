@@ -3,17 +3,149 @@
 import { AlertList, Button, ImageCustom } from '@/shared/ui';
 
 const grid = [
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+  [
+    { id: 1, image: '/images/other/cell.png' },
+    { id: 2, image: '/images/other/cell.png' },
+    { id: 3, image: '/images/other/cell.png' },
+    { id: 4, image: '/images/other/cell.png' },
+    { id: 5, image: '/images/other/cell.png' },
+    { id: 6, image: '/images/other/cell.png' },
+    { id: 7, image: '/images/other/cell.png' },
+    { id: 8, image: '/images/other/cell.png' },
+    { id: 9, image: '/images/other/cell.png' },
+    { id: 10, image: '/images/other/cell.png' },
+    { id: 11, image: '/images/other/cell.png' },
+  ],
+  [
+    { id: 1, image: '/images/other/cell.png' },
+    { id: 2, image: '/images/other/cell.png' },
+    { id: 3, image: '/images/other/cell.png' },
+    { id: 4, image: '/images/other/mountain.png' },
+    { id: 5, image: '/images/other/cell.png' },
+    { id: 6, image: '/images/other/ruins.png' },
+    { id: 7, image: '/images/other/cell.png' },
+    { id: 8, image: '/images/other/cell.png' },
+    { id: 9, image: '/images/other/cell.png' },
+    { id: 10, image: '/images/other/cell.png' },
+    { id: 11, image: '/images/other/cell.png' },
+  ],
+  [
+    { id: 1, image: '/images/other/cell.png' },
+    { id: 2, image: '/images/other/ruins.png' },
+    { id: 3, image: '/images/other/cell.png' },
+    { id: 4, image: '/images/other/cell.png' },
+    { id: 5, image: '/images/other/cell.png' },
+    { id: 6, image: '/images/other/cell.png' },
+    { id: 7, image: '/images/other/cell.png' },
+    { id: 8, image: '/images/other/cell.png' },
+    { id: 9, image: '/images/other/mountain.png' },
+    { id: 10, image: '/images/other/ruins.png' },
+    { id: 11, image: '/images/other/cell.png' },
+  ],
+  [
+    { id: 1, image: '/images/other/cell.png' },
+    { id: 2, image: '/images/other/cell.png' },
+    { id: 3, image: '/images/other/cell.png' },
+    { id: 4, image: '/images/other/cell.png' },
+    { id: 5, image: '/images/other/cell.png' },
+    { id: 6, image: '/images/other/cell.png' },
+    { id: 7, image: '/images/other/cell.png' },
+    { id: 8, image: '/images/other/cell.png' },
+    { id: 9, image: '/images/other/cell.png' },
+    { id: 10, image: '/images/other/cell.png' },
+    { id: 11, image: '/images/other/cell.png' },
+  ],
+  [
+    { id: 1, image: '/images/other/cell.png' },
+    { id: 2, image: '/images/other/cell.png' },
+    { id: 3, image: '/images/other/cell.png' },
+    { id: 4, image: '/images/other/cell.png' },
+    { id: 5, image: '/images/other/cell.png' },
+    { id: 6, image: '/images/other/cell.png' },
+    { id: 7, image: '/images/other/cell.png' },
+    { id: 8, image: '/images/other/cell.png' },
+    { id: 9, image: '/images/other/cell.png' },
+    { id: 10, image: '/images/other/cell.png' },
+    { id: 11, image: '/images/other/cell.png' },
+  ],
+  [
+    { id: 1, image: '/images/other/cell.png' },
+    { id: 2, image: '/images/other/cell.png' },
+    { id: 3, image: '/images/other/cell.png' },
+    { id: 4, image: '/images/other/cell.png' },
+    { id: 5, image: '/images/other/cell.png' },
+    { id: 6, image: '/images/other/mountain.png' },
+    { id: 7, image: '/images/other/cell.png' },
+    { id: 8, image: '/images/other/cell.png' },
+    { id: 9, image: '/images/other/cell.png' },
+    { id: 10, image: '/images/other/cell.png' },
+    { id: 11, image: '/images/other/cell.png' },
+  ],
+  [
+    { id: 1, image: '/images/other/cell.png' },
+    { id: 2, image: '/images/other/cell.png' },
+    { id: 3, image: '/images/other/cell.png' },
+    { id: 4, image: '/images/other/cell.png' },
+    { id: 5, image: '/images/other/cell.png' },
+    { id: 6, image: '/images/other/cell.png' },
+    { id: 7, image: '/images/other/cell.png' },
+    { id: 8, image: '/images/other/cell.png' },
+    { id: 9, image: '/images/other/cell.png' },
+    { id: 10, image: '/images/other/cell.png' },
+    { id: 11, image: '/images/other/cell.png' },
+  ],
+  [
+    { id: 1, image: '/images/other/cell.png' },
+    { id: 2, image: '/images/other/cell.png' },
+    { id: 3, image: '/images/other/cell.png' },
+    { id: 4, image: '/images/other/cell.png' },
+    { id: 5, image: '/images/other/cell.png' },
+    { id: 6, image: '/images/other/cell.png' },
+    { id: 7, image: '/images/other/cell.png' },
+    { id: 8, image: '/images/other/cell.png' },
+    { id: 9, image: '/images/other/cell.png' },
+    { id: 10, image: '/images/other/cell.png' },
+    { id: 11, image: '/images/other/cell.png' },
+  ],
+  [
+    { id: 1, image: '/images/other/cell.png' },
+    { id: 2, image: '/images/other/ruins.png' },
+    { id: 3, image: '/images/other/mountain.png' },
+    { id: 4, image: '/images/other/cell.png' },
+    { id: 5, image: '/images/other/cell.png' },
+    { id: 6, image: '/images/other/cell.png' },
+    { id: 7, image: '/images/other/cell.png' },
+    { id: 8, image: '/images/other/cell.png' },
+    { id: 9, image: '/images/other/cell.png' },
+    { id: 10, image: '/images/other/ruins.png' },
+    { id: 11, image: '/images/other/cell.png' },
+  ],
+  [
+    { id: 1, image: '/images/other/cell.png' },
+    { id: 2, image: '/images/other/cell.png' },
+    { id: 3, image: '/images/other/cell.png' },
+    { id: 4, image: '/images/other/cell.png' },
+    { id: 5, image: '/images/other/cell.png' },
+    { id: 6, image: '/images/other/ruins.png' },
+    { id: 7, image: '/images/other/cell.png' },
+    { id: 8, image: '/images/other/mountain.png' },
+    { id: 9, image: '/images/other/cell.png' },
+    { id: 10, image: '/images/other/cell.png' },
+    { id: 11, image: '/images/other/cell.png' },
+  ],
+  [
+    { id: 1, image: '/images/other/cell.png' },
+    { id: 2, image: '/images/other/cell.png' },
+    { id: 3, image: '/images/other/cell.png' },
+    { id: 4, image: '/images/other/cell.png' },
+    { id: 5, image: '/images/other/cell.png' },
+    { id: 6, image: '/images/other/cell.png' },
+    { id: 7, image: '/images/other/cell.png' },
+    { id: 8, image: '/images/other/cell.png' },
+    { id: 9, image: '/images/other/cell.png' },
+    { id: 10, image: '/images/other/cell.png' },
+    { id: 11, image: '/images/other/cell.png' },
+  ],
 ];
 
 function PlaygroundPage(): JSX.Element {
@@ -84,13 +216,15 @@ function PlaygroundPage(): JSX.Element {
                 className="relative border-2 border-secondary-900"
                 width={600}
               />
-              <div className="grid grid-cols-11 absolute top-[166px] left-12 z-10">
+              <div className="grid grid-cols-11 absolute top-[165px] left-12 z-10">
                 {/* top-40 left-12 */}
                 {grid.map((row, indexRow) =>
                   row.map((cell, indexCell) => (
-                    <div
+                    <ImageCustom
                       key={`${indexRow} + ${indexCell}`}
-                      className="w-[46px] h-[46px] hover:bg-primary-100 opacity-70"
+                      src={cell.image}
+                      alt="cell"
+                      className="w-[46px] h-[46px]"
                       onClick={() =>
                         console.log('indexRow,indexCell:', indexRow, indexCell)
                       }
