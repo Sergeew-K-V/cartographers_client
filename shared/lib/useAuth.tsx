@@ -18,7 +18,9 @@ interface IAuthContext {
 
 const STORAGE_NAME = 'Cartographers-token';
 const STORAGE_DATA =
-  JSON.parse(localStorage.getItem(STORAGE_NAME) as string) || null;
+  typeof window !== 'undefined'
+    ? JSON.parse(window.localStorage.getItem(STORAGE_NAME) as string)
+    : null;
 
 const AuthContext = createContext<IAuthContext>({
   token: '',
@@ -44,7 +46,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUserId(userId);
       push('/hub');
 
-      localStorage.setItem(
+      window.localStorage.setItem(
         STORAGE_NAME,
         JSON.stringify({
           userId,
@@ -60,7 +62,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUserId(null);
     push('/auth/login');
 
-    localStorage.removeItem(STORAGE_NAME);
+    window.localStorage.removeItem(STORAGE_NAME);
   }, [push]);
 
   return (
