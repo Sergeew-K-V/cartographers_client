@@ -92,14 +92,13 @@ function PlaygroundPage(): JSX.Element {
                 width={600}
               />
               <div className="grid grid-cols-11 absolute top-[165px] left-12 z-10">
-                {/* top-40 left-12 */}
                 {grid.map((row, indexRow) =>
                   row.map((cell, indexCell) => (
                     <ImageCustom
                       key={`${indexRow} + ${indexCell}`}
                       src={cell.image}
                       alt="cell"
-                      className="w-[46px] h-[46px] hover:scale-[1.1] hover:border-2 hover:border-secondary-900 hover:border-dashed"
+                      className="w-[46px] h-[46px] hover:scale-[1.08] hover:border-2 hover:border-secondary-900 hover:border-dashed"
                       onClick={() =>
                         console.log('indexRow,indexCell:', indexRow, indexCell)
                       }
@@ -123,7 +122,7 @@ function PlaygroundPage(): JSX.Element {
               <ImageCustom
                 src="/images/cards/card_3.png"
                 width={200}
-                className="w-32 "
+                className="w-32 hover:animate-wiggle"
                 alt="Previous card"
               />
             </div>

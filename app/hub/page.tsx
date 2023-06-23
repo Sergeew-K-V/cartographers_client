@@ -6,16 +6,16 @@ import { useAlertContext, useAuthContext } from '@/shared/lib';
 import { AlertList, Button } from '@/shared/ui';
 
 const games: GameSessionInfo[] = [
-  // {
-  //   hostName: 'Test1',
-  //   numberOfPlayers: 3,
-  //   status: 'In game',
-  // },
-  // {
-  //   hostName: 'Test2',
-  //   numberOfPlayers: 1,
-  //   status: 'Not started',
-  // },
+  {
+    hostName: 'Test1',
+    numberOfPlayers: 3,
+    status: 'In game',
+  },
+  {
+    hostName: 'Test2',
+    numberOfPlayers: 1,
+    status: 'Not started',
+  },
 ];
 
 const HubPage = (): JSX.Element => {

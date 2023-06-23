@@ -33,7 +33,7 @@ function PlaygroundLayout({ children }: { children: ReactNode }): JSX.Element {
               className="hidden w-full md:block md:w-auto"
               id="navbar-default"
             >
-              <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-secondary-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
+              <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-secondary-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
                 <li>
                   <LinkButton
                     href="/hub"
@@ -58,14 +58,14 @@ function PlaygroundLayout({ children }: { children: ReactNode }): JSX.Element {
                     Playground
                   </LinkButton>
                 </li>
-                {/* <li>
+                <li>
                   <LinkButton
                     href="/auth/login"
                     className="block py-2 pl-3 pr-4 text-secondary-900 rounded hover:bg-secondary-100 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0"
                   >
-                    Login
+                    Logout
                   </LinkButton>
-                </li> */}
+                </li>
               </ul>
             </div>
           </div>
