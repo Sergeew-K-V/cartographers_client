@@ -1,3 +1,9 @@
+const players = [
+  { isReady: false, name: 'Kirill', score: 120, id: 1 },
+  { isReady: false, name: 'Vadim', score: 15, id: 2 },
+  { isReady: true, name: 'Danil', score: 20, id: 3 },
+];
+
 const grid = [
   [
     { id: 1, image: '/images/other/ruins.png' },
@@ -144,4 +150,4 @@ const grid = [
   ],
 ];
 
-export { grid };
+export { grid, players };
