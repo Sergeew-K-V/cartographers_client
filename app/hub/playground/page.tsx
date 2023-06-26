@@ -1,11 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import { AlertList, Button, ImageCustom } from '@/shared/ui';
 import { grid } from './config';
 
-const classDivider = 'scale-[2] w-full flex justify-center';
+const classDivider = 'text-3xl w-full flex justify-center';
 
 function PlaygroundPage(): JSX.Element {
+  const [coinsData, setCoinsData] = useState<number[]>([]);
   return (
     <main className="min-h-[calc(100vh-64px)] p-6 bg-secondary-50">
       <div className="container min-w-full relative">
@@ -13,23 +15,6 @@ function PlaygroundPage(): JSX.Element {
           <div className="grid grid-rows-4 max-h-fit">
             <div className="row-start-3">
               <div className="mb-2">Game stats</div>
-              {/* <div className="grid grid-cols-2 gap-4">
-                <div className="border-2 border-secondary-900 bg-secondary-50 min-w-fit shadow-2xl">
-                  <h3>Player: Danil</h3>
-                  <p>Score: 33</p>
-                  <p>Ready: Yes</p>
-                </div>
-                <div className="border-2 border-secondary-900 bg-secondary-50 min-w-fit shadow-2xl">
-                  <h3>Player: Vadim</h3>
-                  <p>Score: 23</p>
-                  <p>Ready: No</p>
-                </div>
-                <div className="border-2 border-secondary-900 bg-secondary-50 min-w-fit shadow-2xl">
-                  <h3>Player: Test</h3>
-                  <p>Score: 44</p>
-                  <p>Ready: Yes</p>
-                </div>
-              </div> */}
               <table className="text-sm text-left text-secondary-500 shadow-xl">
                 <thead className="text-xs text-secondary-700 uppercase bg-secondary-200">
                   <tr>
@@ -114,20 +99,53 @@ function PlaygroundPage(): JSX.Element {
               <div className="absolute top-[110px] left-[37px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
                 Legendary
               </div>
-              <div className="absolute bottom-[110px] w-[480px] h-[30px] left-[90px] z-10 flex justify-between">
-                <div className={classDivider}>/</div>
-                <div className={classDivider}>/</div>
-                <div className={classDivider}>/</div>
-                <div className={classDivider}>/</div>
-                <div className={classDivider}>/</div>
-                <div className={classDivider}>/</div>
-                <div className={classDivider}>/</div>
-                <div className={classDivider}>/</div>
-                <div className={classDivider}>/</div>
-                <div className={classDivider}>/</div>
-                <div className={classDivider}>/</div>
-                <div className={classDivider}>/</div>
-                <div className={classDivider}>/</div>
+              <div className="absolute bottom-[120px] left-[97px] z-10 w-[490px] h-[30px] grid grid-cols-15">
+                {coinsData.map((coin) => (
+                  <div key={coin} className={classDivider}>
+                    \
+                  </div>
+                ))}
+              </div>
+              <div className="absolute bottom-[35px] left-[30px] grid grid-cols-4 w-[480px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 gap-x-2">
+                    <span className="text-xl">A</span>
+                    <span className="text-xl">B</span>
+                    <span>13</span>
+                    <span>14</span>
+                  </div>
+                  <div className="flex items-center">27</div>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 gap-x-2">
+                    <span className="text-xl">B</span>
+                    <span className="text-xl">C</span>
+                    <span>13</span>
+                    <span>14</span>
+                  </div>
+                  <div className="flex items-center">27</div>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 gap-x-2">
+                    <span className="text-xl">C</span>
+                    <span className="text-xl">D</span>
+                    <span>13</span>
+                    <span>14</span>
+                  </div>
+                  <div className="flex items-center">27</div>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 gap-x-2">
+                    <span className="text-xl">D</span>
+                    <span className="text-xl">A</span>
+                    <span>13</span>
+                    <span>14</span>
+                  </div>
+                  <div className="flex items-center">27</div>
+                </div>
+              </div>
+              <div className="absolute bottom-[60px] right-[47px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
+                120
               </div>
             </div>
           </div>

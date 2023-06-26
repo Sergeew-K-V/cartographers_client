@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        15: 'repeat(15, minmax(0, 1fr))',
+      },
       colors: {
         primary: colors.amber,
         secondary: colors.stone,
