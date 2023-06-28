@@ -10,10 +10,10 @@ import { AlertList, Button, Input, LinkButton, Loader } from '@/shared/ui';
 const LoginForm = (): JSX.Element => {
   const [loginUser, setLoginUser] = useState<IUser>({
     email: 'admin@admin.com',
-    password: 'adminadmin',
+    password: 'admin@admin.com',
   });
   const { login } = useAuthContext();
-  const { setAlert, removeAlert } = useAlertContext();
+  const { setAlert } = useAlertContext();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleChange = (value: string, fieldName?: string) => {
