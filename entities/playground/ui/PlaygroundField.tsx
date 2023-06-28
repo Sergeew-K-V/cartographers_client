@@ -1,5 +1,7 @@
+import { useQuery } from 'react-query';
+import { useAuthContext } from '@/shared/lib';
 import { ImageCustom } from '@/shared/ui';
-
+import { fetchUser } from '../api';
 import SeasonsCounter from './SeasonsCounter';
 
 interface PlaygroundFieldProps {
@@ -13,6 +15,15 @@ function PlaygroundField({
   coinsData,
   seasonsData,
 }: PlaygroundFieldProps) {
+  const { userId } = useAuthContext();
+  const { data, isLoading, isError } = useQuery(
+    'getUser',
+    () => fetchUser(userId),
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+
   return (
     <div className="relative">
       <ImageCustom
@@ -37,10 +48,10 @@ function PlaygroundField({
         )}
       </div>
       <div className="absolute top-[50px] left-[37px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
-        Kirill
+        {data?.data.user?.nickname}
       </div>
       <div className="absolute top-[110px] left-[37px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
-        Legendary
+        {data?.data.user?.rang}
       </div>
       <div className="absolute bottom-[120px] left-[97px] z-10 w-[490px] h-[30px] grid grid-cols-15">
         {coinsData.map((coin) => (
