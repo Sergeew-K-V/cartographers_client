@@ -17,7 +17,6 @@ interface AlertContextType {
 interface IAlert {
   type: 'danger' | 'success';
   text: string;
-  onClose: (index: number) => void;
 }
 
 const defaultValue = {
