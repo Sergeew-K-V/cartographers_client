@@ -6,8 +6,12 @@ interface IPlayer {
 }
 
 interface ISeason {
-  season: 'A' | 'B' | 'C' | 'D';
-  score: number;
+  A?: number;
+  B?: number;
+  C?: number;
+  D?: number;
+  coins?: number;
+  enemy?: number;
 }
 
 export type { IPlayer, ISeason };

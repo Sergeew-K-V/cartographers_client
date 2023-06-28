@@ -1,19 +1,18 @@
-import { useState } from 'react';
 import { ImageCustom } from '@/shared/ui';
-import { ISeason } from '../api';
+
+import SeasonsCounter from './SeasonsCounter';
 
 interface PlaygroundFieldProps {
   grid: { id: number; image: string }[][];
   coinsData: number[];
+  seasonsData: number[][];
 }
 
-const classDivider = 'text-3xl w-full flex justify-center';
-
-function PlaygroundField({ grid, coinsData }: PlaygroundFieldProps) {
-  const [gamePoints, setGamePoint] = useState<ISeason[]>([
-    { season: 'A', score: 13 },
-  ]);
-
+function PlaygroundField({
+  grid,
+  coinsData,
+  seasonsData,
+}: PlaygroundFieldProps) {
   return (
     <div className="relative">
       <ImageCustom
@@ -45,48 +44,15 @@ function PlaygroundField({ grid, coinsData }: PlaygroundFieldProps) {
       </div>
       <div className="absolute bottom-[120px] left-[97px] z-10 w-[490px] h-[30px] grid grid-cols-15">
         {coinsData.map((coin) => (
-          <div key={coin} className={classDivider}>
+          <div key={coin} className="coinsDivider">
             \
           </div>
         ))}
       </div>
-      <div className="absolute bottom-[35px] left-[30px] grid grid-cols-4 w-[480px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
-        <div className="grid grid-cols-2 gap-2">
-          <div className="grid grid-cols-2 gap-x-2">
-            <span className="text-xl">A</span>
-            <span className="text-xl">B</span>
-            <span>13</span>
-            <span>14</span>
-          </div>
-          <div className="flex items-center">27</div>
-        </div>
-        <div className="grid grid-cols-2 gap-2">
-          <div className="grid grid-cols-2 gap-x-2">
-            <span className="text-xl">B</span>
-            <span className="text-xl">C</span>
-            <span>13</span>
-            <span>14</span>
-          </div>
-          <div className="flex items-center">27</div>
-        </div>
-        <div className="grid grid-cols-2 gap-2">
-          <div className="grid grid-cols-2 gap-x-2">
-            <span className="text-xl">C</span>
-            <span className="text-xl">D</span>
-            <span>13</span>
-            <span>14</span>
-          </div>
-          <div className="flex items-center">27</div>
-        </div>
-        <div className="grid grid-cols-2 gap-2">
-          <div className="grid grid-cols-2 gap-x-2">
-            <span className="text-xl">D</span>
-            <span className="text-xl">A</span>
-            <span>13</span>
-            <span>14</span>
-          </div>
-          <div className="flex items-center">27</div>
-        </div>
+      <div className="absolute bottom-[35px] left-[25px] grid grid-cols-4 w-[480px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
+        {seasonsData.map((seasonList, index) => (
+          <SeasonsCounter seasonsList={seasonList} key={index} />
+        ))}
       </div>
       <div className="absolute bottom-[60px] right-[47px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
         120
