@@ -43,7 +43,6 @@ const LoginForm = (): JSX.Element => {
       setIsLoading(false);
       setAlert({
         type: 'danger',
-        onClose: removeAlert,
         text: response.data,
       });
     },
