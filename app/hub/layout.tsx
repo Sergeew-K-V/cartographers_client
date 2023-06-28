@@ -2,10 +2,12 @@
 
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
-import { ImageCustom, LinkButton } from '@/shared/ui';
+import { useAuthContext } from '@/shared/lib';
+import { Button, ImageCustom, LinkButton } from '@/shared/ui';
 
 function PlaygroundLayout({ children }: { children: ReactNode }): JSX.Element {
   const pathname = usePathname();
+  const { logout } = useAuthContext();
   const isActiveLink = (pathname: string, matchedPath: string) => {
     return pathname === matchedPath
       ? 'md:text-primary-700'
@@ -59,12 +61,7 @@ function PlaygroundLayout({ children }: { children: ReactNode }): JSX.Element {
                   </LinkButton>
                 </li>
                 <li>
-                  <LinkButton
-                    href="/auth/login"
-                    className="block py-2 pl-3 pr-4 text-secondary-900 rounded hover:bg-secondary-100 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0"
-                  >
-                    Logout
-                  </LinkButton>
+                  <Button onClick={() => logout()}>Logout</Button>
                 </li>
               </ul>
             </div>
