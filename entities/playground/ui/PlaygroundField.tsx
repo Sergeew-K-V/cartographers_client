@@ -15,14 +15,10 @@ function PlaygroundField({
   coinsData,
   seasonsData,
 }: PlaygroundFieldProps) {
-  const { userId } = useAuthContext();
-  const { data, isLoading, isError } = useQuery(
-    'getUser',
-    () => fetchUser(userId),
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { userId, token } = useAuthContext();
+  const { data } = useQuery('getUser', () => fetchUser(userId, token), {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <div className="relative">

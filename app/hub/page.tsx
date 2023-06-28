@@ -1,26 +1,12 @@
 'use client';
 
 import { GameSessionInfoRow } from '@/entities/hub';
-import { GameSessionInfo } from '@/shared/api';
-import { useAlertContext, useAuthContext } from '@/shared/lib';
+import { useAuthContext } from '@/shared/lib';
 import { AlertList, Button } from '@/shared/ui';
-
-const games: GameSessionInfo[] = [
-  {
-    hostName: 'Test1',
-    numberOfPlayers: 3,
-    status: 'In game',
-  },
-  {
-    hostName: 'Test2',
-    numberOfPlayers: 1,
-    status: 'Not started',
-  },
-];
+import { games } from './config';
 
 const HubPage = (): JSX.Element => {
   const { logout } = useAuthContext();
-  const { removeAlert, setAlert } = useAlertContext();
 
   return (
     <>
