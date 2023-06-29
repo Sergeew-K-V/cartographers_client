@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { Navbar } from '@/features/hub';
+import { AlertList } from '@/shared/ui';
 import { ImageCustom } from '@/shared/ui';
 
 function PlaygroundLayout({ children }: { children: ReactNode }): JSX.Element {
@@ -30,6 +31,7 @@ function PlaygroundLayout({ children }: { children: ReactNode }): JSX.Element {
         </nav>
       </div>
       {children}
+      <AlertList />
     </>
   );
 }

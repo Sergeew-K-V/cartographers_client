@@ -1,13 +1,8 @@
-'use client';
-
+import { HubControl } from '@/features/hub';
 import { GameSessionInfoRow } from '@/entities/hub';
-import { useAuth } from '@/shared/lib';
-import { AlertList, Button } from '@/shared/ui';
 import { games } from './config';
 
 const HubPage = (): JSX.Element => {
-  const { logout } = useAuth();
-
   return (
     <>
       <main className="min-h-[calc(100vh-64px)] p-6 bg-secondary-50">
@@ -49,21 +44,10 @@ const HubPage = (): JSX.Element => {
                 </div>
               )}
             </div>
-
-            <div className="grid grid-cols-1 gap-y-4">
-              <div className="w-40">
-                <Button className="primary-button">Create lobby</Button>
-              </div>
-              <div className="w-40">
-                <Button className="primary-button" onClick={() => logout()}>
-                  Logout
-                </Button>
-              </div>
-            </div>
+            <HubControl />
           </div>
         </div>
       </main>
-      <AlertList />
     </>
   );
 };

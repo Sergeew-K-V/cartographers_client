@@ -1,3 +1,3 @@
-import { Navbar } from './ui';
+import { Navbar, HubControl } from './ui';
 
-export { Navbar };
+export { Navbar, HubControl };

@@ -1,3 +1,5 @@
+'use client';
+
 import { GameSessionInfo } from '@/shared/api';
 import { Button } from '@/shared/ui';
 
@@ -25,6 +27,7 @@ function GameSessionInfoRow({
       <td className="px-6 py-4 w-32">
         <Button
           className="primary-button"
+          onClick={() => console.log('connect to lobby')}
           disabled={status === 'In game' ? true : false}
         >
           Connect
