@@ -52,10 +52,12 @@ const HubPage = (): JSX.Element => {
 
             <div className="grid grid-cols-1 gap-y-4">
               <div className="w-40">
-                <Button>Create lobby</Button>
+                <Button className="primary-button">Create lobby</Button>
               </div>
               <div className="w-40">
-                <Button onClick={() => logout()}>Logout</Button>
+                <Button className="primary-button" onClick={() => logout()}>
+                  Logout
+                </Button>
               </div>
             </div>
           </div>

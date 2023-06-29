@@ -61,7 +61,9 @@ function PlaygroundLayout({ children }: { children: ReactNode }): JSX.Element {
                   </LinkButton>
                 </li>
                 <li>
-                  <Button onClick={() => logout()}>Logout</Button>
+                  <Button className="primary-button" onClick={() => logout()}>
+                    Logout
+                  </Button>
                 </li>
               </ul>
             </div>

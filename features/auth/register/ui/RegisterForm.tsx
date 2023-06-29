@@ -110,7 +110,7 @@ const RegisterForm = () => {
           <Checkbox labelText="I agree to the privacy policy" />
         </div>
 
-        <Button className="bg-primary-600 block" onClick={handleSubmit}>
+        <Button className="primary-button" onClick={handleSubmit}>
           Create account
         </Button>
 

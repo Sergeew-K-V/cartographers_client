@@ -23,10 +23,10 @@ function PlaygroundPage(): JSX.Element {
             <CardView />
             <div className="flex gap-x-4 items-center">
               <div className="w-32">
-                <Button>Submit step</Button>
+                <Button className="primary-button">Submit step</Button>
               </div>
               <div className="w-32">
-                <Button>Reset step</Button>
+                <Button className="primary-button">Reset step</Button>
               </div>
             </div>
           </div>
