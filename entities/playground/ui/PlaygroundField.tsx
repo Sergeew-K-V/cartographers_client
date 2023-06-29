@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { useAuthContext } from '@/shared/lib';
+import { useAuth } from '@/shared/lib';
 import { ImageCustom } from '@/shared/ui';
 import { fetchUser } from '../api';
 import SeasonsCounter from './SeasonsCounter';
@@ -15,7 +15,7 @@ function PlaygroundField({
   coinsData,
   seasonsData,
 }: PlaygroundFieldProps) {
-  const { userId, token } = useAuthContext();
+  const { userId, token } = useAuth();
   const { data } = useQuery('getUser', () => fetchUser(userId, token), {
     refetchOnWindowFocus: false,
   });

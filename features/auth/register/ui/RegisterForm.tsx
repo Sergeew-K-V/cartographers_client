@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { IUser } from '@/shared/api';
-import { useAlertContext, useAuthContext } from '@/shared/lib';
+import { useAlert, useAuth } from '@/shared/lib';
 import {
   AlertList,
   Button,
@@ -23,8 +23,8 @@ const RegisterForm = () => {
     nickname: '',
   });
   const [confirmPassword, setConfirmPassword] = useState<string>('');
-  const { setAlert } = useAlertContext();
-  const { login } = useAuthContext();
+  const { setAlert } = useAlert();
+  const { login } = useAuth();
 
   const handleChange = (value: string, fieldName?: string) => {
     if (fieldName) {

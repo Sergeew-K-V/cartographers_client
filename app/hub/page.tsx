@@ -1,12 +1,12 @@
 'use client';
 
 import { GameSessionInfoRow } from '@/entities/hub';
-import { useAuthContext } from '@/shared/lib';
+import { useAuth } from '@/shared/lib';
 import { AlertList, Button } from '@/shared/ui';
 import { games } from './config';
 
 const HubPage = (): JSX.Element => {
-  const { logout } = useAuthContext();
+  const { logout } = useAuth();
 
   return (
     <>

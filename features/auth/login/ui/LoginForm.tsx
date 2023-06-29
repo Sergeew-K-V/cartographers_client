@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { IUser } from '@/shared/api';
-import { useAlertContext, useAuthContext } from '@/shared/lib';
+import { useAlert, useAuth } from '@/shared/lib';
 import { AlertList, Button, Input, LinkButton, Loader } from '@/shared/ui';
 
 const LoginForm = (): JSX.Element => {
@@ -12,8 +12,8 @@ const LoginForm = (): JSX.Element => {
     email: 'admin@admin.com',
     password: 'admin@admin.com',
   });
-  const { login } = useAuthContext();
-  const { setAlert } = useAlertContext();
+  const { login } = useAuth();
+  const { setAlert } = useAlert();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleChange = (value: string, fieldName?: string) => {

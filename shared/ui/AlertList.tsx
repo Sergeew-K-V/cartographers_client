@@ -1,10 +1,10 @@
 'use client';
 
-import { useAlertContext } from '../lib';
+import { useAlert } from '../lib';
 import Alert from './Alert';
 
 const AlertList = () => {
-  const { alerts, removeAlert } = useAlertContext();
+  const { alerts, removeAlert } = useAlert();
 
   return (
     <div className="absolute z-50 right-0 top-0 w-fit max-w-md overflow-hidden max-h-full h-auto">

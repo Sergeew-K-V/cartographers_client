@@ -1,4 +1,4 @@
-// import { useAuthContext } from '@/shared/lib';
+// import { useAuth } from '@/shared/lib';
 
 interface PlayerStatsProps {
   name: string;
@@ -7,7 +7,7 @@ interface PlayerStatsProps {
 }
 
 function PlayerStats({ isReady, name, score }: PlayerStatsProps) {
-  // const { user } = useAuthContext();
+  // const { user } = useAuth();
   return (
     <tr className="border-b text-center">
       <th

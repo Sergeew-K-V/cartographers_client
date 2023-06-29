@@ -2,12 +2,12 @@
 
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
-import { useAuthContext } from '@/shared/lib';
+import { useAuth } from '@/shared/lib';
 import { Button, ImageCustom, LinkButton } from '@/shared/ui';
 
 function PlaygroundLayout({ children }: { children: ReactNode }): JSX.Element {
   const pathname = usePathname();
-  const { logout } = useAuthContext();
+  const { logout } = useAuth();
   const isActiveLink = (pathname: string, matchedPath: string) => {
     return pathname === matchedPath
       ? 'md:text-primary-700'

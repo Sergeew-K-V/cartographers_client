@@ -17,4 +17,9 @@ interface GameSessionInfo {
   status: 'In game' | 'Not started';
 }
 
-export type { IUser, GameSessionInfo };
+interface IAlert {
+  type: 'danger' | 'success';
+  text: string;
+}
+
+export type { IUser, GameSessionInfo, IAlert };

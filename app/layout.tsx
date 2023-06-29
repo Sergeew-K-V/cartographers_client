@@ -1,6 +1,5 @@
 import Head from 'next/head';
-import { AlertProvider, AuthProvider } from '@/shared/lib';
-import { QueryProvider } from './providers';
+import { AlertProvider, AuthProvider, QueryProvider } from './providers';
 import './styles/globals.css';
 
 export const metadata = {

@@ -1,4 +1,4 @@
-import { AlertProvider, useAlertContext } from './useAlerts';
-import { AuthProvider, useAuthContext } from './useAuth';
+import { AlertContext, useAlert } from './useAlerts';
+import { AuthContext, useAuth } from './useAuth';
 
-export { AuthProvider, useAuthContext, AlertProvider, useAlertContext };
+export { AuthContext, useAuth, AlertContext, useAlert };
