@@ -6,14 +6,7 @@ import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { IUser } from '@/shared/api';
 import { useAlert, useAuth } from '@/shared/lib';
-import {
-  AlertList,
-  Button,
-  Checkbox,
-  Input,
-  LinkButton,
-  Loader,
-} from '@/shared/ui';
+import { Button, Checkbox, Input, LinkButton, Loader } from '@/shared/ui';
 
 const RegisterForm = () => {
   const { push } = useRouter();
@@ -110,7 +103,7 @@ const RegisterForm = () => {
           <Checkbox labelText="I agree to the privacy policy" />
         </div>
 
-        <Button className="bg-primary-600 block" onClick={handleSubmit}>
+        <Button className="primary-button" onClick={handleSubmit}>
           Create account
         </Button>
 
@@ -125,7 +118,6 @@ const RegisterForm = () => {
           </LinkButton>
         </p>
       </form>
-      <AlertList />
       {registerMutation.isLoading && <Loader />}
     </>
   );

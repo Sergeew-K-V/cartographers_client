@@ -5,12 +5,6 @@ const PLAYERS = [
 ];
 
 const COINS = [1, 2, 3, 4, 5, 6];
-// const SEASONS: ISeason[][] = [
-//   [{ A: 13 }, { B: 14 }, { coins: 1 }, { enemy: 6 }],
-//   [{ B: 13 }, { C: 14 }, { coins: 3 }, { enemy: 5 }],
-//   [{ C: 13 }, { D: 14 }, { coins: 6 }, { enemy: 4 }],
-//   [{ D: 13 }, { A: 14 }, { coins: 8 }, { enemy: 3 }],
-// ];
 const SEASONS: number[][] = [
   [13, 14, 1, 6],
   [13, 14, 3, 5],

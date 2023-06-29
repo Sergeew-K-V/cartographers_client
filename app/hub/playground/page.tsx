@@ -1,7 +1,7 @@
 'use client';
 
 import { CardView, PlayerTable, PlaygroundField } from '@/entities/playground';
-import { AlertList, Button } from '@/shared/ui';
+import { Button } from '@/shared/ui';
 import { COINS, GRID, PLAYERS, SEASONS } from './config';
 
 function PlaygroundPage(): JSX.Element {
@@ -23,16 +23,15 @@ function PlaygroundPage(): JSX.Element {
             <CardView />
             <div className="flex gap-x-4 items-center">
               <div className="w-32">
-                <Button>Submit step</Button>
+                <Button className="primary-button">Submit step</Button>
               </div>
               <div className="w-32">
-                <Button>Reset step</Button>
+                <Button className="primary-button">Reset step</Button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <AlertList />
     </main>
   );
 }
