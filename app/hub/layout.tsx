@@ -3,7 +3,7 @@ import { Navbar } from '@/features/hub';
 import { AlertList } from '@/shared/ui';
 import { ImageCustom } from '@/shared/ui';
 
-function PlaygroundLayout({ children }: { children: ReactNode }): JSX.Element {
+function HubLayout({ children }: { children: ReactNode }): JSX.Element {
   return (
     <>
       <div className="absolute w-full z-40">
@@ -36,4 +36,4 @@ function PlaygroundLayout({ children }: { children: ReactNode }): JSX.Element {
   );
 }
 
-export default PlaygroundLayout;
+export default HubLayout;

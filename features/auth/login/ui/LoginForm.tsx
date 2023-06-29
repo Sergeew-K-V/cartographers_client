@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { IUser } from '@/shared/api';
 import { useAlert, useAuth } from '@/shared/lib';
-import { AlertList, Button, Input, LinkButton, Loader } from '@/shared/ui';
+import { Button, Input, LinkButton, Loader } from '@/shared/ui';
 
 const LoginForm = (): JSX.Element => {
   const [loginUser, setLoginUser] = useState<IUser>({
@@ -106,7 +106,6 @@ const LoginForm = (): JSX.Element => {
           </LinkButton>
         </p>
       </form>
-      <AlertList />
       {isLoading && <Loader />}
     </>
   );

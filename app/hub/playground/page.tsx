@@ -1,7 +1,7 @@
 'use client';
 
 import { CardView, PlayerTable, PlaygroundField } from '@/entities/playground';
-import { AlertList, Button } from '@/shared/ui';
+import { Button } from '@/shared/ui';
 import { COINS, GRID, PLAYERS, SEASONS } from './config';
 
 function PlaygroundPage(): JSX.Element {
@@ -32,7 +32,6 @@ function PlaygroundPage(): JSX.Element {
           </div>
         </div>
       </div>
-      <AlertList />
     </main>
   );
 }
