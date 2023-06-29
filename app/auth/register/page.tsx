@@ -10,7 +10,7 @@ const RegisterPage = () => {
             <ImageCustom
               src={'/images/seasons/summer.jpg'}
               alt="Logo"
-              width={100}
+              width={1000}
               height={100}
               className="object-cover w-full h-full"
             />
