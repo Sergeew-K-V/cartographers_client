@@ -51,7 +51,7 @@ function PlaygroundField({
       </div>
       <div className="absolute bottom-[120px] left-[97px] z-10 w-[490px] h-[30px] grid grid-cols-15">
         {coinsData.map((coin) => (
-          <div key={coin} className="coinsDivider">
+          <div key={coin} className="coins-divider">
             \
           </div>
         ))}
