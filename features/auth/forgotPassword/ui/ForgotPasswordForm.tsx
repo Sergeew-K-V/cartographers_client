@@ -1,18 +1,16 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
-import { Button, Input } from '@/shared/ui';
+import { FormEvent, useState } from 'react';
+import { Button, Input, LinkButton } from '@/shared/ui';
 
 const ForgotPasswordForm = () => {
-  const { back } = useRouter();
   const [recoverEmail, setRecoverEmail] = useState<string>('');
 
   const handleChange = (value: string) => {
     setRecoverEmail(value);
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     console.log('submit');
   };
@@ -37,12 +35,12 @@ const ForgotPasswordForm = () => {
         Recover password
       </Button>
       <p className="mt-20 w-28">
-        <Button
-          className="text-sm font-medium text-primary-600 hover:underline"
-          onClick={() => back()}
+        <LinkButton
+          className="text-sm font-medium bg-primary-700 w-40 rounded-md text-white px-5 py-2"
+          href={'/auth/login'}
         >
-          Go back
-        </Button>
+          Go to login
+        </LinkButton>
       </p>
     </form>
   );
