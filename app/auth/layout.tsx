@@ -4,7 +4,9 @@ import { AlertList } from '@/shared/ui';
 const AuthLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
-      {children}
+      <main className="flex items-center min-h-screen p-6 bg-secondary-50">
+        {children}
+      </main>
       <AlertList />
     </>
   );
