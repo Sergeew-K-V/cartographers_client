@@ -1,14 +1,23 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
 import { Navbar } from '@/features/hub';
 import { AlertList } from '@/shared/ui';
 import { ImageCustom } from '@/shared/ui';
 
 function HubLayout({ children }: { children: ReactNode }): JSX.Element {
+  const path = usePathname();
+
   return (
     <>
-      <div className="w-full z-40">
+      <div
+        className={
+          'w-full z-40 ' + (path === '/hub/playground' ? 'absolute' : ' ')
+        }
+      >
         <nav className="border-secondary-200 ">
-          <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+          <div className="max-w-full flex flex-wrap items-center justify-between mx-auto p-4">
             <div className="flex items-center">
               <ImageCustom
                 src="/images/seasons/summer.jpg"
@@ -30,7 +39,14 @@ function HubLayout({ children }: { children: ReactNode }): JSX.Element {
           </div>
         </nav>
       </div>
-      <main className="min-h-[calc(100vh-72px)] p-6 bg-secondary-50">
+      <main
+        className={
+          'p-6 bg-secondary-50 ' +
+          (path !== '/hub/playground'
+            ? 'min-h-[calc(100vh-72px)]'
+            : 'min-h-screen')
+        }
+      >
         {children}
       </main>
       <AlertList />

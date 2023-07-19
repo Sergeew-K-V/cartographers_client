@@ -4,11 +4,11 @@ const NavbarLinkList = [
     title: 'Hub',
   },
   {
-    href: 'playground',
+    href: 'hub/playground',
     title: 'Playground',
   },
   {
-    href: 'profile',
+    href: 'hub/profile',
     title: 'Profile',
   },
 ];
