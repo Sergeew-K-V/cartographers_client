@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/shared/lib';
 import { LinkButton, Button } from '@/shared/ui';
+import NavbarLinkList from '../config';
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -14,31 +15,19 @@ const Navbar = () => {
   };
 
   return (
-    <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-secondary-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
-      <li>
-        <LinkButton
-          href="/hub"
-          className={
-            'block py-2 pl-3 pr-4rounded md:bg-transparent md:p-0' +
-            ' ' +
-            `${isActiveLink(pathname, '/hub')}`
-          }
-        >
-          Hub
-        </LinkButton>
-      </li>
-      <li>
-        <LinkButton
-          href="/hub/playground"
-          className={
-            'block py-2 pl-3 pr-4rounded md:bg-transparent md:p-0' +
-            ' ' +
-            `${isActiveLink(pathname, '/hub/playground')}`
-          }
-        >
-          Playground
-        </LinkButton>
-      </li>
+    <ul className="font-medium flex flex-col items-center p-4 md:p-0 mt-4 border border-secondary-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
+      {NavbarLinkList.map((link) => (
+        <li key={link.href}>
+          <LinkButton
+            href={`/${link.href}`}
+            className={
+              'navbar-link' + ' ' + `${isActiveLink(pathname, `/${link.href}`)}`
+            }
+          >
+            {link.title}
+          </LinkButton>
+        </li>
+      ))}
       <li>
         <Button className="primary-button" onClick={() => logout()}>
           Logout

@@ -6,7 +6,7 @@ import { ImageCustom } from '@/shared/ui';
 function HubLayout({ children }: { children: ReactNode }): JSX.Element {
   return (
     <>
-      <div className="absolute w-full z-40">
+      <div className="w-full z-40">
         <nav className="border-secondary-200 ">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <div className="flex items-center">
@@ -30,7 +30,9 @@ function HubLayout({ children }: { children: ReactNode }): JSX.Element {
           </div>
         </nav>
       </div>
-      {children}
+      <main className="min-h-[calc(100vh-72px)] p-6 bg-secondary-50">
+        {children}
+      </main>
       <AlertList />
     </>
   );

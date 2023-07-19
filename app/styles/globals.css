@@ -12,4 +12,7 @@
   .secondary-button {
     @apply flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 bg-none text-secondary-700 transition-colors duration-150 border border-secondary-300 rounded-lg active:bg-transparent hover:border-secondary-500 focus:border-secondary-500 active:text-secondary-500 focus:outline-none;
   }
+  .navbar-link {
+    @apply block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0;
+  }
 }
