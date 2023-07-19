@@ -1,18 +1,15 @@
-import Head from 'next/head';
 import { AlertProvider, AuthProvider, QueryProvider } from './providers';
 import './styles/globals.css';
 
 export const metadata = {
   title: 'Cartographers',
   description: 'Cartographers game',
+  icons: '/icon.png',
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
-      <Head>
-        <link rel="shortcut icon" href="/icon.png" />
-      </Head>
       <body>
         <AuthProvider>
           <AlertProvider>
