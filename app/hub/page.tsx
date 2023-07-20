@@ -1,5 +1,5 @@
 import { HubControl } from '@/features/hub';
-import { GameSessionInfoRow } from '@/entities/hub';
+import { GameSessionInfoRow, UserInfo } from '@/entities/hub';
 import { games } from './config';
 
 const HubPage = (): JSX.Element => {
@@ -9,8 +9,8 @@ const HubPage = (): JSX.Element => {
         <h1 className="mb-4 text-xl font-semibold text-secondary-700">
           Welcome to Hub
         </h1>
-        <div className="grid grid-cols-3">
-          <div className="col-start-2 relative w-fit overflow-x-auto shadow-md sm:rounded-lg my-3">
+        <div className="flex gap-4">
+          <div className="relative w-fit overflow-x-auto shadow-md sm:rounded-lg">
             <table className="text-sm text-left text-secondary-500 rounded-full">
               <thead className="text-xs text-secondary-700 uppercase bg-secondary-200">
                 <tr>
@@ -43,6 +43,7 @@ const HubPage = (): JSX.Element => {
               </div>
             )}
           </div>
+          <UserInfo />
           <HubControl />
         </div>
       </div>
