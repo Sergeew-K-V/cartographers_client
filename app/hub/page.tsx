@@ -15,6 +15,9 @@ const HubPage = (): JSX.Element => {
     //   console.log('connected');
     //   console.log('hub page');
     // });
+    return () => {
+      socket?.disconnect();
+    };
   }, []);
 
   return (
