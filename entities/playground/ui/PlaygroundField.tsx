@@ -15,8 +15,8 @@ function PlaygroundField({
   coinsData,
   seasonsData,
 }: PlaygroundFieldProps) {
-  const { userId, token } = useAuth();
-  const { data } = useQuery('getUser', () => fetchUser(userId, token), {
+  const { userId, getToken } = useAuth();
+  const { data } = useQuery('getUser', () => fetchUser(userId, getToken()), {
     refetchOnWindowFocus: false,
   });
 

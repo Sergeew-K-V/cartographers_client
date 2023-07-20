@@ -19,6 +19,12 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     STORAGE_DATA?.user ? STORAGE_DATA?.user : null
   );
 
+  const getToken = () => {
+    const user = window.localStorage.getItem(STORAGE_NAME);
+    const token = JSON.parse(user as string)?.token;
+    return token;
+  };
+
   const login = useCallback(
     (token: string, userId: string) => {
       setToken(token);
@@ -45,7 +51,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, [push]);
 
   return (
-    <AuthContext.Provider value={{ login, logout, token, userId }}>
+    <AuthContext.Provider value={{ login, logout, token, userId, getToken }}>
       {children}
     </AuthContext.Provider>
   );
