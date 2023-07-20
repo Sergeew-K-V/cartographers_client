@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
+import { fetchUser } from '@/shared/api';
 import { useAuth } from '@/shared/lib';
 import { ImageCustom } from '@/shared/ui';
-import { fetchUser } from '../api';
 import SeasonsCounter from './SeasonsCounter';
 
 interface PlaygroundFieldProps {
@@ -15,10 +15,14 @@ function PlaygroundField({
   coinsData,
   seasonsData,
 }: PlaygroundFieldProps) {
-  const { userId, getToken } = useAuth();
-  const { data } = useQuery('getUser', () => fetchUser(userId, getToken()), {
-    refetchOnWindowFocus: false,
-  });
+  const { getUserId, getToken } = useAuth();
+  const { data } = useQuery(
+    'getUser',
+    () => fetchUser(getUserId(), getToken()),
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
   return (
     <div className="relative">
@@ -44,10 +48,10 @@ function PlaygroundField({
         )}
       </div>
       <div className="absolute top-[50px] left-[37px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
-        {data?.data.user?.nickname}
+        {data?.data?.nickname}
       </div>
       <div className="absolute top-[110px] left-[37px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
-        {data?.data.user?.rang}
+        {data?.data?.rang}
       </div>
       <div className="absolute bottom-[120px] left-[97px] z-10 w-[490px] h-[30px] grid grid-cols-15">
         {coinsData.map((coin) => (

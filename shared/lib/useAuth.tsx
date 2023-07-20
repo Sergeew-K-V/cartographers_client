@@ -1,17 +1,15 @@
 import { createContext, useContext } from 'react';
 
 interface IAuthContext {
-  token: string;
   getToken: () => string;
+  getUserId: () => string;
   login: (token: string, userId: string) => void;
   logout: () => void;
-  userId: string | null;
 }
 
 export const AuthContext = createContext<IAuthContext>({
-  token: '',
-  userId: null,
   getToken: () => '',
+  getUserId: () => '',
   login: () => undefined,
   logout: () => undefined,
 });

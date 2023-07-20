@@ -25,6 +25,8 @@ function ImageCustom({
       width={width || 100}
       onClick={onClick}
       className={className}
+      placeholder="blur"
+      blurDataURL={src}
     />
   );
 }
