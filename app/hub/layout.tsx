@@ -5,12 +5,13 @@ import { ReactNode } from 'react';
 import { Navbar } from '@/features/hub';
 import { AlertList } from '@/shared/ui';
 import { ImageCustom } from '@/shared/ui';
+import { SocketProvider } from './providers';
 
 function HubLayout({ children }: { children: ReactNode }): JSX.Element {
   const path = usePathname();
 
   return (
-    <>
+    <SocketProvider>
       <div
         className={
           'w-full z-40 ' + (path === '/hub/playground' ? 'absolute' : ' ')
@@ -50,7 +51,7 @@ function HubLayout({ children }: { children: ReactNode }): JSX.Element {
         {children}
       </main>
       <AlertList />
-    </>
+    </SocketProvider>
   );
 }
 

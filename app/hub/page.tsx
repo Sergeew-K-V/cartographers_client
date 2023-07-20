@@ -1,8 +1,22 @@
+'use client';
+
+import { useEffect } from 'react';
 import { HubControl } from '@/features/hub';
 import { GameSessionInfoRow, UserInfo } from '@/entities/hub';
+import { useSocket } from '@/shared/lib';
 import { games } from './config';
 
 const HubPage = (): JSX.Element => {
+  const { socket } = useSocket();
+
+  useEffect(() => {
+    socket?.connect();
+    // socket.on('connect', () => {
+    //   console.log('connected');
+    //   console.log('hub page');
+    // });
+  }, []);
+
   return (
     <>
       <div className="container min-w-full relative">
