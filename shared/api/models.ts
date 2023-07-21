@@ -1,7 +1,6 @@
 interface IUser {
   email: string;
   _id?: string;
-  password: string;
   nickname?: string;
   rang?: string;
   gameStats?: {

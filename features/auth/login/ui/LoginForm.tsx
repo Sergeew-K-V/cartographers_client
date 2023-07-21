@@ -10,8 +10,8 @@ import { Button, Input, LinkButton, Loader } from '@/shared/ui';
 const LoginForm = (): JSX.Element => {
   const [loginUser, setLoginUser] = useState<IUser>({
     email: 'admin@admin.com',
-    password: 'admin@admin.com',
   });
+  const [password, setPassword] = useState<string>('admin@admin.com');
   const { login } = useAuth();
   const { setAlert } = useAlert();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -32,7 +32,7 @@ const LoginForm = (): JSX.Element => {
       setIsLoading(true);
       return axios.post(
         (process.env.NEXT_PUBLIC_SERVER_URL as string) + '/login',
-        loginUser
+        { ...loginUser, password }
       );
     },
     onSuccess(response) {
@@ -66,8 +66,8 @@ const LoginForm = (): JSX.Element => {
           name={'password'}
           id={'password'}
           type="password"
-          value={loginUser?.password}
-          handleChange={handleChange}
+          value={password}
+          handleChange={setPassword}
         />
         <Button className="primary-button" onClick={handleSubmit} type="submit">
           Login

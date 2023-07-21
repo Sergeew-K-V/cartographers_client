@@ -5,19 +5,18 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { IUser } from '@/shared/api';
-import { useAlert, useAuth } from '@/shared/lib';
+import { useAlert } from '@/shared/lib';
 import { Button, Checkbox, Input, LinkButton, Loader } from '@/shared/ui';
 
 const RegisterForm = () => {
   const { push } = useRouter();
   const [registerUser, setRegisterUser] = useState<IUser>({
     email: '',
-    password: '',
     nickname: '',
   });
+  const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const { setAlert } = useAlert();
-  const { login } = useAuth();
 
   const handleChange = (value: string, fieldName?: string) => {
     if (fieldName) {
@@ -29,7 +28,7 @@ const RegisterForm = () => {
 
   const handleSubmit = (event: React.FormEvent | undefined) => {
     event?.preventDefault();
-    if (registerUser.password !== confirmPassword) {
+    if (password !== confirmPassword) {
       setAlert({ text: 'Password mismatch', type: 'danger' });
       return;
     }
@@ -40,7 +39,7 @@ const RegisterForm = () => {
     mutationFn: () => {
       return axios.post(
         (process.env.NEXT_PUBLIC_SERVER_URL as string) + '/register',
-        registerUser
+        { ...registerUser, password }
       );
     },
     onSuccess: (response) => {
@@ -87,8 +86,8 @@ const RegisterForm = () => {
           name={'password'}
           id={'password'}
           type="password"
-          value={registerUser.password}
-          handleChange={handleChange}
+          value={password}
+          handleChange={setPassword}
         />
         <Input
           id="confirmPassword"

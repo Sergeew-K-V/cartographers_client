@@ -1,14 +1,39 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { HubControl } from '@/features/hub';
 import { GameSessionInfoRow, UserInfo } from '@/entities/hub';
-import { useSocket } from '@/shared/lib';
+import { IUser, fetchUser } from '@/shared/api';
+import { useAuth, useSocket } from '@/shared/lib';
 import { Button } from '@/shared/ui';
 import { games } from './config';
 
 const HubPage = (): JSX.Element => {
   const { socket } = useSocket();
+  const { getUserId, getToken, logout } = useAuth();
+  const [user, setUser] = useState<IUser>({ email: '' });
+
+  useQuery(
+    'getUser',
+    () => {
+      fetchUser(getUserId(), getToken())
+        .then((res) => {
+          setUser(res.data);
+        })
+        .catch((err) => {
+          if (err.response.status === 401) {
+            logout();
+          } else {
+            console.log('err:', err);
+            return '';
+          }
+        });
+    },
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
   useEffect(() => {
     socket?.connect();
@@ -64,7 +89,7 @@ const HubPage = (): JSX.Element => {
               </div>
             )}
           </div>
-          <UserInfo />
+          <UserInfo user={user} />
           <HubControl />
         </div>
       </div>

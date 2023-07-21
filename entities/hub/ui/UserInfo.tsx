@@ -1,35 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useQuery } from 'react-query';
-import { IUser, fetchUser } from '@/shared/api';
-import { useAuth } from '@/shared/lib';
+import React from 'react';
+import { IUser } from '@/shared/api';
 import { ImageCustom } from '@/shared/ui';
 
-function UserInfo() {
-  const { getUserId, getToken, logout } = useAuth();
-  const [user, setUser] = useState<IUser>();
+interface UserInfoProps {
+  user: IUser;
+}
 
-  useQuery(
-    'getUser',
-    () => {
-      fetchUser(getUserId(), getToken())
-        .then((res) => {
-          setUser(res.data);
-        })
-        .catch((err) => {
-          if (err.response.status === 401) {
-            logout();
-          } else {
-            console.log('🚀 ~ file: UserInfo.tsx:21 ~ UserInfo ~ err:', err);
-          }
-        });
-    },
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
-
+function UserInfo({ user }: UserInfoProps): JSX.Element {
   return (
     <div className="w-72 bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="py-4 px-6">

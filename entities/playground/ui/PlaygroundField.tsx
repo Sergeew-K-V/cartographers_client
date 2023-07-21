@@ -60,12 +60,12 @@ function PlaygroundField({
           </div>
         ))}
       </div>
-      <div className="absolute bottom-[35px] left-[25px] grid grid-cols-4 w-[480px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
+      <div className="absolute bottom-[35px] left-[25px] grid grid-cols-4 w-[480px] z-10 uppercase whitespace-nowrap font-bold text-secodary-700">
         {seasonsData.map((seasonList, index) => (
           <SeasonsCounter seasonsList={seasonList} key={index} />
         ))}
       </div>
-      <div className="absolute bottom-[60px] right-[47px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
+      <div className="absolute bottom-[60px] right-[47px] z-10 uppercase whitespace-nowrap font-bold text-secodary-700">
         120
       </div>
     </div>
