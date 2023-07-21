@@ -1,15 +1,19 @@
 'use client';
 
-import { SocketEvents } from '@/shared/api';
+import { IUser, SocketEvents } from '@/shared/api';
 import { useSocket } from '@/shared/lib';
 import { Button } from '@/shared/ui';
 
-function HubControl() {
+interface HubControlProps {
+  user: IUser;
+}
+
+function HubControl({ user }: HubControlProps) {
   const { socket } = useSocket();
 
   const handleCreateLobby = () => {
     if (socket) {
-      socket.emit(SocketEvents.CREATE_LOBBY);
+      socket.emit(SocketEvents.CREATE_LOBBY, user.nickname);
     }
   };
 

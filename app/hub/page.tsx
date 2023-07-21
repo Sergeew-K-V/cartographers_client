@@ -90,7 +90,7 @@ const HubPage = (): JSX.Element => {
             )}
           </div>
           <UserInfo user={user} />
-          <HubControl />
+          <HubControl user={user} />
         </div>
       </div>
     </>
