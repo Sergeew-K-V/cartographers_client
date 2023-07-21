@@ -9,10 +9,7 @@ import { ImageCustom } from '@/shared/ui';
 function UserInfo() {
   const { getUserId, getToken } = useAuth();
   const [user, setUser] = useState<IUser>();
-  console.log(
-    '🚀 ~ file: UserInfo.tsx:11 ~ UserInfo ~ getUserId:',
-    getUserId()
-  );
+
   useQuery(
     'getUser',
     () => fetchUser(getUserId(), getToken()).then((res) => setUser(res.data)),

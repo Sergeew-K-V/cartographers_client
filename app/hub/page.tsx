@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { HubControl } from '@/features/hub';
 import { GameSessionInfoRow, UserInfo } from '@/entities/hub';
 import { useSocket } from '@/shared/lib';
+import { Button } from '@/shared/ui';
 import { games } from './config';
 
 const HubPage = (): JSX.Element => {
@@ -40,7 +41,14 @@ const HubPage = (): JSX.Element => {
                   <th scope="col" className="px-6 py-3">
                     Lobby status
                   </th>
-                  <th scope="col" className="px-6 py-3"></th>
+                  <th scope="col" className="px-6 py-3 flex justify-center">
+                    <Button
+                      onClick={() => console.log('refresh')}
+                      className="primary-button"
+                    >
+                      Refresh
+                    </Button>
+                  </th>
                 </tr>
               </thead>
               <tbody>

@@ -5,10 +5,6 @@ import { ReactNode, useCallback } from 'react';
 import { AuthContext } from '@/shared/lib';
 
 const STORAGE_NAME = 'Cartographers-token';
-// const STORAGE_DATA =
-// typeof window !== 'undefined'
-//   ? JSON.parse(window.localStorage.getItem(STORAGE_NAME) as string)
-//   : null;
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { push } = useRouter();
