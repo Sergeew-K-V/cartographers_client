@@ -7,12 +7,24 @@ import { useAuth } from '@/shared/lib';
 import { ImageCustom } from '@/shared/ui';
 
 function UserInfo() {
-  const { getUserId, getToken } = useAuth();
+  const { getUserId, getToken, logout } = useAuth();
   const [user, setUser] = useState<IUser>();
 
   useQuery(
     'getUser',
-    () => fetchUser(getUserId(), getToken()).then((res) => setUser(res.data)),
+    () => {
+      fetchUser(getUserId(), getToken())
+        .then((res) => {
+          setUser(res.data);
+        })
+        .catch((err) => {
+          if (err.response.status === 401) {
+            logout();
+          } else {
+            console.log('🚀 ~ file: UserInfo.tsx:21 ~ UserInfo ~ err:', err);
+          }
+        });
+    },
     {
       refetchOnWindowFocus: false,
     }

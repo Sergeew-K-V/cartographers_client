@@ -12,10 +12,6 @@ const HubPage = (): JSX.Element => {
 
   useEffect(() => {
     socket?.connect();
-    // socket.on('connect', () => {
-    //   console.log('connected');
-    //   console.log('hub page');
-    // });
     return () => {
       socket?.disconnect();
     };

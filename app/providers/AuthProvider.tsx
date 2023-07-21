@@ -12,14 +12,14 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const getUserId = () => {
     const token = JSON.parse(
       window?.localStorage.getItem(STORAGE_NAME) as string
-    ).userId;
+    )?.userId;
     return token;
   };
 
   const getToken = () => {
     const token = JSON.parse(
       window?.localStorage.getItem(STORAGE_NAME) as string
-    ).token;
+    )?.token;
     return token;
   };
 
