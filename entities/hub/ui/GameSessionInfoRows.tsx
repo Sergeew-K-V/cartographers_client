@@ -3,18 +3,14 @@
 import { GameSessionInfo } from '@/shared/api';
 import { Button } from '@/shared/ui';
 
-function GameSessionInfoRow({
+function GameSessionInfoRows({
   hostName,
   numberOfPlayers,
   status,
 }: GameSessionInfo) {
   return (
     <tr
-      className={
-        'border-b' +
-        ' ' +
-        (status === 'Not started' ? 'bg-secondary-200' : 'bg-white')
-      }
+      className={'border-b' + ' ' + (status ? 'bg-secondary-200' : 'bg-white')}
     >
       <th
         scope="row"
@@ -23,12 +19,12 @@ function GameSessionInfoRow({
         {hostName}
       </th>
       <td className="px-6 py-4">{numberOfPlayers}/4</td>
-      <td className="px-6 py-4">{status}</td>
+      <td className="px-6 py-4">{status ? 'In game' : 'Not started'}</td>
       <td className="px-6 py-4 w-32">
         <Button
           className="primary-button"
           onClick={() => console.log('connect to lobby')}
-          disabled={status === 'In game' ? true : false}
+          disabled={status}
         >
           Connect
         </Button>
@@ -37,4 +33,4 @@ function GameSessionInfoRow({
   );
 }
 
-export default GameSessionInfoRow;
+export default GameSessionInfoRows;

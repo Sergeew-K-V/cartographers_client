@@ -10,6 +10,7 @@ import { Button, Input, LinkButton, Loader } from '@/shared/ui';
 const LoginForm = (): JSX.Element => {
   const [loginUser, setLoginUser] = useState<IUser>({
     email: 'admin@admin.com',
+    nickname: '',
   });
   const [password, setPassword] = useState<string>('admin@admin.com');
   const { login } = useAuth();
@@ -32,7 +33,7 @@ const LoginForm = (): JSX.Element => {
       setIsLoading(true);
       return axios.post(
         (process.env.NEXT_PUBLIC_SERVER_URL as string) + '/login',
-        { ...loginUser, password }
+        { email: loginUser.email, password }
       );
     },
     onSuccess(response) {

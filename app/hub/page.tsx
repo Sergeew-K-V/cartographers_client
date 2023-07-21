@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { HubControl } from '@/features/hub';
-import { GameSessionInfoRow, UserInfo } from '@/entities/hub';
-import { IUser, fetchUser } from '@/shared/api';
+import { HubControl, fetchLobbyList } from '@/features/hub';
+import { GameSessionInfoRows, UserInfo } from '@/entities/hub';
+import { ILobby, IUser, SocketEvents, fetchUser } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button } from '@/shared/ui';
-import { games } from './config';
 
 const HubPage = (): JSX.Element => {
   const { socket } = useSocket();
   const { getUserId, getToken, logout } = useAuth();
-  const [user, setUser] = useState<IUser>({ email: '' });
+  const [user, setUser] = useState<IUser>({ email: '', nickname: '' });
+  const [lobbyList, setLobbyList] = useState<ILobby[]>([]);
 
   useQuery(
     'getUser',
@@ -35,11 +35,40 @@ const HubPage = (): JSX.Element => {
     }
   );
 
+  useQuery(
+    'getLobbyList',
+    () => {
+      fetchLobbyList(getToken())
+        .then((res) => {
+          console.log('🚀 ~ file: page.tsx:44 ~ .then ~ res.data:', res.data);
+          setLobbyList(res.data);
+        })
+        .catch((err) => {
+          if (err.response.status === 401) {
+            logout();
+          } else {
+            console.log('err:', err);
+            return '';
+          }
+        });
+    },
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+
   useEffect(() => {
-    socket?.connect();
-    return () => {
-      socket?.disconnect();
-    };
+    if (socket) {
+      socket.connect();
+
+      socket.on(SocketEvents.LOBBY_CREATED, (newLobby: ILobby) => {
+        setLobbyList((lobby) => [...lobby, newLobby]);
+      });
+
+      return () => {
+        socket.disconnect();
+      };
+    }
   }, []);
 
   return (
@@ -49,7 +78,7 @@ const HubPage = (): JSX.Element => {
           Welcome to Hub
         </h1>
         <div className="flex gap-4">
-          <div className="relative w-fit overflow-x-auto shadow-md sm:rounded-lg">
+          <div className="relative w-fit h-96 overflow-y-auto shadow-md sm:rounded-lg">
             <table className="text-sm text-left text-secondary-500 rounded-full">
               <thead className="text-xs text-secondary-700 uppercase bg-secondary-200">
                 <tr>
@@ -73,17 +102,17 @@ const HubPage = (): JSX.Element => {
                 </tr>
               </thead>
               <tbody>
-                {games.map((game, index) => (
-                  <GameSessionInfoRow
-                    hostName={game.hostName}
-                    numberOfPlayers={game.numberOfPlayers}
-                    status={game.status}
-                    key={index}
+                {lobbyList.map((lobby) => (
+                  <GameSessionInfoRows
+                    hostName={lobby.host}
+                    numberOfPlayers={lobby.userList.length}
+                    status={lobby.isStarted}
+                    key={lobby.id}
                   />
                 ))}
               </tbody>
             </table>
-            {games.length === 0 && (
+            {lobbyList.length === 0 && (
               <div className="flex justify-center w-full">
                 No games running or not started
               </div>

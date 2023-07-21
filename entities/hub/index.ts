@@ -1,3 +1,3 @@
-import { GameSessionInfoRow, UserInfo } from './ui';
+import { GameSessionInfoRows, UserInfo } from './ui';
 
-export { GameSessionInfoRow, UserInfo };
+export { GameSessionInfoRows, UserInfo };

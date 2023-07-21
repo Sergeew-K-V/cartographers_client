@@ -1,4 +1,4 @@
-import GameSessionInfoRow from './GameSessionInfoRow';
+import GameSessionInfoRows from './GameSessionInfoRows';
 import UserInfo from './UserInfo';
 
-export { GameSessionInfoRow, UserInfo };
+export { GameSessionInfoRows, UserInfo };

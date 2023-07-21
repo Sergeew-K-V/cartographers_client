@@ -1,7 +1,7 @@
 interface IUser {
   email: string;
   _id?: string;
-  nickname?: string;
+  nickname: string;
   rang?: string;
   gameStats?: {
     rate: number;
@@ -13,7 +13,7 @@ interface IUser {
 interface GameSessionInfo {
   hostName: string;
   numberOfPlayers: number;
-  status: 'In game' | 'Not started';
+  status: boolean;
 }
 
 interface IAlert {
@@ -21,4 +21,11 @@ interface IAlert {
   text: string;
 }
 
-export type { IUser, GameSessionInfo, IAlert };
+interface ILobby {
+  id: string;
+  name: string;
+  host: string;
+  userList: IUser[];
+  isStarted: boolean;
+}
+export type { IUser, GameSessionInfo, IAlert, ILobby };

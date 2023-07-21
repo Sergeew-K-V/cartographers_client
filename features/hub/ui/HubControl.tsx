@@ -13,7 +13,7 @@ function HubControl({ user }: HubControlProps) {
 
   const handleCreateLobby = () => {
     if (socket) {
-      socket.emit(SocketEvents.CREATE_LOBBY, user.nickname);
+      socket.emit(SocketEvents.CREATE_LOBBY, user);
     }
   };
 

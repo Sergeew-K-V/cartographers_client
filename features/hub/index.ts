@@ -1,3 +1,4 @@
+import { fetchLobbyList } from './api';
 import { Navbar, HubControl } from './ui';
 
-export { Navbar, HubControl };
+export { Navbar, HubControl, fetchLobbyList };
