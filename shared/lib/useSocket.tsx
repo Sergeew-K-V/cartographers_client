@@ -1,11 +1,15 @@
+'use client';
+
 import { createContext, useContext } from 'react';
-import { Socket } from 'socket.io-client';
+import { Socket, io } from 'socket.io-client';
 
 interface ISocketContext {
-  socket: Socket | null;
+  socket: Socket;
 }
 
-const socket = null;
+export const socket: Socket = io(process.env.NEXT_PUBLIC_SERVER_URL as string, {
+  autoConnect: false,
+});
 
 export const SocketContext = createContext<ISocketContext>({ socket });
 

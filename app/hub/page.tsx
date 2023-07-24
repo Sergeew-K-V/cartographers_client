@@ -40,7 +40,6 @@ const HubPage = (): JSX.Element => {
     () => {
       fetchLobbyList(getToken())
         .then((res) => {
-          console.log('🚀 ~ file: page.tsx:44 ~ .then ~ res.data:', res.data);
           setLobbyList(res.data);
         })
         .catch((err) => {
@@ -58,24 +57,19 @@ const HubPage = (): JSX.Element => {
   );
 
   useEffect(() => {
-    if (socket) {
-      socket.connect();
+    socket.connect();
 
-      socket.on(SocketEvents.LOBBY_CREATED, (newLobby: ILobby) => {
-        setLobbyList((lobby) => [...lobby, newLobby]);
-      });
+    socket.on(SocketEvents.LOBBY_CREATED, (newLobby: ILobby) => {
+      setLobbyList((lobby) => [...lobby, newLobby]);
+    });
 
-      socket.on(SocketEvents.UPDATE_LOBBY, (updatedLobby: ILobby) => {
-        const filteredLobbies: ILobby[] = lobbyList.filter(
-          (lobby) => lobby.id !== updatedLobby.id
-        );
+    socket.on(SocketEvents.UPDATE_LOBBY, (updatedLobby: ILobby) => {
+      const filteredLobbies: ILobby[] = lobbyList.filter(
+        (lobby) => lobby.id !== updatedLobby.id
+      );
 
-        setLobbyList([updatedLobby, ...filteredLobbies]);
-      });
-      return () => {
-        socket.disconnect();
-      };
-    }
+      setLobbyList([updatedLobby, ...filteredLobbies]);
+    });
   }, []);
 
   return (

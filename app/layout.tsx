@@ -1,4 +1,9 @@
-import { AlertProvider, AuthProvider, QueryProvider } from './providers';
+import {
+  AlertProvider,
+  AuthProvider,
+  QueryProvider,
+  SocketProvider,
+} from './providers';
 import './styles/globals.css';
 
 export const metadata = {
@@ -13,7 +18,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body>
         <AuthProvider>
           <AlertProvider>
-            <QueryProvider>{children}</QueryProvider>
+            <QueryProvider>
+              <SocketProvider>{children}</SocketProvider>
+            </QueryProvider>
           </AlertProvider>
         </AuthProvider>
       </body>

@@ -15,10 +15,8 @@ function HubControl({ user }: HubControlProps) {
   const { push } = useRouter();
 
   const handleCreateLobby = () => {
-    if (socket) {
-      socket.emit(SocketEvents.CREATE_LOBBY, user);
-      push('/hub/playground');
-    }
+    socket.emit(SocketEvents.CREATE_LOBBY, user);
+    push('/hub/playground');
   };
 
   return (

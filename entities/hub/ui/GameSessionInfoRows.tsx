@@ -24,10 +24,8 @@ function GameSessionInfoRows({
   const { push } = useRouter();
 
   const handleConnectToLobby = () => {
-    if (socket) {
-      socket.emit(SocketEvents.JOIN_LOBBY, lobbyId, user);
-      push('/hub/playground');
-    }
+    socket.emit(SocketEvents.JOIN_LOBBY, lobbyId, user);
+    push('/hub/playground');
   };
 
   return (
