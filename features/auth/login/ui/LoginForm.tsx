@@ -9,7 +9,7 @@ import { Button, Input, LinkButton, Loader } from '@/shared/ui';
 
 const LoginForm = (): JSX.Element => {
   const [loginUser, setLoginUser] = useState<IUser>({
-    email: 'admin@admin.com',
+    email: 'admin@admin.com vadim@vadim.com',
     nickname: '',
   });
   const [password, setPassword] = useState<string>('admin@admin.com');

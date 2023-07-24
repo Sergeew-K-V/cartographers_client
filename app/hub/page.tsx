@@ -35,7 +35,7 @@ const HubPage = (): JSX.Element => {
     }
   );
 
-  useQuery(
+  const { refetch: refetchLobbyList } = useQuery(
     'getLobbyList',
     () => {
       fetchLobbyList(getToken())
@@ -65,6 +65,13 @@ const HubPage = (): JSX.Element => {
         setLobbyList((lobby) => [...lobby, newLobby]);
       });
 
+      socket.on(SocketEvents.UPDATE_LOBBY, (updatedLobby: ILobby) => {
+        const filteredLobbies: ILobby[] = lobbyList.filter(
+          (lobby) => lobby.id !== updatedLobby.id
+        );
+
+        setLobbyList([updatedLobby, ...filteredLobbies]);
+      });
       return () => {
         socket.disconnect();
       };
@@ -93,7 +100,7 @@ const HubPage = (): JSX.Element => {
                   </th>
                   <th scope="col" className="px-6 py-3 flex justify-center">
                     <Button
-                      onClick={() => console.log('refresh')}
+                      onClick={() => refetchLobbyList()}
                       className="primary-button"
                     >
                       Refresh
@@ -107,6 +114,8 @@ const HubPage = (): JSX.Element => {
                     hostName={lobby.host}
                     numberOfPlayers={lobby.userList.length}
                     status={lobby.isStarted}
+                    lobbyId={lobby.id}
+                    user={user}
                     key={lobby.id}
                   />
                 ))}

@@ -2,9 +2,9 @@
 
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
-import { Navbar } from '@/features/hub';
+// import { Navbar } from '@/features/hub';
 import { AlertList } from '@/shared/ui';
-import { ImageCustom } from '@/shared/ui';
+// import { ImageCustom } from '@/shared/ui';
 import { SocketProvider } from './providers';
 
 function HubLayout({ children }: { children: ReactNode }): JSX.Element {
@@ -12,7 +12,7 @@ function HubLayout({ children }: { children: ReactNode }): JSX.Element {
 
   return (
     <SocketProvider>
-      <div
+      {/* <div
         className={
           'w-full z-40 ' + (path === '/hub/playground' ? 'absolute' : ' ')
         }
@@ -39,7 +39,7 @@ function HubLayout({ children }: { children: ReactNode }): JSX.Element {
             </div>
           </div>
         </nav>
-      </div>
+      </div> */}
       <main
         className={
           'p-6 bg-secondary-50 ' +

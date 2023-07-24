@@ -10,12 +10,6 @@ interface IUser {
   };
 }
 
-interface GameSessionInfo {
-  hostName: string;
-  numberOfPlayers: number;
-  status: boolean;
-}
-
 interface IAlert {
   type: 'danger' | 'success';
   text: string;
@@ -28,4 +22,4 @@ interface ILobby {
   userList: IUser[];
   isStarted: boolean;
 }
-export type { IUser, GameSessionInfo, IAlert, ILobby };
+export type { IUser, IAlert, ILobby };

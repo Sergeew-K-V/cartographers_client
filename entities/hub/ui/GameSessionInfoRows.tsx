@@ -1,13 +1,35 @@
 'use client';
 
-import { GameSessionInfo } from '@/shared/api';
+import { useRouter } from 'next/navigation';
+import { IUser, SocketEvents } from '@/shared/api';
+import { useSocket } from '@/shared/lib';
 import { Button } from '@/shared/ui';
+
+interface GameSessionInfoProps {
+  hostName: string;
+  numberOfPlayers: number | string;
+  status: boolean;
+  lobbyId: string;
+  user: IUser;
+}
 
 function GameSessionInfoRows({
   hostName,
   numberOfPlayers,
   status,
-}: GameSessionInfo) {
+  lobbyId,
+  user,
+}: GameSessionInfoProps) {
+  const { socket } = useSocket();
+  const { push } = useRouter();
+
+  const handleConnectToLobby = () => {
+    if (socket) {
+      socket.emit(SocketEvents.JOIN_LOBBY, lobbyId, user);
+      push('/hub/playground');
+    }
+  };
+
   return (
     <tr
       className={'border-b' + ' ' + (status ? 'bg-secondary-200' : 'bg-white')}
@@ -23,7 +45,7 @@ function GameSessionInfoRows({
       <td className="px-6 py-4 w-32">
         <Button
           className="primary-button"
-          onClick={() => console.log('connect to lobby')}
+          onClick={handleConnectToLobby}
           disabled={status}
         >
           Connect
