@@ -70,6 +70,28 @@ const HubPage = (): JSX.Element => {
 
       setLobbyList([updatedLobby, ...filteredLobbies]);
     });
+
+    socket.on(
+      SocketEvents.USER_LEAVE_LOBBY,
+      (targetLobby: ILobby, userList: IUser[]) => {
+        const editedLobbyList: ILobby[] = lobbyList.map((lobby) => {
+          if (lobby.id === targetLobby.id) {
+            return { ...lobby, userList };
+          } else {
+            return lobby;
+          }
+        });
+        setLobbyList([...editedLobbyList]);
+      }
+    );
+
+    socket.on(SocketEvents.LEAVE_LOBBY, (leavedLobby: ILobby) => {
+      const filteredLobbies: ILobby[] = lobbyList.filter(
+        (lobby) => lobby.id !== leavedLobby.id
+      );
+
+      setLobbyList([...filteredLobbies]);
+    });
   }, []);
 
   return (
