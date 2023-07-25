@@ -1,21 +1,17 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { IUser, SocketEvents } from '@/shared/api';
+import { SocketEvents } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button } from '@/shared/ui';
 
-interface HubControlProps {
-  user: IUser;
-}
-
-function HubControl({ user }: HubControlProps) {
+function HubControl() {
   const { socket } = useSocket();
-  const { logout } = useAuth();
+  const { logout, getUserId } = useAuth();
   const { push } = useRouter();
 
   const handleCreateLobby = () => {
-    socket.emit(SocketEvents.CREATE_LOBBY, user);
+    socket.emit(SocketEvents.CREATE_LOBBY, getUserId());
     push('/hub/playground');
   };
 

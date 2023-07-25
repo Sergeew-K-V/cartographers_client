@@ -1,21 +1,33 @@
 'use client';
 
 import { CardView, PlayerTable, PlaygroundField } from '@/entities/playground';
-import { useAuth } from '@/shared/lib';
+import { SocketEvents } from '@/shared/api';
+import { useAuth, useSocket } from '@/shared/lib';
 import { Button, LinkButton } from '@/shared/ui';
 import { COINS, GRID, PLAYERS, SEASONS } from './config';
 
 function PlaygroundPage(): JSX.Element {
-  const { logout } = useAuth();
+  const { logout, getUserId } = useAuth();
+  const { socket } = useSocket();
+
+  const leaveLobbyHandler = () => {
+    socket.emit(SocketEvents.LEAVE_LOBBY, getUserId());
+  };
+
   return (
     <div className="container min-w-full relative">
       <div className="grid grid-cols-3 w-full justify-items-center">
         <div className="grid grid-rows-4 max-h-fit">
           <PlayerTable playerList={PLAYERS} />
-          <div className="w-32">
+          <div className="w-40">
             <LinkButton href="/hub" className="primary-button">
-              Reset step
+              Go to hub
             </LinkButton>
+          </div>
+          <div className="w-40">
+            <Button onClick={leaveLobbyHandler} className="primary-button">
+              Leave lobby
+            </Button>
           </div>
         </div>
         <div>

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { IUser, SocketEvents } from '@/shared/api';
-import { useSocket } from '@/shared/lib';
+import { useAuth, useSocket } from '@/shared/lib';
 import { Button } from '@/shared/ui';
 
 interface GameSessionInfoProps {
@@ -18,13 +18,13 @@ function GameSessionInfoRows({
   numberOfPlayers,
   status,
   lobbyId,
-  user,
 }: GameSessionInfoProps) {
+  const { getUserId } = useAuth();
   const { socket } = useSocket();
   const { push } = useRouter();
 
   const handleConnectToLobby = () => {
-    socket.emit(SocketEvents.JOIN_LOBBY, lobbyId, user);
+    socket.emit(SocketEvents.JOIN_LOBBY, lobbyId, getUserId());
     push('/hub/playground');
   };
 

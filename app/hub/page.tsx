@@ -5,7 +5,13 @@ import { useQuery } from 'react-query';
 import { HubControl, fetchLobbyList } from '@/features/hub';
 import { GameSessionInfoRows, UserInfo } from '@/entities/hub';
 import { ILobby, IUser, SocketEvents, fetchUser } from '@/shared/api';
-import { useAuth, useSocket } from '@/shared/lib';
+import {
+  createLobby,
+  deleteLobby,
+  updateLobby,
+  useAuth,
+  useSocket,
+} from '@/shared/lib';
 import { Button } from '@/shared/ui';
 
 const HubPage = (): JSX.Element => {
@@ -59,40 +65,29 @@ const HubPage = (): JSX.Element => {
   useEffect(() => {
     socket.connect();
 
-    socket.on(SocketEvents.LOBBY_CREATED, (newLobby: ILobby) => {
-      setLobbyList((lobby) => [...lobby, newLobby]);
+    socket.on(SocketEvents.LOBBY_CREATED, (targetLobby: ILobby) => {
+      createLobby(setLobbyList, targetLobby);
     });
 
-    socket.on(SocketEvents.UPDATE_LOBBY, (updatedLobby: ILobby) => {
-      const filteredLobbies: ILobby[] = lobbyList.filter(
-        (lobby) => lobby.id !== updatedLobby.id
-      );
-
-      setLobbyList([updatedLobby, ...filteredLobbies]);
-    });
-
-    socket.on(
-      SocketEvents.USER_LEAVE_LOBBY,
-      (targetLobby: ILobby, userList: IUser[]) => {
-        const editedLobbyList: ILobby[] = lobbyList.map((lobby) => {
-          if (lobby.id === targetLobby.id) {
-            return { ...lobby, userList };
-          } else {
-            return lobby;
-          }
-        });
-        setLobbyList([...editedLobbyList]);
-      }
+    socket.on(SocketEvents.UPDATE_LOBBY, (targetLobby: ILobby) =>
+      updateLobby(lobbyList, setLobbyList, targetLobby)
     );
 
-    socket.on(SocketEvents.LEAVE_LOBBY, (leavedLobby: ILobby) => {
-      const filteredLobbies: ILobby[] = lobbyList.filter(
-        (lobby) => lobby.id !== leavedLobby.id
-      );
+    socket.on(SocketEvents.USER_LEAVE_LOBBY, (targetLobby: ILobby) =>
+      updateLobby(lobbyList, setLobbyList, targetLobby)
+    );
 
-      setLobbyList([...filteredLobbies]);
-    });
-  }, []);
+    socket.on(SocketEvents.DELETE_LOBBY, (targetLobby: ILobby) =>
+      deleteLobby(lobbyList, setLobbyList, targetLobby)
+    );
+
+    return () => {
+      socket.removeAllListeners(SocketEvents.LOBBY_CREATED);
+      socket.removeAllListeners(SocketEvents.UPDATE_LOBBY);
+      socket.removeAllListeners(SocketEvents.USER_LEAVE_LOBBY);
+      socket.removeAllListeners(SocketEvents.DELETE_LOBBY);
+    };
+  }, [lobbyList]);
 
   return (
     <>
@@ -144,7 +139,7 @@ const HubPage = (): JSX.Element => {
             )}
           </div>
           <UserInfo user={user} />
-          <HubControl user={user} />
+          <HubControl />
         </div>
       </div>
     </>
