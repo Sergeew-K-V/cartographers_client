@@ -1,16 +1,21 @@
-enum SocketEvents {
-  CONNECTION = 'connection',
-  DISCONNECT = 'disconnect',
+import { Socket } from 'socket.io-client';
+import { ILobby } from './models';
 
-  JOIN_LOBBY = 'joinLobby',
-  LEAVE_LOBBY = 'leaveLobby',
-
-  LOBBY_CREATED = 'lobbyCreated',
-  CREATE_LOBBY = 'createLobby',
-
-  USER_LEAVE_LOBBY = 'userLeaveLobby',
-  UPDATE_LOBBY = 'lobbyUpdate',
-  DELETE_LOBBY = 'deleteLobby',
+interface ServerToClientEvents {
+  LOBBY_CREATED: (lobby: ILobby) => void;
+  DELETE_LOBBY: (lobby: ILobby) => void;
+  USER_LEAVE_LOBBY: (lobby: ILobby) => void;
+  UPDATE_LOBBY: (lobby: ILobby) => void;
 }
 
-export { SocketEvents };
+interface ClientToServerEvents {
+  CONNECTION: () => void;
+  DISCONNECT: () => void;
+  CREATE_LOBBY: (userId: string) => void;
+  JOIN_LOBBY: (lobbyId: string, userId: string) => void;
+  LEAVE_LOBBY: (userId: string) => void;
+}
+
+type AppSocket = Socket<ServerToClientEvents, ClientToServerEvents>;
+
+export type { ClientToServerEvents, ServerToClientEvents, AppSocket };

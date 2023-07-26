@@ -1,7 +1,6 @@
 'use client';
 
 import { CardView, PlayerTable, PlaygroundField } from '@/entities/playground';
-import { SocketEvents } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button, LinkButton } from '@/shared/ui';
 import { COINS, GRID, PLAYERS, SEASONS } from './config';
@@ -11,7 +10,7 @@ function PlaygroundPage(): JSX.Element {
   const { socket } = useSocket();
 
   const leaveLobbyHandler = () => {
-    socket.emit(SocketEvents.LEAVE_LOBBY, getUserId());
+    socket.emit('LEAVE_LOBBY', getUserId());
   };
 
   return (

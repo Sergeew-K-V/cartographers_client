@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { IUser, SocketEvents } from '@/shared/api';
+import { IUser } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button } from '@/shared/ui';
 
@@ -24,7 +24,7 @@ function GameSessionInfoRows({
   const { push } = useRouter();
 
   const handleConnectToLobby = () => {
-    socket.emit(SocketEvents.JOIN_LOBBY, lobbyId, getUserId());
+    socket.emit('JOIN_LOBBY', lobbyId, getUserId());
     push('/hub/playground');
   };
 

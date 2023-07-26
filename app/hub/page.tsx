@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { HubControl, fetchLobbyList } from '@/features/hub';
 import { GameSessionInfoRows, UserInfo } from '@/entities/hub';
-import { ILobby, IUser, SocketEvents, fetchUser } from '@/shared/api';
+import { ILobby, IUser, fetchUser } from '@/shared/api';
 import {
   createLobby,
   deleteLobby,
@@ -65,27 +65,27 @@ const HubPage = (): JSX.Element => {
   useEffect(() => {
     socket.connect();
 
-    socket.on(SocketEvents.LOBBY_CREATED, (targetLobby: ILobby) => {
+    socket.on('LOBBY_CREATED', (targetLobby: ILobby) => {
       createLobby(setLobbyList, targetLobby);
     });
 
-    socket.on(SocketEvents.UPDATE_LOBBY, (targetLobby: ILobby) =>
+    socket.on('UPDATE_LOBBY', (targetLobby: ILobby) =>
       updateLobby(lobbyList, setLobbyList, targetLobby)
     );
 
-    socket.on(SocketEvents.USER_LEAVE_LOBBY, (targetLobby: ILobby) =>
+    socket.on('USER_LEAVE_LOBBY', (targetLobby: ILobby) =>
       updateLobby(lobbyList, setLobbyList, targetLobby)
     );
 
-    socket.on(SocketEvents.DELETE_LOBBY, (targetLobby: ILobby) =>
+    socket.on('DELETE_LOBBY', (targetLobby: ILobby) =>
       deleteLobby(lobbyList, setLobbyList, targetLobby)
     );
 
     return () => {
-      socket.removeAllListeners(SocketEvents.LOBBY_CREATED);
-      socket.removeAllListeners(SocketEvents.UPDATE_LOBBY);
-      socket.removeAllListeners(SocketEvents.USER_LEAVE_LOBBY);
-      socket.removeAllListeners(SocketEvents.DELETE_LOBBY);
+      socket.removeAllListeners('LOBBY_CREATED');
+      socket.removeAllListeners('UPDATE_LOBBY');
+      socket.removeAllListeners('USER_LEAVE_LOBBY');
+      socket.removeAllListeners('DELETE_LOBBY');
     };
   }, [lobbyList]);
 

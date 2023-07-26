@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { SocketEvents } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button } from '@/shared/ui';
 
@@ -11,7 +10,7 @@ function HubControl() {
   const { push } = useRouter();
 
   const handleCreateLobby = () => {
-    socket.emit(SocketEvents.CREATE_LOBBY, getUserId());
+    socket.emit('CREATE_LOBBY', getUserId());
     push('/hub/playground');
   };
 

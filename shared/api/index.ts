@@ -1,6 +1,17 @@
 import fetchUser from './fetchUser';
-import type { IUser, GameSessionInfo, IAlert, ILobby } from './models';
-import { SocketEvents } from './socket';
+import type { IUser, IAlert, ILobby } from './models';
+import {
+  ClientToServerEvents,
+  ServerToClientEvents,
+  AppSocket,
+} from './socket';
 
-export { SocketEvents, fetchUser };
-export type { IUser, GameSessionInfo, IAlert, ILobby };
+export { fetchUser };
+export type {
+  IUser,
+  IAlert,
+  ILobby,
+  ClientToServerEvents,
+  ServerToClientEvents,
+  AppSocket,
+};
