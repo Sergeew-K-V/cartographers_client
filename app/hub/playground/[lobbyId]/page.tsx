@@ -1,17 +1,49 @@
 'use client';
 
-import { CardView, PlayerTable, PlaygroundField } from '@/entities/playground';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
+import { fetchLobby } from '@/features/playground';
+import { PlayerTable, PlaygroundField, CardView } from '@/entities/playground';
+import { ILobby } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
-import { Button, LinkButton } from '@/shared/ui';
-import { COINS, GRID, PLAYERS, SEASONS } from './config';
+import { LinkButton, Button } from '@/shared/ui';
+import { PLAYERS, SEASONS, COINS, GRID } from './config';
 
-function PlaygroundPage(): JSX.Element {
-  const { logout, getUserId } = useAuth();
+function PlaygroundPage({
+  params,
+}: {
+  params: { lobbyId: string };
+}): JSX.Element {
+  const lobbyId = params.lobbyId;
+  const { logout, getUserId, getToken } = useAuth();
   const { socket } = useSocket();
+  const [lobby, setLobby] = useState<ILobby>();
 
   const leaveLobbyHandler = () => {
     socket.emit('LEAVE_LOBBY', getUserId());
   };
+
+  useQuery(
+    '/lobbies/:_id',
+    () => {
+      fetchLobby(getToken(), lobbyId)
+        .then((res) => {
+          console.log('🚀 ~ file: page.tsx:31 ~ .then ~ res:', res);
+          setLobby(res.data);
+        })
+        .catch((err) => {
+          if (err.response.status === 401) {
+            logout();
+          } else {
+            console.log('err:', err);
+            return '';
+          }
+        });
+    },
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
   return (
     <div className="container min-w-full relative">

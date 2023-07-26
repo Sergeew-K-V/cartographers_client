@@ -4,14 +4,18 @@ import { useRouter } from 'next/navigation';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button } from '@/shared/ui';
 
-function HubControl() {
+interface HubControlProps {
+  lobbyId: string;
+}
+
+function HubControl({ lobbyId }: HubControlProps) {
   const { socket } = useSocket();
   const { logout, getUserId } = useAuth();
   const { push } = useRouter();
 
   const handleCreateLobby = () => {
     socket.emit('CREATE_LOBBY', getUserId());
-    push('/hub/playground');
+    push(`/hub/playground/${lobbyId}`);
   };
 
   return (

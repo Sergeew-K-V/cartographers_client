@@ -25,7 +25,7 @@ function GameSessionInfoRows({
 
   const handleConnectToLobby = () => {
     socket.emit('JOIN_LOBBY', lobbyId, getUserId());
-    push('/hub/playground');
+    push(`/hub/playground/${lobbyId}`);
   };
 
   return (
