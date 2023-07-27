@@ -15,4 +15,7 @@
   .navbar-link {
     @apply block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0;
   }
+  .input-label-pseudo-label {
+    @apply after:absolute after:content-[''] left-[20px] after:top-1/2 after:-z-10 after:-left-[2px] after:h-[1px] after:bg-secondary-50;
+  }
 }

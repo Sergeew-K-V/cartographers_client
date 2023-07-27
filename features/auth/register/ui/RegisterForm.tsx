@@ -64,16 +64,14 @@ const RegisterForm = () => {
           Create account
         </h1>
         <Input
-          labelText={'Nickname'}
-          placeholder={'Your nickname'}
+          labelText={'nickname'}
           name={'nickname'}
           id="nickname"
           value={registerUser.nickname}
           handleChange={handleChange}
         />
         <Input
-          labelText={'Email'}
-          placeholder={'Your email'}
+          labelText={'email'}
           name={'email'}
           id="email"
           type="email"
@@ -81,8 +79,7 @@ const RegisterForm = () => {
           handleChange={handleChange}
         />
         <Input
-          labelText={'Password'}
-          placeholder={'Your password'}
+          labelText={'password'}
           name={'password'}
           id={'password'}
           type="password"
@@ -92,7 +89,6 @@ const RegisterForm = () => {
         <Input
           id="confirmPassword"
           labelText={'Confirm password'}
-          placeholder={'Confirm password'}
           value={confirmPassword}
           type="password"
           handleChange={handleChange}

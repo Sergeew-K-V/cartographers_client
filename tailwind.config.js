@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      transitionProperty: {
+        width: 'width',
+      },
       gridTemplateColumns: {
         15: 'repeat(15, minmax(0, 1fr))',
       },
