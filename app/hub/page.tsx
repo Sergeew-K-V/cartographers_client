@@ -139,7 +139,7 @@ const HubPage = (): JSX.Element => {
             )}
           </div>
           <UserInfo user={user} />
-          <HubControl lobbyId={getUserId()} />
+          <HubControl />
         </div>
       </div>
     </>

@@ -5,7 +5,7 @@ const PLAYERS = [
 ];
 
 const COINS = [1, 2, 3, 4, 5, 6];
-const SEASONS: number[][] = [
+const SEASONS: Array<number[]> = [
   [13, 14, 1, 6],
   [13, 14, 3, 5],
   [13, 14, 6, 4],

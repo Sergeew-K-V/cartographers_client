@@ -1,12 +1,13 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { fetchLobby } from '@/features/playground';
 import { PlayerTable, PlaygroundField, CardView } from '@/entities/playground';
 import { ILobby } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
-import { LinkButton, Button } from '@/shared/ui';
+import { Button } from '@/shared/ui';
 import { PLAYERS, SEASONS, COINS, GRID } from './config';
 
 function PlaygroundPage({
@@ -15,12 +16,15 @@ function PlaygroundPage({
   params: { lobbyId: string };
 }): JSX.Element {
   const lobbyId = params.lobbyId;
+  console.log('🚀 ~ file: page.tsx:19 ~ lobbyId:', lobbyId);
   const { logout, getUserId, getToken } = useAuth();
   const { socket } = useSocket();
   const [lobby, setLobby] = useState<ILobby>();
+  const { push } = useRouter();
 
   const leaveLobbyHandler = () => {
     socket.emit('LEAVE_LOBBY', getUserId());
+    push('/hub');
   };
 
   useQuery(
@@ -28,7 +32,7 @@ function PlaygroundPage({
     () => {
       fetchLobby(getToken(), lobbyId)
         .then((res) => {
-          console.log('🚀 ~ file: page.tsx:31 ~ .then ~ res:', res);
+          console.log('🚀 ~ file:', res.data);
           setLobby(res.data);
         })
         .catch((err) => {
@@ -50,12 +54,7 @@ function PlaygroundPage({
       <div className="grid grid-cols-3 w-full justify-items-center">
         <div className="grid grid-rows-4 max-h-fit">
           <PlayerTable playerList={PLAYERS} />
-          <div className="w-40">
-            <LinkButton href="/hub" className="primary-button">
-              Go to hub
-            </LinkButton>
-          </div>
-          <div className="w-40">
+          <div className="row-start-4 w-40">
             <Button onClick={leaveLobbyHandler} className="primary-button">
               Leave lobby
             </Button>
@@ -76,11 +75,6 @@ function PlaygroundPage({
             </div>
             <div className="w-32">
               <Button className="primary-button">Reset step</Button>
-            </div>
-            <div className="w-32">
-              <Button className="primary-button" onClick={() => logout()}>
-                Logout
-              </Button>
             </div>
           </div>
         </div>
