@@ -54,14 +54,14 @@ const LoginForm = (): JSX.Element => {
       <form className="w-full" onSubmit={handleSubmit}>
         <h1 className="mb-4 text-xl font-semibold text-secondary-700">Login</h1>
         <Input
-          labelText={' email'}
+          labelText={'Email'}
           name={'email'}
           id={'email'}
           value={loginUser?.email}
           handleChange={handleChange}
         />
         <Input
-          labelText={'password'}
+          labelText={'Password'}
           name={'password'}
           id={'password'}
           type="password"

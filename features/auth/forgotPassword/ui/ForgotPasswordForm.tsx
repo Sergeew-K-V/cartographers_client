@@ -23,7 +23,8 @@ const ForgotPasswordForm = () => {
       <Input
         value={recoverEmail}
         id="recoverEmail"
-        labelText="email"
+        name="email"
+        labelText="Email"
         handleChange={handleChange}
         type="email"
       />

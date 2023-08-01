@@ -64,14 +64,14 @@ const RegisterForm = () => {
           Create account
         </h1>
         <Input
-          labelText={'nickname'}
+          labelText={'Nickname'}
           name={'nickname'}
           id="nickname"
           value={registerUser.nickname}
           handleChange={handleChange}
         />
         <Input
-          labelText={'email'}
+          labelText={'Email'}
           name={'email'}
           id="email"
           type="email"
@@ -79,7 +79,7 @@ const RegisterForm = () => {
           handleChange={handleChange}
         />
         <Input
-          labelText={'password'}
+          labelText={'Password'}
           name={'password'}
           id={'password'}
           type="password"
