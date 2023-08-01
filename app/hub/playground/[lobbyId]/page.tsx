@@ -3,8 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { fetchLobby } from '@/features/playground';
-import { PlayerTable, PlaygroundField, CardView } from '@/entities/playground';
+import { PlaygroundField, fetchLobby } from '@/features/playground';
+import { PlayerTable, CardView } from '@/entities/playground';
 import { ILobby } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button } from '@/shared/ui';
@@ -32,7 +32,6 @@ function PlaygroundPage({
     () => {
       fetchLobby(getToken(), lobbyId)
         .then((res) => {
-          console.log('🚀 ~ file:', res.data);
           setLobby(res.data);
         })
         .catch((err) => {

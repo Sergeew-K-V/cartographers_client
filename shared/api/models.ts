@@ -22,4 +22,5 @@ interface ILobby {
   userList: IUser[];
   isStarted: boolean;
 }
+
 export type { IUser, IAlert, ILobby };

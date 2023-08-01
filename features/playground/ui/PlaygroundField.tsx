@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query';
+import { SeasonsCounter } from '@/entities/playground';
 import { fetchUser } from '@/shared/api';
 import { useAuth } from '@/shared/lib';
 import { ImageCustom } from '@/shared/ui';
-import SeasonsCounter from './SeasonsCounter';
 
 interface PlaygroundFieldProps {
   grid: { id: number; image: string }[][];
