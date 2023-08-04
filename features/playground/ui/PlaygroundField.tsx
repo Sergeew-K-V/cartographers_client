@@ -6,7 +6,7 @@ import { ImageCustom } from '@/shared/ui';
 
 interface PlaygroundFieldProps {
   grid: { id: number; image: string }[][];
-  coinsData: number[];
+  coinsData: number;
   seasonsData: number[][];
 }
 
@@ -23,6 +23,18 @@ function PlaygroundField({
       refetchOnWindowFocus: false,
     }
   );
+
+  const renderCoins = (coins: number) => {
+    const coinsArray = [];
+    for (let i = 0; i < coins; i++) {
+      coinsArray.push(
+        <div key={i} className="coins-divider">
+          \
+        </div>
+      );
+    }
+    return coinsArray;
+  };
 
   return (
     <div className="relative">
@@ -54,11 +66,7 @@ function PlaygroundField({
         {data?.data?.rang}
       </div>
       <div className="absolute bottom-[120px] left-[97px] z-10 w-[490px] h-[30px] grid grid-cols-15">
-        {coinsData.map((coin) => (
-          <div key={coin} className="coins-divider">
-            \
-          </div>
-        ))}
+        {renderCoins(coinsData)}
       </div>
       <div className="absolute bottom-[35px] left-[25px] grid grid-cols-4 w-[480px] z-10 uppercase whitespace-nowrap font-bold text-secodary-700">
         {seasonsData.map((seasonList, index) => (

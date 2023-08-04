@@ -1,13 +1,13 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+// import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
 // import { Navbar } from '@/features/hub';
 import { AlertList } from '@/shared/ui';
 // import { ImageCustom } from '@/shared/ui';
 
 function HubLayout({ children }: { children: ReactNode }): JSX.Element {
-  const path = usePathname();
+  // const path = usePathname();
 
   return (
     <>
@@ -39,16 +39,7 @@ function HubLayout({ children }: { children: ReactNode }): JSX.Element {
           </div>
         </nav>
       </div> */}
-      <main
-        className={
-          'p-6 bg-secondary-50 ' +
-          (path !== '/hub/playground'
-            ? 'min-h-[calc(100vh-72px)]'
-            : 'min-h-screen')
-        }
-      >
-        {children}
-      </main>
+      <main className={'p-6 bg-secondary-50 min-h-screen'}>{children}</main>
       <AlertList />
     </>
   );

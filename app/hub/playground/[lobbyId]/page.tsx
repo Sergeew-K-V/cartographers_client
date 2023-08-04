@@ -1,14 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { useQuery } from 'react-query';
-import { PlaygroundField, fetchLobby } from '@/features/playground';
+import { useEffect, useState } from 'react';
+import { PlaygroundField } from '@/features/playground';
 import { PlayerTable, CardView } from '@/entities/playground';
-import { ILobby } from '@/shared/api';
+import { IGameSession, ILobbySession } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button } from '@/shared/ui';
-import { PLAYERS, SEASONS, COINS, GRID } from './config';
+import { SEASONS } from './config';
 
 function PlaygroundPage({
   params,
@@ -16,10 +15,9 @@ function PlaygroundPage({
   params: { lobbyId: string };
 }): JSX.Element {
   const lobbyId = params.lobbyId;
-  console.log('🚀 ~ file: page.tsx:19 ~ lobbyId:', lobbyId);
-  const { logout, getUserId, getToken } = useAuth();
+  const { getUserId } = useAuth();
   const { socket } = useSocket();
-  const [lobby, setLobby] = useState<ILobby>();
+  const [gameSession, setGameSession] = useState<ILobbySession>();
   const { push } = useRouter();
 
   const leaveLobbyHandler = () => {
@@ -27,32 +25,25 @@ function PlaygroundPage({
     push('/hub');
   };
 
-  useQuery(
-    '/lobbies/:_id',
-    () => {
-      fetchLobby(getToken(), lobbyId)
-        .then((res) => {
-          setLobby(res.data);
-        })
-        .catch((err) => {
-          if (err.response.status === 401) {
-            logout();
-          } else {
-            console.log('err:', err);
-            return '';
-          }
-        });
-    },
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+  useEffect(() => {
+    socket.emit('GET_GAME_SESSION', lobbyId);
+
+    socket.on('GAME_SESSION_CREATED', (session: ILobbySession) => {
+      setGameSession(session);
+    });
+
+    return () => {
+      socket.removeAllListeners('GAME_SESSION_CREATED');
+    };
+  }, []);
 
   return (
     <div className="container min-w-full relative">
       <div className="grid grid-cols-3 w-full justify-items-center">
         <div className="grid grid-rows-4 max-h-fit">
-          <PlayerTable playerList={PLAYERS} />
+          {gameSession && (
+            <PlayerTable playerList={gameSession as ILobbySession} />
+          )}
           <div className="row-start-4 w-40">
             <Button onClick={leaveLobbyHandler} className="primary-button">
               Leave lobby
@@ -60,11 +51,13 @@ function PlaygroundPage({
           </div>
         </div>
         <div>
-          <PlaygroundField
-            seasonsData={SEASONS}
-            coinsData={COINS}
-            grid={GRID}
-          />
+          {gameSession && (
+            <PlaygroundField
+              seasonsData={SEASONS}
+              coinsData={(gameSession as ILobbySession)[getUserId()].coins}
+              grid={(gameSession as ILobbySession)[getUserId()].gameField}
+            />
+          )}
         </div>
         <div className="grid grid-cols-1 gap-y-4 h-full">
           <CardView />

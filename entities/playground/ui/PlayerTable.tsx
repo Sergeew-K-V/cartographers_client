@@ -1,9 +1,9 @@
 import React from 'react';
-import { IPlayer } from '../api';
+import { ILobbySession } from '@/shared/api';
 import PlayerStats from './PlayerStats';
 
 interface PlayerTableProps {
-  playerList: IPlayer[];
+  playerList: ILobbySession;
 }
 
 function PlayerTable({ playerList }: PlayerTableProps) {
@@ -25,14 +25,16 @@ function PlayerTable({ playerList }: PlayerTableProps) {
           </tr>
         </thead>
         <tbody>
-          {playerList.map((player) => (
-            <PlayerStats
-              isReady={player.isReady}
-              name={player.name}
-              score={player.score}
-              key={player.id}
-            />
-          ))}
+          {Object.values(playerList).map((player, index) => {
+            return (
+              <PlayerStats
+                isReady={player.isReady}
+                name={player.nickname}
+                score={player.score}
+                key={index}
+              />
+            );
+          })}
         </tbody>
       </table>
     </div>
