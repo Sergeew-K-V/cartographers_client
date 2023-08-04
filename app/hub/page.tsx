@@ -21,7 +21,7 @@ const HubPage = (): JSX.Element => {
   const [lobbyList, setLobbyList] = useState<ILobby[]>([]);
 
   useQuery(
-    'getUser',
+    'get-user',
     () => {
       fetchUser(getUserId(), getToken())
         .then((res) => {
@@ -42,7 +42,7 @@ const HubPage = (): JSX.Element => {
   );
 
   const { refetch: refetchLobbyList } = useQuery(
-    'getLobbyList',
+    'get-lobbies',
     () => {
       fetchLobbyList(getToken())
         .then((res) => {
