@@ -1,9 +1,9 @@
 import React from 'react';
-import { ILobbySession } from '@/shared/api';
+import { ILobbyPlayerMap } from '@/shared/api';
 import PlayerStats from './PlayerStats';
 
 interface PlayerTableProps {
-  playerList: ILobbySession;
+  playerList: ILobbyPlayerMap;
 }
 
 function PlayerTable({ playerList }: PlayerTableProps) {

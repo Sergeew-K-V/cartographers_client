@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { PlaygroundField } from '@/features/playground';
 import { PlayerTable, CardView } from '@/entities/playground';
-import { IGameSession, ILobbySession } from '@/shared/api';
+import { ILobbyPlayerMap } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button } from '@/shared/ui';
 import { SEASONS } from './config';
@@ -17,7 +17,7 @@ function PlaygroundPage({
   const lobbyId = params.lobbyId;
   const { getUserId } = useAuth();
   const { socket } = useSocket();
-  const [gameSession, setGameSession] = useState<ILobbySession>();
+  const [gameSession, setGameSession] = useState<ILobbyPlayerMap>();
   const { push } = useRouter();
 
   const leaveLobbyHandler = () => {
@@ -28,7 +28,7 @@ function PlaygroundPage({
   useEffect(() => {
     socket.emit('GET_GAME_SESSION', lobbyId);
 
-    socket.on('GAME_SESSION_CREATED', (session: ILobbySession) => {
+    socket.on('GAME_SESSION_CREATED', (session: ILobbyPlayerMap) => {
       setGameSession(session);
     });
 
@@ -42,7 +42,7 @@ function PlaygroundPage({
       <div className="grid grid-cols-3 w-full justify-items-center">
         <div className="grid grid-rows-4 max-h-fit">
           {gameSession && (
-            <PlayerTable playerList={gameSession as ILobbySession} />
+            <PlayerTable playerList={gameSession as ILobbyPlayerMap} />
           )}
           <div className="row-start-4 w-40">
             <Button onClick={leaveLobbyHandler} className="primary-button">
@@ -54,8 +54,8 @@ function PlaygroundPage({
           {gameSession && (
             <PlaygroundField
               seasonsData={SEASONS}
-              coinsData={(gameSession as ILobbySession)[getUserId()].coins}
-              grid={(gameSession as ILobbySession)[getUserId()].gameField}
+              coinsData={(gameSession as ILobbyPlayerMap)[getUserId()].coins}
+              grid={(gameSession as ILobbyPlayerMap)[getUserId()].gameField}
             />
           )}
         </div>

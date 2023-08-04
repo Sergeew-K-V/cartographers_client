@@ -3,8 +3,8 @@ import type {
   IUser,
   IAlert,
   ILobby,
-  IGameSession,
-  ILobbySession,
+  IGameSessions,
+  ILobbyPlayerMap,
   IFieldCell,
 } from './models';
 import {
@@ -21,7 +21,7 @@ export type {
   ClientToServerEvents,
   ServerToClientEvents,
   AppSocket,
-  ILobbySession,
-  IGameSession,
+  ILobbyPlayerMap,
+  IGameSessions,
   IFieldCell,
 };
