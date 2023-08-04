@@ -1,5 +1,12 @@
 import fetchUser from './fetchUser';
-import type { IUser, IAlert, ILobby } from './models';
+import type {
+  IUser,
+  IAlert,
+  ILobby,
+  IGameSession,
+  ILobbySession,
+  IFieldCell,
+} from './models';
 import {
   ClientToServerEvents,
   ServerToClientEvents,
@@ -14,4 +21,7 @@ export type {
   ClientToServerEvents,
   ServerToClientEvents,
   AppSocket,
+  ILobbySession,
+  IGameSession,
+  IFieldCell,
 };
