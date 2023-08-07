@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { HubControl, fetchLobbyList } from '@/features/hub';
@@ -8,6 +9,7 @@ import { ILobby, IUser, fetchUser } from '@/shared/api';
 import {
   createLobby,
   deleteLobby,
+  isUserHost,
   updateLobby,
   useAuth,
   useSocket,
@@ -15,6 +17,7 @@ import {
 import { Button } from '@/shared/ui';
 
 const HubPage = (): JSX.Element => {
+  const { push } = useRouter();
   const { socket } = useSocket();
   const { getUserId, getToken, logout } = useAuth();
   const [user, setUser] = useState<IUser>({ email: '', nickname: '' });
@@ -63,10 +66,16 @@ const HubPage = (): JSX.Element => {
   );
 
   useEffect(() => {
-    socket.connect();
+    if (!socket.connected) {
+      socket.connect();
+    }
 
     socket.on('LOBBY_CREATED', (targetLobby: ILobby) => {
       createLobby(setLobbyList, targetLobby);
+
+      if (isUserHost(targetLobby, getUserId())) {
+        push(`/hub/playground/${targetLobby.id}`);
+      }
     });
 
     socket.on('UPDATE_LOBBY', (targetLobby: ILobby) =>

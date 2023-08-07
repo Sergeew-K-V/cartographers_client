@@ -22,18 +22,28 @@ function PlaygroundPage({
 
   const leaveLobbyHandler = () => {
     socket.emit('LEAVE_LOBBY', getUserId());
+    socket.emit('REMOVE_GAME_SESSION', lobbyId, getUserId());
     push('/hub');
   };
 
   useEffect(() => {
-    socket.emit('GET_GAME_SESSION', lobbyId);
+    if (!socket.connected) {
+      socket.connect();
+    }
+
+    socket.emit('CREATE_GAME_SESSION', lobbyId, getUserId());
 
     socket.on('GAME_SESSION_CREATED', (session: ILobbyPlayerMap) => {
       setGameSession(session);
     });
 
+    socket.on('UPDATE_GAME_SESSION', (session: ILobbyPlayerMap) => {
+      setGameSession(session);
+    });
+
     return () => {
       socket.removeAllListeners('GAME_SESSION_CREATED');
+      socket.removeAllListeners('UPDATE_GAME_SESSION');
     };
   }, []);
 

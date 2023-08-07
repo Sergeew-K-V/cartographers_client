@@ -19,4 +19,8 @@ const findLobbyByUserId = (list: ILobby[], userId: string) => {
   return currentLobby;
 };
 
-export { findLobbyByLobbyId, findLobbyByUserId };
+const isUserHost = (lobby: ILobby, userId: string) => {
+  return lobby.userList.find((user) => user._id === userId);
+};
+
+export { findLobbyByLobbyId, findLobbyByUserId, isUserHost };

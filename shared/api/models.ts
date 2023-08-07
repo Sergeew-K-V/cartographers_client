@@ -39,6 +39,7 @@ interface IUserGameData {
   coins: number;
   points: number[][];
 }
+
 interface IFieldCell {
   id: number;
   image: string;

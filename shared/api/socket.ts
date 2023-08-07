@@ -8,6 +8,7 @@ interface ServerToClientEvents {
   UPDATE_LOBBY: (lobby: ILobby) => void;
 
   GAME_SESSION_CREATED: (session: ILobbyPlayerMap) => void;
+  UPDATE_GAME_SESSION: (session: ILobbyPlayerMap) => void;
 }
 
 interface ClientToServerEvents {
@@ -17,7 +18,8 @@ interface ClientToServerEvents {
   JOIN_LOBBY: (lobbyId: string, userId: string) => void;
   LEAVE_LOBBY: (userId: string) => void;
 
-  GET_GAME_SESSION: (lobbyId: string) => void;
+  CREATE_GAME_SESSION: (lobbyId: string, userId: string) => void;
+  REMOVE_GAME_SESSION: (lobbyId: string, userId: string) => void;
 }
 
 type AppSocket = Socket<ServerToClientEvents, ClientToServerEvents>;
