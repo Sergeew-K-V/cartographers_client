@@ -21,9 +21,9 @@ function PlaygroundPage({
   const { push } = useRouter();
 
   const leaveLobbyHandler = () => {
+    push('/hub');
     socket.emit('LEAVE_LOBBY', getUserId());
     socket.emit('REMOVE_GAME_SESSION', lobbyId, getUserId());
-    push('/hub');
   };
 
   useEffect(() => {
