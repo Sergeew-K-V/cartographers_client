@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'wood-background': "url('/images/other/background.jpg')",
+      },
       transitionProperty: {
         width: 'width',
       },

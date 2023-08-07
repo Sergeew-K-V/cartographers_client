@@ -6,7 +6,7 @@ import { PlaygroundField } from '@/features/playground';
 import { PlayerTable, CardView } from '@/entities/playground';
 import { ILobbyPlayerMap } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
-import { Button } from '@/shared/ui';
+import { Button, ImageCustom } from '@/shared/ui';
 import { SEASONS } from './config';
 
 function PlaygroundPage({
@@ -50,15 +50,78 @@ function PlaygroundPage({
   return (
     <div className="container min-w-full relative">
       <div className="grid grid-cols-3 w-full justify-items-center">
-        <div className="grid grid-rows-4 max-h-fit">
+        <div className="grid grid-cols-1">
+          <div className="flex gap-2 h-fit">
+            <div>
+              <ImageCustom
+                width={100}
+                height={100}
+                src="/images/other/stage_a.png"
+                alt="stage-a"
+              />
+            </div>
+            <div>
+              <ImageCustom
+                width={100}
+                height={100}
+                src="/images/other/stage_b.png"
+                alt="stage-b"
+              />
+            </div>
+            <div>
+              <ImageCustom
+                width={100}
+                height={100}
+                src="/images/other/stage_c.png"
+                alt="stage-c"
+              />
+            </div>
+            <div>
+              <ImageCustom
+                width={100}
+                height={100}
+                src="/images/other/stage_d.png"
+                alt="stage-d"
+              />
+            </div>
+          </div>
+          <div className="flex gap-2 h-fit">
+            <div>
+              <ImageCustom
+                width={100}
+                height={100}
+                src="/images/points_card/city_1.png"
+                alt="city_1"
+              />
+            </div>
+            <div>
+              <ImageCustom
+                width={100}
+                height={100}
+                src="/images/points_card/fields_1.png"
+                alt="fields_1"
+              />
+            </div>
+            <div>
+              <ImageCustom
+                width={100}
+                height={100}
+                src="/images/points_card/form_1.png"
+                alt="form_1"
+              />
+            </div>
+            <div>
+              <ImageCustom
+                width={100}
+                height={100}
+                src="/images/points_card/wood_1.png"
+                alt="wood_1"
+              />
+            </div>
+          </div>
           {gameSession && (
             <PlayerTable playerList={gameSession as ILobbyPlayerMap} />
           )}
-          <div className="row-start-4 w-40">
-            <Button onClick={leaveLobbyHandler} className="primary-button">
-              Leave lobby
-            </Button>
-          </div>
         </div>
         <div>
           {gameSession && (
@@ -77,6 +140,11 @@ function PlaygroundPage({
             </div>
             <div className="w-32">
               <Button className="primary-button">Reset step</Button>
+            </div>
+            <div className="w-32">
+              <Button onClick={leaveLobbyHandler} className="primary-button">
+                Leave lobby
+              </Button>
             </div>
           </div>
         </div>
