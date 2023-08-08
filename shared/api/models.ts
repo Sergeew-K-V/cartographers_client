@@ -38,6 +38,7 @@ interface IUserGameData {
   isReady: boolean;
   score: number;
   coins: number;
+  rang: string;
   points: number[][];
 }
 

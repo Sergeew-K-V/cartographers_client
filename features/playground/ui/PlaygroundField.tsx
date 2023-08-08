@@ -1,6 +1,5 @@
-import { useQuery } from 'react-query';
 import { SeasonsCounter } from '@/entities/playground';
-import { IGameSession, fetchUser } from '@/shared/api';
+import { IGameSession } from '@/shared/api';
 import { useAuth } from '@/shared/lib';
 import { ImageCustom } from '@/shared/ui';
 
@@ -10,18 +9,10 @@ interface PlaygroundFieldProps {
 }
 
 function PlaygroundField({ gameSession, seasonsData }: PlaygroundFieldProps) {
-  const { getUserId, getToken } = useAuth();
+  const { getUserId } = useAuth();
 
   const playerData = gameSession.players.find(
     (player) => player._id === getUserId()
-  );
-
-  const { data } = useQuery(
-    'getUser',
-    () => fetchUser(getUserId(), getToken()),
-    {
-      refetchOnWindowFocus: false,
-    }
   );
 
   const renderCoins = (coins: number) => {
@@ -61,10 +52,10 @@ function PlaygroundField({ gameSession, seasonsData }: PlaygroundFieldProps) {
           )}
       </div>
       <div className="absolute top-[50px] left-[37px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
-        {data?.data?.nickname}
+        {playerData?.nickname}
       </div>
       <div className="absolute top-[110px] left-[37px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
-        {data?.data?.rang}
+        {playerData?.rang}
       </div>
       <div className="absolute bottom-[120px] left-[97px] z-10 w-[490px] h-[30px] grid grid-cols-15">
         {playerData && renderCoins(playerData.coins)}
