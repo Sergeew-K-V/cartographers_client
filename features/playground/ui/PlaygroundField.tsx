@@ -5,10 +5,9 @@ import { ImageCustom } from '@/shared/ui';
 
 interface PlaygroundFieldProps {
   gameSession: IGameSession;
-  seasonsData: number[][];
 }
 
-function PlaygroundField({ gameSession, seasonsData }: PlaygroundFieldProps) {
+function PlaygroundField({ gameSession }: PlaygroundFieldProps) {
   const { getUserId } = useAuth();
 
   const playerData = gameSession.players.find(
@@ -61,7 +60,7 @@ function PlaygroundField({ gameSession, seasonsData }: PlaygroundFieldProps) {
         {playerData && renderCoins(playerData.coins)}
       </div>
       <div className="absolute bottom-[35px] left-[25px] grid grid-cols-4 w-[480px] z-10 uppercase whitespace-nowrap font-bold text-secodary-700">
-        {seasonsData.map((seasonList, index) => (
+        {playerData?.points.map((seasonList, index) => (
           <SeasonsCounter seasonsList={seasonList} key={index} />
         ))}
       </div>

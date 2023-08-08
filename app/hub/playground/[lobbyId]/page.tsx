@@ -7,7 +7,6 @@ import { PlayerTable, CardView } from '@/entities/playground';
 import { IGameSession } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button, ImageCustom } from '@/shared/ui';
-import { SEASONS } from './config';
 
 function PlaygroundPage({
   params,
@@ -50,8 +49,8 @@ function PlaygroundPage({
   return (
     <div className="container min-w-full relative">
       <div className="grid grid-cols-3 w-full justify-items-center">
-        <div className="grid grid-cols-1">
-          <div className="flex gap-2 h-fit">
+        <div className="">
+          <div className="flex gap-2 h-fit mb-2">
             <div>
               <ImageCustom
                 width={100}
@@ -85,46 +84,19 @@ function PlaygroundPage({
               />
             </div>
           </div>
-          <div className="flex gap-2 h-fit">
-            <div>
-              <ImageCustom
-                width={100}
-                height={100}
-                src="/images/points_card/city_1.png"
-                alt="city_1"
-              />
-            </div>
-            <div>
-              <ImageCustom
-                width={100}
-                height={100}
-                src="/images/points_card/fields_1.png"
-                alt="fields_1"
-              />
-            </div>
-            <div>
-              <ImageCustom
-                width={100}
-                height={100}
-                src="/images/points_card/form_1.png"
-                alt="form_1"
-              />
-            </div>
-            <div>
-              <ImageCustom
-                width={100}
-                height={100}
-                src="/images/points_card/wood_1.png"
-                alt="wood_1"
-              />
-            </div>
+          <div className="flex gap-2 h-fit mb-2">
+            {gameSession?.rules.map((rule) => {
+              return (
+                <div key={rule}>
+                  <ImageCustom width={100} height={100} src={rule} alt={rule} />
+                </div>
+              );
+            })}
           </div>
           {gameSession && <PlayerTable playerList={gameSession.players} />}
         </div>
         <div>
-          {gameSession && (
-            <PlaygroundField seasonsData={SEASONS} gameSession={gameSession} />
-          )}
+          {gameSession && <PlaygroundField gameSession={gameSession} />}
         </div>
         <div className="grid grid-cols-1 gap-y-4 h-full">
           <CardView />
