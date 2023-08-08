@@ -1,19 +1,12 @@
 import { SeasonsCounter } from '@/entities/playground';
-import { IGameSession } from '@/shared/api';
-import { useAuth } from '@/shared/lib';
+import { IUserGameData } from '@/shared/api';
 import { ImageCustom } from '@/shared/ui';
 
 interface PlaygroundFieldProps {
-  gameSession: IGameSession;
+  playerData: IUserGameData;
 }
 
-function PlaygroundField({ gameSession }: PlaygroundFieldProps) {
-  const { getUserId } = useAuth();
-
-  const playerData = gameSession.players.find(
-    (player) => player._id === getUserId()
-  );
-
+function PlaygroundField({ playerData }: PlaygroundFieldProps) {
   const renderCoins = (coins: number) => {
     const coinsArray = [];
     for (let i = 0; i < coins; i++) {

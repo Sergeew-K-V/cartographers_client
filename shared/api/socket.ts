@@ -20,6 +20,7 @@ interface ClientToServerEvents {
 
   CREATE_GAME_SESSION: (sessionId: string, userId: string) => void;
   REMOVE_GAME_SESSION: (sessionId: string, userId: string) => void;
+  REROLL_POINT_CARDS: (sessionId: string, userId: string) => void;
 }
 
 type AppSocket = Socket<ServerToClientEvents, ClientToServerEvents>;
