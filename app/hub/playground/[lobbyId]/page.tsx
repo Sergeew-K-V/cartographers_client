@@ -1,13 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { PlaygroundField, fetchLobby } from '@/features/playground';
 import { PlayerTable, CardView } from '@/entities/playground';
 import { IGameSession, IUserGameData } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button, ImageCustom } from '@/shared/ui';
+import findPlayerById from './utils';
 
 function PlaygroundPage({
   params,
@@ -19,17 +20,14 @@ function PlaygroundPage({
   const { socket } = useSocket();
   const { push } = useRouter();
   const [gameSession, setGameSession] = useState<IGameSession>();
-  const [isHost, setIsHost] = useState(false);
-
   const [playerData, setPlayerData] = useState<IUserGameData>();
+  const [isHost, setIsHost] = useState(false);
 
   const { refetch: refetchLobbyForHost } = useQuery(
     'fetch-lobby',
     () => {
       fetchLobby(getToken(), lobbyId)
         .then((res) => {
-          console.log('fetched lobby', res.data);
-          console.log('.then ~ playerData:', playerData);
           setIsHost(res.data.host === playerData?.nickname);
         })
         .catch((err) => {
@@ -65,16 +63,14 @@ function PlaygroundPage({
 
     socket.on('GAME_SESSION_CREATED', (session) => {
       setGameSession(session);
-      setPlayerData(
-        session?.players.find((player) => player._id === getUserId())
-      );
+      const targetPlayer = findPlayerById(session, getUserId());
+      setPlayerData(targetPlayer);
     });
 
     socket.on('GAME_SESSION_UPDATED', (session) => {
       setGameSession(session);
-      setPlayerData(
-        session?.players.find((player) => player._id === getUserId())
-      );
+      const targetPlayer = findPlayerById(session, getUserId());
+      setPlayerData(targetPlayer);
     });
 
     return () => {
