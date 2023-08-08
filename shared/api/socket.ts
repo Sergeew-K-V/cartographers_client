@@ -1,5 +1,5 @@
 import { Socket } from 'socket.io-client';
-import { ILobby, ILobbyPlayerMap } from './models';
+import { ILobby, IGameSession } from './models';
 
 interface ServerToClientEvents {
   LOBBY_CREATED: (lobby: ILobby) => void;
@@ -7,8 +7,8 @@ interface ServerToClientEvents {
   USER_LEAVE_LOBBY: (lobby: ILobby) => void;
   UPDATE_LOBBY: (lobby: ILobby) => void;
 
-  GAME_SESSION_CREATED: (session: ILobbyPlayerMap) => void;
-  UPDATE_GAME_SESSION: (session: ILobbyPlayerMap) => void;
+  GAME_SESSION_CREATED: (session: IGameSession) => void;
+  GAME_SESSION_UPDATED: (session: IGameSession) => void;
 }
 
 interface ClientToServerEvents {
@@ -18,8 +18,8 @@ interface ClientToServerEvents {
   JOIN_LOBBY: (lobbyId: string, userId: string) => void;
   LEAVE_LOBBY: (userId: string) => void;
 
-  CREATE_GAME_SESSION: (lobbyId: string, userId: string) => void;
-  REMOVE_GAME_SESSION: (lobbyId: string, userId: string) => void;
+  CREATE_GAME_SESSION: (sessionId: string, userId: string) => void;
+  REMOVE_GAME_SESSION: (sessionId: string, userId: string) => void;
 }
 
 type AppSocket = Socket<ServerToClientEvents, ClientToServerEvents>;

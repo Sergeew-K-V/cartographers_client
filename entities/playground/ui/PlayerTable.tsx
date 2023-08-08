@@ -1,9 +1,9 @@
 import React from 'react';
-import { ILobbyPlayerMap } from '@/shared/api';
+import { IUserGameData } from '@/shared/api';
 import PlayerStats from './PlayerStats';
 
 interface PlayerTableProps {
-  playerList: ILobbyPlayerMap;
+  playerList: IUserGameData[];
 }
 
 function PlayerTable({ playerList }: PlayerTableProps) {
@@ -25,13 +25,13 @@ function PlayerTable({ playerList }: PlayerTableProps) {
           </tr>
         </thead>
         <tbody>
-          {Object.values(playerList).map((player, index) => {
+          {playerList.map((player) => {
             return (
               <PlayerStats
                 isReady={player.isReady}
                 name={player.nickname}
                 score={player.score}
-                key={index}
+                key={player._id}
               />
             );
           })}

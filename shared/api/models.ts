@@ -23,15 +23,16 @@ interface ILobby {
   isStarted: boolean;
 }
 
-interface IGameSessions {
-  [lobbyId: string]: ILobbyPlayerMap;
-}
-
-interface ILobbyPlayerMap {
-  [userId: string]: IUserGameData;
+interface IGameSession {
+  id: string;
+  rules: string[];
+  winner: string;
+  time: number;
+  players: IUserGameData[];
 }
 
 interface IUserGameData {
+  _id: string;
   nickname: string;
   gameField: IFieldCell[][];
   isReady: boolean;
@@ -45,11 +46,4 @@ interface IFieldCell {
   image: string;
 }
 
-export type {
-  IUser,
-  IAlert,
-  ILobby,
-  IGameSessions,
-  ILobbyPlayerMap,
-  IFieldCell,
-};
+export type { IUser, IAlert, ILobby, IGameSession, IFieldCell, IUserGameData };

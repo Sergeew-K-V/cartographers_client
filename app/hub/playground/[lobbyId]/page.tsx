@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { PlaygroundField } from '@/features/playground';
 import { PlayerTable, CardView } from '@/entities/playground';
-import { ILobbyPlayerMap } from '@/shared/api';
+import { IGameSession } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button, ImageCustom } from '@/shared/ui';
 import { SEASONS } from './config';
@@ -17,7 +17,7 @@ function PlaygroundPage({
   const lobbyId = params.lobbyId;
   const { getUserId } = useAuth();
   const { socket } = useSocket();
-  const [gameSession, setGameSession] = useState<ILobbyPlayerMap>();
+  const [gameSession, setGameSession] = useState<IGameSession>();
   const { push } = useRouter();
 
   const leaveLobbyHandler = () => {
@@ -33,17 +33,17 @@ function PlaygroundPage({
 
     socket.emit('CREATE_GAME_SESSION', lobbyId, getUserId());
 
-    socket.on('GAME_SESSION_CREATED', (session: ILobbyPlayerMap) => {
+    socket.on('GAME_SESSION_CREATED', (session) => {
       setGameSession(session);
     });
 
-    socket.on('UPDATE_GAME_SESSION', (session: ILobbyPlayerMap) => {
+    socket.on('GAME_SESSION_UPDATED', (session) => {
       setGameSession(session);
     });
 
     return () => {
       socket.removeAllListeners('GAME_SESSION_CREATED');
-      socket.removeAllListeners('UPDATE_GAME_SESSION');
+      socket.removeAllListeners('GAME_SESSION_UPDATED');
     };
   }, []);
 
@@ -119,17 +119,11 @@ function PlaygroundPage({
               />
             </div>
           </div>
-          {gameSession && (
-            <PlayerTable playerList={gameSession as ILobbyPlayerMap} />
-          )}
+          {gameSession && <PlayerTable playerList={gameSession.players} />}
         </div>
         <div>
           {gameSession && (
-            <PlaygroundField
-              seasonsData={SEASONS}
-              coinsData={(gameSession as ILobbyPlayerMap)[getUserId()].coins}
-              grid={(gameSession as ILobbyPlayerMap)[getUserId()].gameField}
-            />
+            <PlaygroundField seasonsData={SEASONS} gameSession={gameSession} />
           )}
         </div>
         <div className="grid grid-cols-1 gap-y-4 h-full">
