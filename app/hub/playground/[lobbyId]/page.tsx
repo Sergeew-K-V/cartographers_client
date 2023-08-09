@@ -110,13 +110,12 @@ function PlaygroundPage({
               );
             })}
             <div className="w-20">
-              <Button
+              <ImageCustom
+                src="/images/icons/refresh-icon.png"
+                alt="refresh-icon"
                 onClick={rerollPointCardsHandler}
-                className="primary-button"
-                disabled={!isHost}
-              >
-                Reroll
-              </Button>
+                className="cursor-pointer w-6 hover:rotate-180 transition-all"
+              />
             </div>
           </div>
           {gameSession && <PlayerTable playerList={gameSession.players} />}
