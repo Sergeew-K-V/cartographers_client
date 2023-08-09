@@ -3,13 +3,13 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { HubControl, fetchLobbyList } from '@/features/hub';
+import { HubControl } from '@/features/hub';
 import { GameSessionInfoRows, UserInfo } from '@/entities/hub';
-import { ILobby, IUser, fetchUser } from '@/shared/api';
+import { ILobby, IUser, fetchLobby, fetchUser } from '@/shared/api';
 import {
   createLobby,
   deleteLobby,
-  isUserHost,
+  isHostLobby,
   updateLobby,
   useAuth,
   useSocket,
@@ -47,7 +47,7 @@ const HubPage = (): JSX.Element => {
   const { refetch: refetchLobbyList } = useQuery(
     'get-lobbies',
     () => {
-      fetchLobbyList(getToken())
+      fetchLobby(getToken())
         .then((res) => {
           setLobbyList(res.data);
         })
@@ -73,7 +73,7 @@ const HubPage = (): JSX.Element => {
     socket.on('LOBBY_CREATED', (targetLobby: ILobby) => {
       createLobby(setLobbyList, targetLobby);
 
-      if (isUserHost(targetLobby, getUserId())) {
+      if (isHostLobby(targetLobby, getUserId())) {
         push(`/hub/playground/${targetLobby.id}`);
       }
     });

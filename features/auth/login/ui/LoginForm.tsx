@@ -1,11 +1,11 @@
 'use client';
 
-import axios from 'axios';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { IUser } from '@/shared/api';
 import { useAlert, useAuth } from '@/shared/lib';
 import { Button, Input, LinkButton, Loader } from '@/shared/ui';
+import { fetchLogin } from '../api';
 
 const LoginForm = (): JSX.Element => {
   const [loginUser, setLoginUser] = useState<IUser>({
@@ -31,10 +31,7 @@ const LoginForm = (): JSX.Element => {
   const loginMutation = useMutation({
     mutationFn: () => {
       setIsLoading(true);
-      return axios.post(
-        (process.env.NEXT_PUBLIC_SERVER_URL as string) + '/login',
-        { email: loginUser.email, password }
-      );
+      return fetchLogin(loginUser.email, password);
     },
     onSuccess(response) {
       setIsLoading(false);

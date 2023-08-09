@@ -1,12 +1,12 @@
 'use client';
 
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { IUser } from '@/shared/api';
 import { useAlert } from '@/shared/lib';
 import { Button, Checkbox, Input, LinkButton, Loader } from '@/shared/ui';
+import { fetchRegister } from '../api';
 
 const RegisterForm = () => {
   const { push } = useRouter();
@@ -37,10 +37,7 @@ const RegisterForm = () => {
 
   const registerMutation = useMutation({
     mutationFn: () => {
-      return axios.post(
-        (process.env.NEXT_PUBLIC_SERVER_URL as string) + '/register',
-        { ...registerUser, password }
-      );
+      return fetchRegister(registerUser, password);
     },
     onSuccess: (response) => {
       setAlert({
@@ -93,17 +90,13 @@ const RegisterForm = () => {
           type="password"
           handleChange={handleChange}
         />
-
         <div className="flex mb-4 text-sm">
           <Checkbox labelText="I agree to the privacy policy" />
         </div>
-
         <Button className="primary-button" onClick={handleSubmit}>
           Create account
         </Button>
-
         <hr className="my-8" />
-
         <p className="mt-4">
           <LinkButton
             className="text-sm font-medium text-primary-600 hover:underline"

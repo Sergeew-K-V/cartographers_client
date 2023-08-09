@@ -9,7 +9,6 @@ interface IUser {
     loses: number;
   };
 }
-
 interface IAlert {
   type: 'danger' | 'success';
   text: string;

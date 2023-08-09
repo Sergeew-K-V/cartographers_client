@@ -9,11 +9,11 @@ import { useAuth, useSocket } from '@/shared/lib';
 import { Button, ImageCustom } from '@/shared/ui';
 import { findPlayerById, isHost } from './utils';
 
-function PlaygroundPage({
-  params,
-}: {
+interface PlaygroundPageProps {
   params: { lobbyId: string };
-}): JSX.Element {
+}
+
+function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
   const lobbyId = params.lobbyId;
   const { getUserId } = useAuth();
   const { socket } = useSocket();

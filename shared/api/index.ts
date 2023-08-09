@@ -1,4 +1,6 @@
+import fetchLobby from './fetchLobby';
 import fetchUser from './fetchUser';
+
 import type {
   IUser,
   IAlert,
@@ -13,7 +15,7 @@ import {
   AppSocket,
 } from './socket';
 
-export { fetchUser };
+export { fetchUser, fetchLobby };
 export type {
   IUser,
   IAlert,

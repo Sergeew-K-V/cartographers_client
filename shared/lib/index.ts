@@ -1,8 +1,8 @@
-import { findLobbyByLobbyId, findLobbyByUserId, isUserHost } from './helpers';
 import { createLobby, deleteLobby, updateLobby } from './socketActions';
 import { AlertContext, useAlert } from './useAlerts';
 import { AuthContext, useAuth } from './useAuth';
 import { useSocket, socket, SocketContext } from './useSocket';
+import { findLobbyByLobbyId, findLobbyByUserId, isHostLobby } from './utils';
 
 export {
   AuthContext,
@@ -17,5 +17,5 @@ export {
   updateLobby,
   findLobbyByLobbyId,
   findLobbyByUserId,
-  isUserHost,
+  isHostLobby,
 };

@@ -7,10 +7,6 @@ const NavbarLinkList = [
     href: 'hub/playground',
     title: 'Playground',
   },
-  {
-    href: 'hub/profile',
-    title: 'Profile',
-  },
 ];
 
 export default NavbarLinkList;
