@@ -1,12 +1,17 @@
 import { ImageCustom } from '@/shared/ui';
 
-function CardView() {
+interface CardViewProps {
+  currentCard: string | null;
+  remainingCards: string[];
+}
+
+function CardView({ currentCard, remainingCards }: CardViewProps) {
   return (
     <>
       <div className="flex flex-col gap-y-2 justify-center items-center">
         <span className="uppercase font-bold text-xl">Current card</span>
         <ImageCustom
-          src="/images/cards/card_1.png"
+          src={currentCard ? currentCard : '/images/other/explore_back.jpg'}
           width={600}
           className="w-52"
           alt="Current card"
@@ -23,7 +28,9 @@ function CardView() {
           />
         </div>
         <div className="flex flex-col gap-y-2 justify-center items-center">
-          <span className="font-bold">Remaining cards in the deck 6/13</span>
+          <span className="font-bold">
+            Remaining cards in the deck {remainingCards.length}/13
+          </span>
           <ImageCustom
             src="/images/other/explore_back.jpg"
             width={600}

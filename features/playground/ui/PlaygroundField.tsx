@@ -1,24 +1,13 @@
 import { SeasonsCounter } from '@/entities/playground';
 import { IUserGameData } from '@/shared/api';
 import { ImageCustom } from '@/shared/ui';
+import { countScore, renderCoins } from '../utils';
 
 interface PlaygroundFieldProps {
   playerData: IUserGameData;
 }
 
 function PlaygroundField({ playerData }: PlaygroundFieldProps) {
-  const renderCoins = (coins: number) => {
-    const coinsArray = [];
-    for (let i = 0; i < coins; i++) {
-      coinsArray.push(
-        <div key={i} className="coins-divider">
-          \
-        </div>
-      );
-    }
-    return coinsArray;
-  };
-
   return (
     <div className="relative">
       <ImageCustom
@@ -44,21 +33,21 @@ function PlaygroundField({ playerData }: PlaygroundFieldProps) {
           )}
       </div>
       <div className="absolute top-[50px] left-[37px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
-        {playerData?.nickname}
+        {playerData.nickname}
       </div>
       <div className="absolute top-[110px] left-[37px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
-        {playerData?.rang}
+        {playerData.rang}
       </div>
       <div className="absolute bottom-[120px] left-[97px] z-10 w-[490px] h-[30px] grid grid-cols-15">
-        {playerData && renderCoins(playerData.coins)}
+        {renderCoins(playerData.coins)}
       </div>
       <div className="absolute bottom-[35px] left-[25px] grid grid-cols-4 w-[480px] z-10 uppercase whitespace-nowrap font-bold text-secodary-700">
         {playerData?.points.map((seasonList, index) => (
           <SeasonsCounter seasonsList={seasonList} key={index} />
         ))}
       </div>
-      <div className="absolute bottom-[60px] right-[47px] z-10 uppercase whitespace-nowrap font-bold text-secodary-700">
-        120
+      <div className="absolute w-[30px] text-center bottom-[60px] right-[47px] z-10 uppercase whitespace-nowrap font-bold text-secodary-700">
+        {countScore(playerData)}
       </div>
     </div>
   );

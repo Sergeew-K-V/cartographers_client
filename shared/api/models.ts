@@ -27,7 +27,12 @@ interface IGameSession {
   id: string;
   rules: string[];
   winner: string;
+  host: string;
+  currentCard: string | null;
   time: number;
+  remainingCards: string[];
+  playedCards: string[];
+  enemyCards: string[];
   players: IUserGameData[];
 }
 
