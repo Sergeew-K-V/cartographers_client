@@ -6,7 +6,7 @@ import { PlaygroundField } from '@/features/playground';
 import { PlayerTable, CardView } from '@/entities/playground';
 import { IGameSession, IUserGameData } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
-import { Button, ImageCustom } from '@/shared/ui';
+import { Button, ImageCustom, Loader } from '@/shared/ui';
 import { findPlayerById, isHost } from './utils';
 
 interface PlaygroundPageProps {
@@ -20,8 +20,10 @@ function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
   const { push } = useRouter();
   const [gameSession, setGameSession] = useState<IGameSession>();
   const [playerData, setPlayerData] = useState<IUserGameData>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const leaveLobbyHandler = () => {
+    setIsLoading(true);
     push('/hub');
     socket.emit('LEAVE_LOBBY', getUserId());
     socket.emit('REMOVE_GAME_SESSION', lobbyId, getUserId());
@@ -128,6 +130,7 @@ function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
           </div>
         </div>
       )}
+      {isLoading && <Loader />}
     </div>
   );
 }

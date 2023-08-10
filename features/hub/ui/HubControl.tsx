@@ -1,14 +1,21 @@
 'use client';
 
+import { useState } from 'react';
 import { useAuth, useSocket } from '@/shared/lib';
-import { Button } from '@/shared/ui';
+import { Button, Loader } from '@/shared/ui';
 
 function HubControl() {
   const { socket } = useSocket();
   const { logout, getUserId } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCreateLobby = () => {
     socket.emit('CREATE_LOBBY', getUserId());
+  };
+
+  const handleLogout = () => {
+    setIsLoading(true);
+    logout();
   };
 
   return (
@@ -19,10 +26,11 @@ function HubControl() {
         </Button>
       </div>
       <div className="w-40">
-        <Button className="primary-button" onClick={() => logout()}>
+        <Button className="primary-button" onClick={handleLogout}>
           Logout
         </Button>
       </div>
+      {isLoading && <Loader />}
     </div>
   );
 }

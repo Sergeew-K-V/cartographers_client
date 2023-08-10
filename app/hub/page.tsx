@@ -7,7 +7,7 @@ import { HubControl } from '@/features/hub';
 import { GameSessionInfoRows, UserInfo } from '@/entities/hub';
 import { ILobby, IUser, fetchLobby, fetchUser } from '@/shared/api';
 import { isHostLobby, useAuth, useSocket } from '@/shared/lib';
-import { Button } from '@/shared/ui';
+import { Button, Loader } from '@/shared/ui';
 
 const HubPage = (): JSX.Element => {
   const { push } = useRouter();
@@ -15,6 +15,7 @@ const HubPage = (): JSX.Element => {
   const { getUserId, getToken, logout } = useAuth();
   const [user, setUser] = useState<IUser>({ email: '', nickname: '' });
   const [lobbyList, setLobbyList] = useState<ILobby[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useQuery(
     'get-user',
@@ -67,6 +68,7 @@ const HubPage = (): JSX.Element => {
       setLobbyList((prevLobbyList) => [...prevLobbyList, targetLobby]);
 
       if (isHostLobby(targetLobby, getUserId())) {
+        setIsLoading(true);
         push(`/hub/playground/${targetLobby.id}`);
       }
     });
@@ -145,6 +147,7 @@ const HubPage = (): JSX.Element => {
           <HubControl />
         </div>
       </div>
+      {isLoading && <Loader />}
     </>
   );
 };
