@@ -16,7 +16,7 @@ import {
 import { IGameSession, IUserGameData } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button, Loader } from '@/shared/ui';
-import { findPlayerById, isHost } from './utils';
+import { findPlayerById, isSessionHost } from './utils';
 
 interface PlaygroundPageProps {
   params: { lobbyId: string };
@@ -40,6 +40,14 @@ function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
 
   const rerollPointCardsHandler = () => {
     socket.emit('REROLL_POINT_CARDS', lobbyId, getUserId());
+  };
+
+  const handleChangeGameStatus = () => {
+    if (gameSession?.isStarted) {
+      socket.emit('END_GAME');
+    } else {
+      socket.emit('START_GAME');
+    }
   };
 
   useEffect(() => {
@@ -83,11 +91,15 @@ function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
             <div className="grid items-center w-fit">
               <GameControls />
               <div className="flex gap-2">
-                {isHost(gameSession, playerData) && (
-                  <HostControls
-                    rerollPointCardsHandler={rerollPointCardsHandler}
-                  />
-                )}
+                <HostControls
+                  sessionStarted={gameSession.isStarted}
+                  isSessionHost={isSessionHost(
+                    gameSession.host,
+                    playerData.nickname
+                  )}
+                  handleChangeGameStatus={handleChangeGameStatus}
+                  rerollPointCardsHandler={rerollPointCardsHandler}
+                />
                 <div className="w-32">
                   <Button
                     onClick={leaveLobbyHandler}

@@ -1,4 +1,4 @@
 import findPlayerById from './findPlayerById';
-import isHost from './isHost';
+import isSessionHost from './isSessionHost';
 
-export { findPlayerById, isHost };
+export { findPlayerById, isSessionHost };

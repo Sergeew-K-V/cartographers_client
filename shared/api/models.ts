@@ -9,6 +9,7 @@ interface IUser {
     loses: number;
   };
 }
+
 interface IAlert {
   type: 'danger' | 'success';
   text: string;
@@ -22,17 +23,23 @@ interface ILobby {
   isStarted: boolean;
 }
 
+interface IFieldCell {
+  id: number;
+  image: string;
+}
+
 interface IGameSession {
   id: string;
   rules: string[];
   winner: string;
   host: string;
-  currentCard: string | null;
   time: number;
+  players: IUserGameData[];
+  isStarted: boolean;
+  currentCard: string | null;
   remainingCards: string[];
   playedCards: string[];
   enemyCards: string[];
-  players: IUserGameData[];
 }
 
 interface IUserGameData {
@@ -44,11 +51,6 @@ interface IUserGameData {
   coins: number;
   rang: string;
   points: number[][];
-}
-
-interface IFieldCell {
-  id: number;
-  image: string;
 }
 
 export type { IUser, IAlert, ILobby, IGameSession, IFieldCell, IUserGameData };
