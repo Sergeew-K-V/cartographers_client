@@ -2,8 +2,17 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { PlaygroundField } from '@/features/playground';
-import { PlayerTable, CardView } from '@/entities/playground';
+import {
+  GameControls,
+  HostControls,
+  PlaygroundField,
+} from '@/features/playground';
+import {
+  PlayerTable,
+  CardView,
+  GameSessionStages,
+  GameSessionRules,
+} from '@/entities/playground';
 import { IGameSession, IUserGameData } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button, ImageCustom, Loader } from '@/shared/ui';
@@ -58,74 +67,26 @@ function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
 
   return (
     <div className="container min-w-full relative">
-      {gameSession && (
+      {gameSession && playerData && (
         <div className="grid grid-cols-3 w-full justify-items-center">
           <div className="">
-            <div className="flex gap-2 h-fit mb-2">
-              <div>
-                <ImageCustom src="/images/other/stage_a.png" alt="stage-a" />
-              </div>
-              <div>
-                <ImageCustom src="/images/other/stage_b.png" alt="stage-b" />
-              </div>
-              <div>
-                <ImageCustom src="/images/other/stage_c.png" alt="stage-c" />
-              </div>
-              <div>
-                <ImageCustom src="/images/other/stage_d.png" alt="stage-d" />
-              </div>
-            </div>
-            <div className="flex gap-2 h-fit mb-2">
-              {gameSession.rules.map((rule) => {
-                return (
-                  <div key={rule} className="relative">
-                    <ImageCustom
-                      src={rule}
-                      alt={rule}
-                      scalable
-                      className="cursor-zoom-in"
-                    />
-                  </div>
-                );
-              })}
-            </div>
+            <GameSessionStages />
+            <GameSessionRules gameSession={gameSession} />
             <PlayerTable playerList={gameSession.players} />
           </div>
-          <div>{playerData && <PlaygroundField playerData={playerData} />}</div>
+          <div>{<PlaygroundField playerData={playerData} />}</div>
           <div className="grid grid-cols-1 gap-y-4 h-full">
             <CardView
               currentCard={gameSession.currentCard}
               remainingCards={gameSession.remainingCards}
             />
             <div className="grid items-center w-fit">
+              <GameControls />
               <div className="flex gap-2">
-                <div className="w-32">
-                  <Button className="primary-button">Submit step</Button>
-                </div>
-                <div className="w-32">
-                  <Button className="primary-button">Reset step</Button>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                {playerData && isHost(gameSession, playerData) && (
-                  <>
-                    <div className="w-32">
-                      <Button className="primary-button">Start game</Button>
-                    </div>
-                    <div className="w-32">
-                      <Button
-                        className="primary-button flex items-center justify-evenly"
-                        onClick={rerollPointCardsHandler}
-                      >
-                        <ImageCustom
-                          src="/images/icons/refresh-icon.png"
-                          alt="refresh-icon"
-                          className="cursor-pointer w-5 hover:rotate-180 transition-all "
-                        />
-                        Reroll
-                      </Button>
-                    </div>
-                  </>
+                {isHost(gameSession, playerData) && (
+                  <HostControls
+                    rerollPointCardsHandler={rerollPointCardsHandler}
+                  />
                 )}
                 <div className="w-32">
                   <Button

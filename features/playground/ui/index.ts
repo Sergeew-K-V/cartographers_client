@@ -1,3 +1,5 @@
+import GameControls from './GameControls';
+import HostControls from './HostControls';
 import PlaygroundField from './PlaygroundField';
 
-export { PlaygroundField };
+export { PlaygroundField, GameControls, HostControls };
