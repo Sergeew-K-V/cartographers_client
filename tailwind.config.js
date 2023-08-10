@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      cursor: {
+        'zoom-in': 'url(/images/other/zoom-in-icon.png) 25 25,auto ',
+      },
       backgroundImage: {
         'wood-background': "url('/images/other/background.jpg')",
       },

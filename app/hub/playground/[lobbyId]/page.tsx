@@ -75,24 +75,19 @@ function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
                 <ImageCustom src="/images/other/stage_d.png" alt="stage-d" />
               </div>
             </div>
-            <div className="flex gap-2  h-fit mb-2">
+            <div className="flex gap-2 h-fit mb-2">
               {gameSession.rules.map((rule) => {
                 return (
-                  <div key={rule}>
-                    <ImageCustom src={rule} alt={rule} />
+                  <div key={rule} className="relative">
+                    <ImageCustom
+                      src={rule}
+                      alt={rule}
+                      scalable
+                      className="cursor-zoom-in"
+                    />
                   </div>
                 );
               })}
-              {playerData && isHost(gameSession, playerData) && (
-                <div className="w-20">
-                  <ImageCustom
-                    src="/images/icons/refresh-icon.png"
-                    alt="refresh-icon"
-                    onClick={rerollPointCardsHandler}
-                    className="cursor-pointer w-6 hover:rotate-180 transition-all"
-                  />
-                </div>
-              )}
             </div>
             <PlayerTable playerList={gameSession.players} />
           </div>
@@ -112,11 +107,26 @@ function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
                 </div>
               </div>
               <div className="flex gap-2">
-                <div className="w-32">
-                  {playerData && isHost(gameSession, playerData) && (
-                    <Button className="primary-button">Start game</Button>
-                  )}
-                </div>
+                {playerData && isHost(gameSession, playerData) && (
+                  <>
+                    <div className="w-32">
+                      <Button className="primary-button">Start game</Button>
+                    </div>
+                    <div className="w-32">
+                      <Button
+                        className="primary-button flex items-center justify-evenly"
+                        onClick={rerollPointCardsHandler}
+                      >
+                        <ImageCustom
+                          src="/images/icons/refresh-icon.png"
+                          alt="refresh-icon"
+                          className="cursor-pointer w-5 hover:rotate-180 transition-all "
+                        />
+                        Reroll
+                      </Button>
+                    </div>
+                  </>
+                )}
                 <div className="w-32">
                   <Button
                     onClick={leaveLobbyHandler}
