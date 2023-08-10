@@ -15,7 +15,7 @@ import {
 } from '@/entities/playground';
 import { IGameSession, IUserGameData } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
-import { Button, ImageCustom, Loader } from '@/shared/ui';
+import { Button, Loader } from '@/shared/ui';
 import { findPlayerById, isHost } from './utils';
 
 interface PlaygroundPageProps {
