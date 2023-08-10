@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       cursor: {
         'zoom-in': 'url(/images/other/zoom-in-icon.png) 25 25,auto ',
+        'zoom-out': 'url(/images/other/zoom-out-icon.png) 25 25,auto ',
       },
       backgroundImage: {
         'wood-background': "url('/images/other/background.jpg')",
