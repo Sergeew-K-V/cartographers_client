@@ -71,30 +71,31 @@ const HubPage = (): JSX.Element => {
     }
 
     socket.on('LOBBY_CREATED', (targetLobby: ILobby) => {
-      createLobby(setLobbyList, targetLobby);
+      setLobbyList((prevLobbyList) => [...prevLobbyList, targetLobby]);
 
       if (isHostLobby(targetLobby, getUserId())) {
         push(`/hub/playground/${targetLobby.id}`);
       }
     });
 
-    socket.on('UPDATE_LOBBY', (targetLobby: ILobby) =>
-      updateLobby(lobbyList, setLobbyList, targetLobby)
+    socket.on('LOBBY_UPDATED', (targetLobby: ILobby) =>
+      setLobbyList((prevLobbyList) =>
+        prevLobbyList.map((lobby) =>
+          lobby.id === targetLobby.id ? targetLobby : lobby
+        )
+      )
     );
 
-    socket.on('USER_LEAVE_LOBBY', (targetLobby: ILobby) =>
-      updateLobby(lobbyList, setLobbyList, targetLobby)
-    );
-
-    socket.on('DELETE_LOBBY', (targetLobby: ILobby) =>
-      deleteLobby(lobbyList, setLobbyList, targetLobby)
-    );
+    socket.on('LOBBY_DELETED', (targetLobby: ILobby) => {
+      setLobbyList((prevList) =>
+        prevList.filter((lobby) => lobby.id !== targetLobby.id)
+      );
+    });
 
     return () => {
       socket.removeAllListeners('LOBBY_CREATED');
-      socket.removeAllListeners('UPDATE_LOBBY');
-      socket.removeAllListeners('USER_LEAVE_LOBBY');
-      socket.removeAllListeners('DELETE_LOBBY');
+      socket.removeAllListeners('LOBBY_UPDATED');
+      socket.removeAllListeners('LOBBY_DELETED');
     };
   }, [lobbyList]);
 

@@ -3,9 +3,8 @@ import { ILobby, IGameSession } from './models';
 
 interface ServerToClientEvents {
   LOBBY_CREATED: (lobby: ILobby) => void;
-  DELETE_LOBBY: (lobby: ILobby) => void;
-  USER_LEAVE_LOBBY: (lobby: ILobby) => void;
-  UPDATE_LOBBY: (lobby: ILobby) => void;
+  LOBBY_DELETED: (lobby: ILobby) => void;
+  LOBBY_UPDATED: (lobby: ILobby) => void;
 
   GAME_SESSION_CREATED: (session: IGameSession) => void;
   GAME_SESSION_UPDATED: (session: IGameSession) => void;
