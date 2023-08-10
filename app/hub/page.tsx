@@ -6,14 +6,7 @@ import { useQuery } from 'react-query';
 import { HubControl } from '@/features/hub';
 import { GameSessionInfoRows, UserInfo } from '@/entities/hub';
 import { ILobby, IUser, fetchLobby, fetchUser } from '@/shared/api';
-import {
-  createLobby,
-  deleteLobby,
-  isHostLobby,
-  updateLobby,
-  useAuth,
-  useSocket,
-} from '@/shared/lib';
+import { isHostLobby, useAuth, useSocket } from '@/shared/lib';
 import { Button } from '@/shared/ui';
 
 const HubPage = (): JSX.Element => {
