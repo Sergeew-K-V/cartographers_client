@@ -1,7 +1,8 @@
 import { SeasonsCounter } from '@/entities/playground';
 import { IUserGameData } from '@/shared/api';
+import { countScore } from '@/shared/lib';
 import { ImageCustom } from '@/shared/ui';
-import { countScore, renderCoins } from '../utils';
+import { renderCoins } from '../utils';
 
 interface PlaygroundFieldProps {
   playerData: IUserGameData;

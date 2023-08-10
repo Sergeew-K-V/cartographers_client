@@ -1,7 +1,7 @@
 interface PlayerStatsProps {
   name: string;
   isReady: boolean;
-  score: number;
+  score: number | '';
 }
 
 function PlayerStats({ isReady, name, score }: PlayerStatsProps) {
@@ -14,7 +14,7 @@ function PlayerStats({ isReady, name, score }: PlayerStatsProps) {
         {name}
       </th>
       <td className="px-6 py-4">{isReady ? 'Yes' : 'No'}</td>
-      <td className="px-6 py-4">{score}</td>
+      <td className="px-6 py-4">{score ? score : 0}</td>
     </tr>
   );
 }

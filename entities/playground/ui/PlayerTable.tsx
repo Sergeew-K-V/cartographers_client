@@ -1,5 +1,6 @@
 import React from 'react';
 import { IUserGameData } from '@/shared/api';
+import { countScore } from '@/shared/lib';
 import PlayerStats from './PlayerStats';
 
 interface PlayerTableProps {
@@ -30,7 +31,7 @@ function PlayerTable({ playerList }: PlayerTableProps) {
               <PlayerStats
                 isReady={player.isReady}
                 name={player.nickname}
-                score={player.score}
+                score={countScore(player)}
                 key={player._id}
               />
             );
