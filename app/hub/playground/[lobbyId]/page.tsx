@@ -57,24 +57,29 @@ function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
       socket.connect();
     }
 
-    socket.emit('CREATE_GAME_SESSION', lobbyId, getUserId());
+    if (!gameSession) {
+      socket.emit('CREATE_GAME_SESSION', lobbyId, getUserId());
+    }
 
     socket.on('GAME_SESSION_CREATED', (session) => {
       setGameSession(session);
       setPlayerData(findPlayerById(session, getUserId()));
     });
 
-    socket.on('GAME_SESSION_UPDATED', (session) => {
-      console.log('socket.on ~ session:', session);
-      setGameSession(session);
-      setPlayerData(findPlayerById(session, getUserId()));
+    socket.on('GAME_SESSION_UPDATED', (data) => {
+      console.log('socket.on ~ data:', data);
+      if (gameSession) {
+        const updatedGameSession = { ...gameSession, ...data };
+
+        setGameSession(updatedGameSession);
+      }
     });
 
     return () => {
       socket.removeAllListeners('GAME_SESSION_CREATED');
       socket.removeAllListeners('GAME_SESSION_UPDATED');
     };
-  }, []);
+  }, [gameSession]);
 
   return (
     <div className="container min-w-full relative">

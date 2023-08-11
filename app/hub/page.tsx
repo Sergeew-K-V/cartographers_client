@@ -6,7 +6,12 @@ import { useQuery } from 'react-query';
 import { HubControl } from '@/features/hub';
 import { GameSessionInfoRows, UserInfo } from '@/entities/hub';
 import { ILobby, IUser, fetchLobby, fetchUser } from '@/shared/api';
-import { isHostLobby, useAuth, useSocket } from '@/shared/lib';
+import {
+  findLobbyByLobbyId,
+  isHostLobby,
+  useAuth,
+  useSocket,
+} from '@/shared/lib';
 import { Button, Loader } from '@/shared/ui';
 
 const HubPage = (): JSX.Element => {
@@ -73,17 +78,22 @@ const HubPage = (): JSX.Element => {
       }
     });
 
-    socket.on('LOBBY_UPDATED', (targetLobby: ILobby) =>
-      setLobbyList((prevLobbyList) =>
-        prevLobbyList.map((lobby) =>
-          lobby.id === targetLobby.id ? targetLobby : lobby
-        )
-      )
-    );
+    socket.on('LOBBY_UPDATED', (lobbyId, data) => {
+      const targetLobby = findLobbyByLobbyId(lobbyList, lobbyId);
+      if (targetLobby) {
+        const updatedLobby = { ...targetLobby, ...data };
 
-    socket.on('LOBBY_DELETED', (targetLobby: ILobby) => {
+        setLobbyList((prevLobbyList) =>
+          prevLobbyList.map((lobby) =>
+            lobby.id === updatedLobby.id ? updatedLobby : lobby
+          )
+        );
+      }
+    });
+
+    socket.on('LOBBY_DELETED', (lobbyId) => {
       setLobbyList((prevList) =>
-        prevList.filter((lobby) => lobby.id !== targetLobby.id)
+        prevList.filter((lobby) => lobby.id !== lobbyId)
       );
     });
 
