@@ -12,7 +12,11 @@ function CardView({ currentCard, poolOfCards, playedCards }: CardViewProps) {
       <div className="flex flex-col gap-y-2 justify-center items-center">
         <span className="uppercase font-bold text-xl">Current card</span>
         <ImageCustom
-          src={currentCard || '/images/other/explore_back.jpg'}
+          src={
+            currentCard
+              ? `/images/cards/card_${currentCard}.png`
+              : '/images/other/explore_back.jpg'
+          }
           width={600}
           className="w-52"
           alt="Current card"
