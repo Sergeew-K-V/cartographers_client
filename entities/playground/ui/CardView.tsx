@@ -2,16 +2,17 @@ import { ImageCustom } from '@/shared/ui';
 
 interface CardViewProps {
   currentCard: string | null;
-  remainingCards: string[];
+  poolOfCards: string[];
+  playedCards: string[];
 }
 
-function CardView({ currentCard, remainingCards }: CardViewProps) {
+function CardView({ currentCard, poolOfCards, playedCards }: CardViewProps) {
   return (
     <>
       <div className="flex flex-col gap-y-2 justify-center items-center">
         <span className="uppercase font-bold text-xl">Current card</span>
         <ImageCustom
-          src={currentCard ? currentCard : '/images/other/explore_back.jpg'}
+          src={currentCard || '/images/other/explore_back.jpg'}
           width={600}
           className="w-52"
           alt="Current card"
@@ -21,7 +22,10 @@ function CardView({ currentCard, remainingCards }: CardViewProps) {
         <div className="flex flex-col gap-y-2 justify-center items-center">
           <span className="font-bold">Previous card</span>
           <ImageCustom
-            src="/images/cards/card_3.png"
+            src={
+              playedCards[playedCards.length - 1] ||
+              '/images/other/explore_back.jpg'
+            }
             width={200}
             className="w-32 hover:animate-wiggle"
             alt="Previous card"
@@ -29,7 +33,8 @@ function CardView({ currentCard, remainingCards }: CardViewProps) {
         </div>
         <div className="flex flex-col gap-y-2 justify-center items-center">
           <span className="font-bold">
-            Remaining cards in the deck {remainingCards.length}/13
+            Remaining cards in the deck{' '}
+            {poolOfCards.length - playedCards.length - 1}/{poolOfCards.length}
           </span>
           <ImageCustom
             src="/images/other/explore_back.jpg"

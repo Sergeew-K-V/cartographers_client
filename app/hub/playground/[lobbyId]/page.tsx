@@ -43,10 +43,12 @@ function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
   };
 
   const handleChangeGameStatus = () => {
-    if (gameSession?.isStarted) {
-      socket.emit('END_GAME');
-    } else {
-      socket.emit('START_GAME');
+    if (gameSession) {
+      if (gameSession.isStarted) {
+        socket.emit('END_GAME', gameSession.id);
+      } else {
+        socket.emit('START_GAME', gameSession.id);
+      }
     }
   };
 
@@ -63,6 +65,7 @@ function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
     });
 
     socket.on('GAME_SESSION_UPDATED', (session) => {
+      console.log('socket.on ~ session:', session);
       setGameSession(session);
       setPlayerData(findPlayerById(session, getUserId()));
     });
@@ -86,7 +89,8 @@ function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
           <div className="grid grid-cols-1 gap-y-4 h-full">
             <CardView
               currentCard={gameSession.currentCard}
-              remainingCards={gameSession.remainingCards}
+              poolOfCards={gameSession.poolOfCards}
+              playedCards={gameSession.playedCards}
             />
             <div className="grid items-center w-fit">
               <GameControls />
