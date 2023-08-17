@@ -13,7 +13,7 @@ function GameSessionRules({ gameSession }: GameSessionRulesProps) {
         return (
           <div key={rule} className="relative">
             <ImageCustom
-              src={rule}
+              src={`/images/points_card/${rule}`}
               alt={rule}
               scalable
               className="cursor-zoom-in"

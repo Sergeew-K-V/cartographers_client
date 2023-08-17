@@ -23,7 +23,7 @@ function PlaygroundField({ playerData }: PlaygroundFieldProps) {
             row.map((cell, indexCell) => (
               <ImageCustom
                 key={`${indexRow} + ${indexCell}`}
-                src={cell.image}
+                src={`/images/other/${cell.image}`}
                 alt="cell"
                 className="w-[46px] h-[46px] hover:scale-[1.08] hover:border-2 hover:border-secondary-900 hover:border-dashed"
                 onClick={() =>

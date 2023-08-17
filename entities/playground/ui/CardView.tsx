@@ -14,7 +14,7 @@ function CardView({ currentCard, poolOfCards, playedCards }: CardViewProps) {
         <ImageCustom
           src={
             currentCard
-              ? `/images/cards/card_${currentCard}.png`
+              ? `/images/cards/${currentCard}`
               : '/images/other/explore_back.jpg'
           }
           width={600}
