@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@/shared/ui';
 
-function GameControls() {
+const GameControls = () => {
   return (
     <div className="flex gap-2">
       <div className="w-32">
@@ -12,6 +12,6 @@ function GameControls() {
       </div>
     </div>
   );
-}
+};
 
 export default GameControls;

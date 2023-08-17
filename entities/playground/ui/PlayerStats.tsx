@@ -4,7 +4,7 @@ interface PlayerStatsProps {
   score: number | '';
 }
 
-function PlayerStats({ isReady, name, score }: PlayerStatsProps) {
+const PlayerStats = ({ isReady, name, score }: PlayerStatsProps) => {
   return (
     <tr className="border-b text-center">
       <th
@@ -17,6 +17,6 @@ function PlayerStats({ isReady, name, score }: PlayerStatsProps) {
       <td className="px-6 py-4">{score ? score : 0}</td>
     </tr>
   );
-}
+};
 
 export default PlayerStats;

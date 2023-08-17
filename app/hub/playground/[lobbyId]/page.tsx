@@ -22,7 +22,7 @@ interface PlaygroundPageProps {
   params: { lobbyId: string };
 }
 
-function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
+const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
   const lobbyId = params.lobbyId;
   const { getUserId } = useAuth();
   const { socket } = useSocket();
@@ -125,6 +125,6 @@ function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
       {isLoading && <Loader />}
     </div>
   );
-}
+};
 
 export default PlaygroundPage;

@@ -4,7 +4,7 @@ interface PlaygroundCardProps {
   text: string;
 }
 
-function PlaygroundCard({ text }: PlaygroundCardProps) {
+const PlaygroundCard = ({ text }: PlaygroundCardProps) => {
   return (
     <div className="flex flex-col gap-y-2 justify-center items-center">
       <span className="uppercase font-bold text-xl">{text}</span>
@@ -16,6 +16,6 @@ function PlaygroundCard({ text }: PlaygroundCardProps) {
       />
     </div>
   );
-}
+};
 
 export default PlaygroundCard;

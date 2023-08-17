@@ -13,7 +13,7 @@ interface ImageCustomProps {
   className?: string;
 }
 
-function ImageCustom({
+const ImageCustom = ({
   alt,
   src,
   className,
@@ -21,7 +21,7 @@ function ImageCustom({
   width,
   onClick,
   scalable,
-}: ImageCustomProps) {
+}: ImageCustomProps) => {
   const [isScaled, setIsScaled] = useState<boolean>(false);
 
   const handleClick = (event: MouseEvent<HTMLImageElement>) => {
@@ -56,6 +56,6 @@ function ImageCustom({
       )}
     </>
   );
-}
+};
 
 export default ImageCustom;

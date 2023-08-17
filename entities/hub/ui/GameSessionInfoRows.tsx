@@ -13,12 +13,12 @@ interface GameSessionInfoProps {
   user: IUser;
 }
 
-function GameSessionInfoRows({
+const GameSessionInfoRows = ({
   hostName,
   numberOfPlayers,
   status,
   lobbyId,
-}: GameSessionInfoProps) {
+}: GameSessionInfoProps) => {
   const { getUserId } = useAuth();
   const { socket } = useSocket();
   const { push } = useRouter();
@@ -51,6 +51,6 @@ function GameSessionInfoRows({
       </td>
     </tr>
   );
-}
+};
 
 export default GameSessionInfoRows;

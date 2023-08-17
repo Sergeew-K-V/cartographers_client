@@ -2,7 +2,7 @@ interface SeasonsCounterProps {
   seasonsList: number[];
 }
 
-function SeasonsCounter({ seasonsList }: SeasonsCounterProps) {
+const SeasonsCounter = ({ seasonsList }: SeasonsCounterProps) => {
   const [seasonFirst, seasonSecond, coins, enemy] = seasonsList;
   return (
     <div className="grid grid-cols-2 gap-2">
@@ -17,6 +17,6 @@ function SeasonsCounter({ seasonsList }: SeasonsCounterProps) {
       </div>
     </div>
   );
-}
+};
 
 export default SeasonsCounter;

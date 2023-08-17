@@ -7,7 +7,7 @@ interface PlayerTableProps {
   playerList: IUserGameData[];
 }
 
-function PlayerTable({ playerList }: PlayerTableProps) {
+const PlayerTable = ({ playerList }: PlayerTableProps) => {
   return (
     <div>
       <div className="mb-2">Game stats</div>
@@ -40,6 +40,6 @@ function PlayerTable({ playerList }: PlayerTableProps) {
       </table>
     </div>
   );
-}
+};
 
 export default PlayerTable;

@@ -8,7 +8,7 @@ interface UserInfoProps {
   user: IUser;
 }
 
-function UserInfo({ user }: UserInfoProps): JSX.Element {
+const UserInfo = ({ user }: UserInfoProps): JSX.Element => {
   return (
     <div className="w-72 bg-white shadow-lg rounded-lg overflow-hidden">
       {user && (
@@ -74,6 +74,6 @@ function UserInfo({ user }: UserInfoProps): JSX.Element {
       )}
     </div>
   );
-}
+};
 
 export default UserInfo;

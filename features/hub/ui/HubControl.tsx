@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button, Loader } from '@/shared/ui';
 
-function HubControl() {
+const HubControl = () => {
   const { socket } = useSocket();
   const { logout, getUserId } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
@@ -33,6 +33,6 @@ function HubControl() {
       {isLoading && <Loader />}
     </div>
   );
-}
+};
 
 export default HubControl;

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-export default function NotFound() {
+const NotFound = () => {
   const { back } = useRouter();
 
   return (
@@ -33,4 +33,6 @@ export default function NotFound() {
       </div>
     </main>
   );
-}
+};
+
+export default NotFound;

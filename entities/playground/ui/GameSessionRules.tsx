@@ -6,7 +6,7 @@ interface GameSessionRulesProps {
   gameSession: IGameSessionClient;
 }
 
-function GameSessionRules({ gameSession }: GameSessionRulesProps) {
+const GameSessionRules = ({ gameSession }: GameSessionRulesProps) => {
   return (
     <div className="flex gap-2 h-fit mb-2">
       {gameSession.rules.map((rule) => {
@@ -23,6 +23,6 @@ function GameSessionRules({ gameSession }: GameSessionRulesProps) {
       })}
     </div>
   );
-}
+};
 
 export default GameSessionRules;

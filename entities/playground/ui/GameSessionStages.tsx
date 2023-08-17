@@ -1,7 +1,7 @@
 import React from 'react';
 import { ImageCustom } from '@/shared/ui';
 
-function GameSessionStages() {
+const GameSessionStages = () => {
   return (
     <div className="flex gap-2 h-fit mb-2">
       <div>
@@ -18,6 +18,6 @@ function GameSessionStages() {
       </div>
     </div>
   );
-}
+};
 
 export default GameSessionStages;

@@ -8,7 +8,7 @@ interface PlaygroundFieldProps {
   playerData: IUserGameData;
 }
 
-function PlaygroundField({ playerData }: PlaygroundFieldProps) {
+const PlaygroundField = ({ playerData }: PlaygroundFieldProps) => {
   return (
     <div className="relative">
       <ImageCustom
@@ -52,6 +52,6 @@ function PlaygroundField({ playerData }: PlaygroundFieldProps) {
       </div>
     </div>
   );
-}
+};
 
 export default PlaygroundField;

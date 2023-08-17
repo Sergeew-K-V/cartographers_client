@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
 import { AlertList } from '@/shared/ui';
 
-function HubLayout({ children }: { children: ReactNode }): JSX.Element {
+const HubLayout = ({ children }: { children: ReactNode }): JSX.Element => {
   const path = usePathname();
 
   return (
@@ -20,6 +20,6 @@ function HubLayout({ children }: { children: ReactNode }): JSX.Element {
       <AlertList />
     </>
   );
-}
+};
 
 export default HubLayout;

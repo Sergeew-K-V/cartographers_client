@@ -6,11 +6,11 @@ interface CardViewProps {
   playedCards: string[];
 }
 
-function CardView({
+const CardView = ({
   currentCard,
   poolOfCardsNumber,
   playedCards,
-}: CardViewProps) {
+}: CardViewProps) => {
   return (
     <>
       <div className="flex flex-col gap-y-2 justify-center items-center">
@@ -57,6 +57,6 @@ function CardView({
       </div>
     </>
   );
-}
+};
 
 export default CardView;

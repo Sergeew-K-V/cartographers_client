@@ -8,12 +8,12 @@ interface HostControlsProps {
   handleChangeGameStatus: () => void;
 }
 
-function HostControls({
+const HostControls = ({
   rerollPointCardsHandler,
   sessionStarted,
   isSessionHost,
   handleChangeGameStatus,
-}: HostControlsProps) {
+}: HostControlsProps) => {
   return (
     <>
       <div className="w-32">
@@ -51,6 +51,6 @@ function HostControls({
       </div>
     </>
   );
-}
+};
 
 export default HostControls;
