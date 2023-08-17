@@ -42,6 +42,19 @@ interface IGameSession {
   enemyCards: string[];
 }
 
+interface IGameSessionClient {
+  id: string;
+  rules: string[];
+  winner: string;
+  host: string;
+  time: number;
+  players: IUserGameData[];
+  isStarted: boolean;
+  currentCard: string | null;
+  poolOfCardsNumber: number;
+  playedCards: string[];
+}
+
 interface IUserGameData {
   _id: string;
   nickname: string;
@@ -53,4 +66,12 @@ interface IUserGameData {
   points: number[][];
 }
 
-export type { IUser, IAlert, ILobby, IGameSession, IFieldCell, IUserGameData };
+export type {
+  IUser,
+  IAlert,
+  ILobby,
+  IGameSession,
+  IFieldCell,
+  IUserGameData,
+  IGameSessionClient,
+};

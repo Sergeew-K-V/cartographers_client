@@ -1,9 +1,9 @@
 import { Socket } from 'socket.io-client';
-import { ILobby, IGameSession } from './models';
+import { ILobby, IGameSessionClient } from './models';
 
 type IUpdateDataLobby = IUpdateData<ILobby>;
 
-type IUpdateDataGameSession = IUpdateData<IGameSession>;
+type IUpdateDataGameSession = IUpdateData<IGameSessionClient>;
 
 type IUpdateData<T> = {
   [key in keyof Omit<T, 'id'>]?: T[key];
@@ -14,10 +14,8 @@ interface ServerToClientEvents {
   LOBBY_DELETED: (lobbyId: string) => void;
   LOBBY_UPDATED: (lobbyId: string, data: IUpdateDataLobby) => void;
 
-  GAME_SESSION_CREATED: (session: IGameSession) => void;
-  GAME_SESSION_UPDATED: (
-    data: IUpdateDataGameSession
-  ) => void;
+  GAME_SESSION_CREATED: (session: IGameSessionClient) => void;
+  GAME_SESSION_UPDATED: (data: IUpdateDataGameSession) => void;
 }
 
 interface ClientToServerEvents {

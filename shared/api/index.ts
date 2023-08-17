@@ -8,6 +8,7 @@ import type {
   IGameSession,
   IUserGameData,
   IFieldCell,
+  IGameSessionClient,
 } from './models';
 import {
   ClientToServerEvents,
@@ -26,4 +27,5 @@ export type {
   IGameSession,
   IUserGameData,
   IFieldCell,
+  IGameSessionClient,
 };

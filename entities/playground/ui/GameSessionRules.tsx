@@ -1,9 +1,9 @@
 import React from 'react';
-import { IGameSession } from '@/shared/api';
+import { IGameSessionClient } from '@/shared/api';
 import { ImageCustom } from '@/shared/ui';
 
 interface GameSessionRulesProps {
-  gameSession: IGameSession;
+  gameSession: IGameSessionClient;
 }
 
 function GameSessionRules({ gameSession }: GameSessionRulesProps) {

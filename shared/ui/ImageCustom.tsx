@@ -51,7 +51,7 @@ function ImageCustom({
           width={400}
           onClick={() => scalable && setIsScaled(false)}
           onMouseLeave={() => scalable && setIsScaled(false)}
-          className="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[480px] max-w-none cursor-zoom-out"
+          className="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] max-w-none cursor-zoom-out"
         />
       )}
     </>

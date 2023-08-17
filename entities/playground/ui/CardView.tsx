@@ -2,11 +2,15 @@ import { ImageCustom } from '@/shared/ui';
 
 interface CardViewProps {
   currentCard: string | null;
-  poolOfCards: string[];
+  poolOfCardsNumber: number;
   playedCards: string[];
 }
 
-function CardView({ currentCard, poolOfCards, playedCards }: CardViewProps) {
+function CardView({
+  currentCard,
+  poolOfCardsNumber,
+  playedCards,
+}: CardViewProps) {
   return (
     <>
       <div className="flex flex-col gap-y-2 justify-center items-center">
@@ -38,7 +42,10 @@ function CardView({ currentCard, poolOfCards, playedCards }: CardViewProps) {
         <div className="flex flex-col gap-y-2 justify-center items-center">
           <span className="font-bold">
             Remaining cards in the deck{' '}
-            {poolOfCards.length - playedCards.length - 1}/{poolOfCards.length}
+            {currentCard
+              ? poolOfCardsNumber - playedCards.length - 1
+              : poolOfCardsNumber - playedCards.length}
+            /{poolOfCardsNumber}
           </span>
           <ImageCustom
             src="/images/other/explore_back.jpg"

@@ -13,7 +13,7 @@ import {
   GameSessionStages,
   GameSessionRules,
 } from '@/entities/playground';
-import { IGameSession, IUserGameData } from '@/shared/api';
+import { IGameSessionClient, IUserGameData } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button, Loader } from '@/shared/ui';
 import { findPlayerById, isSessionHost } from './utils';
@@ -27,7 +27,7 @@ function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
   const { getUserId } = useAuth();
   const { socket } = useSocket();
   const { push } = useRouter();
-  const [gameSession, setGameSession] = useState<IGameSession>();
+  const [gameSession, setGameSession] = useState<IGameSessionClient>();
   const [playerData, setPlayerData] = useState<IUserGameData>();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -94,7 +94,7 @@ function PlaygroundPage({ params }: PlaygroundPageProps): JSX.Element {
           <div className="grid grid-cols-1 gap-y-4 h-full">
             <CardView
               currentCard={gameSession.currentCard}
-              poolOfCards={gameSession.poolOfCards}
+              poolOfCardsNumber={gameSession.poolOfCardsNumber}
               playedCards={gameSession.playedCards}
             />
             <div className="grid items-center w-fit">
