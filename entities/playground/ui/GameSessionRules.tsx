@@ -16,7 +16,7 @@ const GameSessionRules = ({ gameSession }: GameSessionRulesProps) => {
               src={`/images/points_card/${rule}`}
               alt={rule}
               scalable
-              className="cursor-zoom-in"
+              className="cursor-zoom-in w-auto h-auto"
             />
           </div>
         );

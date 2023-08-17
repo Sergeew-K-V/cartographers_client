@@ -67,7 +67,6 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
     });
 
     socket.on('GAME_SESSION_UPDATED', (data) => {
-      console.log('socket.on ~ data:', data);
       if (gameSession) {
         const updatedGameSession = { ...gameSession, ...data };
 

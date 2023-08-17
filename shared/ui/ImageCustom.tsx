@@ -42,16 +42,17 @@ const ImageCustom = ({
         width={width || 100}
         onClick={handleClick}
         className={className}
+        priority={true}
       />
       {isScaled && (
         <Image
           src={src}
           alt={alt}
-          height={400}
-          width={400}
+          height={600}
+          width={600}
           onClick={() => scalable && setIsScaled(false)}
           onMouseLeave={() => scalable && setIsScaled(false)}
-          className="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] max-w-none cursor-zoom-out"
+          className="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] max-w-none cursor-zoom-out"
         />
       )}
     </>

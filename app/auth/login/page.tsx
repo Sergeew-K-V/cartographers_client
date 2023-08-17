@@ -9,8 +9,8 @@ const LoginPage = () => {
           <ImageCustom
             src={'/images/seasons/summer.jpg'}
             alt="Logo"
-            width={1000}
-            height={100}
+            width={600}
+            height={600}
             className="w-full"
           />
         </div>
