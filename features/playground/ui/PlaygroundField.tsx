@@ -18,20 +18,19 @@ const PlaygroundField = ({ playerData }: PlaygroundFieldProps) => {
         width={600}
       />
       <div className="grid grid-cols-11 absolute top-[165px] left-12 z-10">
-        {playerData &&
-          playerData.gameField.map((row, indexRow) =>
-            row.map((cell, indexCell) => (
-              <ImageCustom
-                key={`${indexRow} + ${indexCell}`}
-                src={`/images/other/${cell.image}`}
-                alt="cell"
-                className="w-[46px] h-[46px] hover:scale-[1.08] hover:border-2 hover:border-secondary-900 hover:border-dashed"
-                onClick={() =>
-                  console.log('indexRow,indexCell:', indexRow, indexCell)
-                }
-              />
-            ))
-          )}
+        {playerData.gameField.map((row, indexRow) =>
+          row.map((cell, indexCell) => (
+            <ImageCustom
+              key={`${indexRow} + ${indexCell}`}
+              src={`/images/type_card/${cell}.png`}
+              alt={'cell'}
+              className="w-[46px] h-[46px] hover:scale-[1.08] hover:border-2 hover:border-secondary-900 hover:border-dashed"
+              onClick={() =>
+                console.log('indexRow,indexCell:', indexRow, indexCell)
+              }
+            />
+          ))
+        )}
       </div>
       <div className="absolute top-[50px] left-[37px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
         {playerData.nickname}
