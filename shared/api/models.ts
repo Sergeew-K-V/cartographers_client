@@ -23,9 +23,26 @@ interface ILobby {
   isStarted: boolean;
 }
 
-interface IFieldCell {
-  id: number;
-  image: string;
+type IGameCardType =
+  | 'city'
+  | 'wood'
+  | 'ground'
+  | 'water'
+  | 'enemy'
+  | 'mountain'
+  | 'ruins'
+  | 'cell';
+
+type IFieldCell = 1 | 0;
+
+interface IGameCard {
+  id: string;
+  img: string;
+  name: string;
+  cost: number;
+  type: IGameCardType[];
+  matrix: IFieldCell[][];
+  coinsMatrix?: IFieldCell[][];
 }
 
 interface IGameSession {
@@ -73,5 +90,7 @@ export type {
   IGameSession,
   IFieldCell,
   IUserGameData,
+  IGameCardType,
+  IGameCard,
   IGameSessionClient,
 };

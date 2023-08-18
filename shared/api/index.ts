@@ -9,6 +9,8 @@ import type {
   IUserGameData,
   IFieldCell,
   IGameSessionClient,
+  IGameCardType,
+  IGameCard,
 } from './models';
 import {
   ClientToServerEvents,
@@ -28,4 +30,6 @@ export type {
   IUserGameData,
   IFieldCell,
   IGameSessionClient,
+  IGameCardType,
+  IGameCard,
 };
