@@ -67,7 +67,7 @@ interface IGameSessionClient {
   time: number;
   players: IUserGameData[];
   isStarted: boolean;
-  currentCard: string | null;
+  currentCard: IGameCard | null;
   poolOfCardsNumber: number;
   playedCards: string[];
 }

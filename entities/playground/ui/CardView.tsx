@@ -1,7 +1,8 @@
+import { IGameCard } from '@/shared/api';
 import { ImageCustom } from '@/shared/ui';
 
 interface CardViewProps {
-  currentCard: string | null;
+  currentCard: IGameCard | null;
   poolOfCardsNumber: number;
   playedCards: string[];
 }
@@ -18,10 +19,11 @@ const CardView = ({
         <ImageCustom
           src={
             currentCard
-              ? `/images/cards/${currentCard}`
+              ? `/images/cards/${currentCard.img}`
               : '/images/other/explore_back.jpg'
           }
           width={600}
+          height={600}
           className="w-52"
           alt="Current card"
         />
@@ -35,6 +37,7 @@ const CardView = ({
               '/images/other/explore_back.jpg'
             }
             width={200}
+            height={200}
             className="w-32 hover:animate-wiggle"
             alt="Previous card"
           />
@@ -50,6 +53,7 @@ const CardView = ({
           <ImageCustom
             src="/images/other/explore_back.jpg"
             width={600}
+            height={600}
             className="w-32"
             alt="Previous card"
           />
