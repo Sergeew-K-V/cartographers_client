@@ -13,8 +13,8 @@ const CardView = ({
   playedCards,
 }: CardViewProps) => {
   return (
-    <>
-      <div className="flex flex-col gap-y-2 justify-center items-center">
+    <div className="flex justify-between h-fit gap-4">
+      <div className="flex flex-col gap-y-2 text-center justify-center">
         <span className="uppercase font-bold text-xl">Current card</span>
         <ImageCustom
           src={
@@ -24,25 +24,25 @@ const CardView = ({
           }
           width={600}
           height={600}
-          className="w-52"
+          className="w-60 h-80 rounded-2xl"
           alt="Current card"
         />
       </div>
-      <div className="grid grid-cols-2">
-        <div className="flex flex-col gap-y-2 justify-center items-center">
+      <div className="flex flex-col">
+        <div className="flex flex-col gap-y-2 items-center">
           <span className="font-bold">Previous card</span>
           <ImageCustom
             src={
               playedCards[playedCards.length - 1] ||
               '/images/other/explore_back.jpg'
             }
-            width={200}
-            height={200}
-            className="w-32 hover:animate-wiggle"
+            width={600}
+            height={600}
+            className="w-auto h-44 rounded-2xl"
             alt="Previous card"
           />
         </div>
-        <div className="flex flex-col gap-y-2 justify-center items-center">
+        <div className="flex flex-col gap-y-2 items-center">
           <span className="font-bold">
             Remaining cards in the deck{' '}
             {currentCard
@@ -54,12 +54,12 @@ const CardView = ({
             src="/images/other/explore_back.jpg"
             width={600}
             height={600}
-            className="w-32"
+            className="w-auto h-44 rounded-2xl"
             alt="Previous card"
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

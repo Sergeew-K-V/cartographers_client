@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import {
+  CardControls,
   GameControls,
   HostControls,
   PlaygroundField,
@@ -13,7 +14,12 @@ import {
   GameSessionStages,
   GameSessionRules,
 } from '@/entities/playground';
-import { IGameSessionClient, IUserGameData } from '@/shared/api';
+import {
+  IFieldCell,
+  IGameCard,
+  IGameSessionClient,
+  IUserGameData,
+} from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button, Loader } from '@/shared/ui';
 import { findPlayerById, isSessionHost } from './utils';
@@ -30,6 +36,10 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
   const [gameSession, setGameSession] = useState<IGameSessionClient>();
   const [playerData, setPlayerData] = useState<IUserGameData>();
   const [isLoading, setIsLoading] = useState(false);
+
+  const [card, setCard] = useState<IGameCard | null>(null);
+  const [cardType, setCardType] = useState<string | null>(null);
+  const [matrix, setMatrix] = useState<IFieldCell[][] | null>(null);
 
   const leaveLobbyHandler = () => {
     setIsLoading(true);
@@ -64,6 +74,7 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
     socket.on('GAME_SESSION_CREATED', (session) => {
       setGameSession(session);
       setPlayerData(findPlayerById(session, getUserId()));
+      setCard(session.currentCard);
     });
 
     socket.on('GAME_SESSION_UPDATED', (data) => {
@@ -80,6 +91,19 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
     };
   }, [gameSession]);
 
+  useEffect(() => {
+    if (gameSession) {
+      setCard(gameSession.currentCard);
+    }
+  }, [gameSession]);
+
+  useEffect(() => {
+    if (card) {
+      setCardType(card.type[0]);
+      setMatrix(card.matrix);
+    }
+  }, [card]);
+
   return (
     <div className="container min-w-full relative">
       {gameSession && playerData && (
@@ -88,35 +112,39 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
             <GameSessionStages />
             <GameSessionRules gameSession={gameSession} />
             <PlayerTable playerList={gameSession.players} />
+            <div className="flex gap-2 mt-4">
+              <HostControls
+                sessionStarted={gameSession.isStarted}
+                isSessionHost={isSessionHost(
+                  gameSession.host,
+                  playerData.nickname
+                )}
+                handleChangeGameStatus={handleChangeGameStatus}
+                rerollPointCardsHandler={rerollPointCardsHandler}
+              />
+              <div className="w-32">
+                <Button onClick={leaveLobbyHandler} className="primary-button">
+                  Leave lobby
+                </Button>
+              </div>
+            </div>
           </div>
           <div>{<PlaygroundField playerData={playerData} />}</div>
-          <div className="grid grid-cols-1 gap-y-4 h-full">
+          <div className="relative">
             <CardView
               currentCard={gameSession.currentCard}
               poolOfCardsNumber={gameSession.poolOfCardsNumber}
               playedCards={gameSession.playedCards}
             />
-            <div className="grid items-center w-fit">
+            <CardControls
+              currentCard={gameSession.currentCard}
+              setCardType={setCardType}
+              cardType={cardType}
+              matrix={matrix}
+              setMatrix={setMatrix}
+            />
+            <div className="mt-4">
               <GameControls />
-              <div className="flex gap-2">
-                <HostControls
-                  sessionStarted={gameSession.isStarted}
-                  isSessionHost={isSessionHost(
-                    gameSession.host,
-                    playerData.nickname
-                  )}
-                  handleChangeGameStatus={handleChangeGameStatus}
-                  rerollPointCardsHandler={rerollPointCardsHandler}
-                />
-                <div className="w-32">
-                  <Button
-                    onClick={leaveLobbyHandler}
-                    className="primary-button"
-                  >
-                    Leave lobby
-                  </Button>
-                </div>
-              </div>
             </div>
           </div>
         </div>

@@ -11,8 +11,8 @@ const PlayerTable = ({ playerList }: PlayerTableProps) => {
   return (
     <div>
       <div className="mb-2">Game stats</div>
-      <table className="text-sm text-left text-secondary-500 shadow-xl bg-secondary-50 h-fit">
-        <thead className="text-xs text-secondary-700 uppercase bg-secondary-200">
+      <table className="text-sm text-left text-secondary-500 shadow-xl bg-secondary-50 h-fit w-full">
+        <thead className="text-xs text-secondary-700 uppercase bg-secondary-200 text-center">
           <tr>
             <th scope="col" className="px-6 py-3">
               Player

@@ -1,3 +1,8 @@
-import { GameControls, PlaygroundField, HostControls } from './ui';
+import {
+  GameControls,
+  PlaygroundField,
+  HostControls,
+  CardControls,
+} from './ui';
 
-export { PlaygroundField, GameControls, HostControls };
+export { PlaygroundField, GameControls, HostControls, CardControls };
