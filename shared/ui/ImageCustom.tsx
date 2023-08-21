@@ -10,6 +10,7 @@ interface ImageCustomProps {
   onClick?: React.MouseEventHandler<HTMLImageElement> | undefined;
   height?: number;
   scalable?: boolean;
+  onMouseEnter?: React.MouseEventHandler<HTMLImageElement> | undefined;
   className?: string;
 }
 
@@ -21,6 +22,7 @@ const ImageCustom = ({
   width,
   onClick,
   scalable,
+  onMouseEnter,
 }: ImageCustomProps) => {
   const [isScaled, setIsScaled] = useState<boolean>(false);
 
@@ -43,6 +45,7 @@ const ImageCustom = ({
         onClick={handleClick}
         className={className}
         priority={true}
+        onMouseEnter={onMouseEnter}
       />
       {isScaled && (
         <Image

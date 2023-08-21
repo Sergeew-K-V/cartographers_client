@@ -14,7 +14,12 @@ import {
   GameSessionStages,
   GameSessionRules,
 } from '@/entities/playground';
-import { IGameCardData, IGameSessionClient, IUserGameData } from '@/shared/api';
+import {
+  IGameCardData,
+  IGameSessionClient,
+  IMatrix,
+  IUserGameData,
+} from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button, Loader } from '@/shared/ui';
 import { findPlayerById, isSessionHost } from './utils';
@@ -31,8 +36,9 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
   const [gameSession, setGameSession] = useState<IGameSessionClient>();
   const [playerData, setPlayerData] = useState<IUserGameData>();
   const [isLoading, setIsLoading] = useState(false);
-
   const [cardData, setCardData] = useState<IGameCardData | null>(null);
+
+  const [targetGameField, setTargetGameField] = useState<IMatrix | undefined>();
 
   const leaveLobbyHandler = () => {
     setIsLoading(true);
@@ -67,6 +73,7 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
     socket.on('GAME_SESSION_CREATED', (session) => {
       setGameSession(session);
       setPlayerData(findPlayerById(session, getUserId()));
+      setTargetGameField(findPlayerById(session, getUserId())?.gameField);
 
       if (session.currentCard) {
         setCardData({
@@ -130,7 +137,14 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
               </div>
             </div>
           </div>
-          <div>{<PlaygroundField playerData={playerData} />}</div>
+          <div>
+            <PlaygroundField
+              playerData={playerData}
+              cardData={cardData}
+              targetGameField={targetGameField as IMatrix}
+              setTargetGameField={setTargetGameField}
+            />
+          </div>
           <div className="relative">
             <CardView
               currentCard={gameSession.currentCard}

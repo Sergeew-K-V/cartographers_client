@@ -1,14 +1,53 @@
 import { SeasonsCounter } from '@/entities/playground';
-import { IUserGameData } from '@/shared/api';
+import {
+  IGameCardData,
+  IGameCardType,
+  IMatrix,
+  IUserGameData,
+} from '@/shared/api';
 import { countScore } from '@/shared/lib';
 import { ImageCustom } from '@/shared/ui';
 import { renderCoins } from '../utils';
 
 interface PlaygroundFieldProps {
   playerData: IUserGameData;
+  cardData: IGameCardData | null;
+  targetGameField: IMatrix;
+  setTargetGameField: (data: IMatrix) => void;
 }
 
-const PlaygroundField = ({ playerData }: PlaygroundFieldProps) => {
+const PlaygroundField = ({
+  playerData,
+  cardData,
+  targetGameField,
+  setTargetGameField,
+}: PlaygroundFieldProps) => {
+  //need fix types, gameField, cause gameField correctly must be type of IGameCardType, but now it's IFieldCell with 1,0
+  function replaceElements(
+    indexRow: number,
+    indexCell: number,
+    type: IGameCardType,
+    matrix: IMatrix,
+    gameField: IMatrix | IGameCardType[][]
+  ) {
+    for (let i = 0; i < matrix.length; i++) {
+      for (let j = 0; j < matrix[i].length; j++) {
+        const rowIndex = indexRow + i;
+        const cellIndex = indexCell + j;
+        if (
+          rowIndex >= 0 &&
+          rowIndex < gameField.length &&
+          cellIndex >= 0 &&
+          cellIndex < gameField[rowIndex].length
+        ) {
+          gameField[rowIndex][cellIndex] = matrix[i][j]
+            ? type
+            : gameField[rowIndex][cellIndex];
+        }
+      }
+    }
+    setTargetGameField([...gameField] as IMatrix);
+  }
   return (
     <div className="relative">
       <ImageCustom
@@ -26,7 +65,14 @@ const PlaygroundField = ({ playerData }: PlaygroundFieldProps) => {
               alt={'cell'}
               className="w-[46px] h-[46px] hover:scale-[1.08] hover:border-2 hover:border-secondary-900 hover:border-dashed"
               onClick={() =>
-                console.log('indexRow,indexCell:', indexRow, indexCell)
+                cardData &&
+                replaceElements(
+                  indexRow,
+                  indexCell,
+                  cardData.type as IGameCardType,
+                  cardData.matrix as IMatrix,
+                  targetGameField as IMatrix
+                )
               }
             />
           ))
@@ -42,7 +88,7 @@ const PlaygroundField = ({ playerData }: PlaygroundFieldProps) => {
         {renderCoins(playerData.coins)}
       </div>
       <div className="absolute bottom-[35px] left-[25px] grid grid-cols-4 w-[480px] z-10 uppercase whitespace-nowrap font-bold text-secodary-700">
-        {playerData?.points.map((seasonList, index) => (
+        {playerData.points.map((seasonList, index) => (
           <SeasonsCounter seasonsList={seasonList} key={index} />
         ))}
       </div>
