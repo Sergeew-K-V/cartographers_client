@@ -14,12 +14,7 @@ import {
   GameSessionStages,
   GameSessionRules,
 } from '@/entities/playground';
-import {
-  IFieldCell,
-  IGameCard,
-  IGameSessionClient,
-  IUserGameData,
-} from '@/shared/api';
+import { IGameCardData, IGameSessionClient, IUserGameData } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button, Loader } from '@/shared/ui';
 import { findPlayerById, isSessionHost } from './utils';
@@ -37,9 +32,7 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
   const [playerData, setPlayerData] = useState<IUserGameData>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const [card, setCard] = useState<IGameCard | null>(null);
-  const [cardType, setCardType] = useState<string | null>(null);
-  const [matrix, setMatrix] = useState<IFieldCell[][] | null>(null);
+  const [cardData, setCardData] = useState<IGameCardData | null>(null);
 
   const leaveLobbyHandler = () => {
     setIsLoading(true);
@@ -74,7 +67,15 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
     socket.on('GAME_SESSION_CREATED', (session) => {
       setGameSession(session);
       setPlayerData(findPlayerById(session, getUserId()));
-      setCard(session.currentCard);
+
+      if (session.currentCard) {
+        setCardData({
+          ...cardData,
+          card: session.currentCard,
+          type: session.currentCard.type[0],
+          matrix: session.currentCard.matrix,
+        });
+      }
     });
 
     socket.on('GAME_SESSION_UPDATED', (data) => {
@@ -92,17 +93,17 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
   }, [gameSession]);
 
   useEffect(() => {
-    if (gameSession) {
-      setCard(gameSession.currentCard);
+    if (gameSession && gameSession.currentCard) {
+      setCardData({
+        ...cardData,
+        card: gameSession.currentCard,
+        type: gameSession.currentCard.type[0],
+        matrix: gameSession.currentCard.matrix,
+      });
+    } else {
+      setCardData(null);
     }
   }, [gameSession]);
-
-  useEffect(() => {
-    if (card) {
-      setCardType(card.type[0]);
-      setMatrix(card.matrix);
-    }
-  }, [card]);
 
   return (
     <div className="container min-w-full relative">
@@ -136,13 +137,7 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
               poolOfCardsNumber={gameSession.poolOfCardsNumber}
               playedCards={gameSession.playedCards}
             />
-            <CardControls
-              currentCard={gameSession.currentCard}
-              setCardType={setCardType}
-              cardType={cardType}
-              matrix={matrix}
-              setMatrix={setMatrix}
-            />
+            <CardControls cardData={cardData} setCardData={setCardData} />
             <div className="mt-4">
               <GameControls />
             </div>

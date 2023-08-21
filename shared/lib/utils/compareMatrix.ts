@@ -1,9 +1,6 @@
-import { IFieldCell } from '@/shared/api';
+import { IMatrix } from '@/shared/api';
 
-const compareMatrix = (
-  firstMatrix: IFieldCell[][],
-  secondMatrix: IFieldCell[][]
-) => {
+const compareMatrix = (firstMatrix: IMatrix, secondMatrix: IMatrix) => {
   if (firstMatrix.length !== secondMatrix.length) {
     return false;
   }

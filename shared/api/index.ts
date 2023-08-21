@@ -11,6 +11,8 @@ import type {
   IGameSessionClient,
   IGameCardType,
   IGameCard,
+  IGameCardData,
+  IMatrix,
 } from './models';
 import {
   ClientToServerEvents,
@@ -32,4 +34,6 @@ export type {
   IGameSessionClient,
   IGameCardType,
   IGameCard,
+  IGameCardData,
+  IMatrix,
 };
