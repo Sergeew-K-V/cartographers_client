@@ -23,13 +23,13 @@ const PlaygroundField = ({
   setTargetGameField,
 }: PlaygroundFieldProps) => {
   //need fix types, gameField, cause gameField correctly must be type of IGameCardType, but now it's IFieldCell with 1,0
-  function replaceElements(
+  const replaceElements = (
     indexRow: number,
     indexCell: number,
     type: IGameCardType,
     matrix: IMatrix,
     gameField: IMatrix | IGameCardType[][]
-  ) {
+  ) => {
     for (let i = 0; i < matrix.length; i++) {
       for (let j = 0; j < matrix[i].length; j++) {
         const rowIndex = indexRow + i;
@@ -47,7 +47,8 @@ const PlaygroundField = ({
       }
     }
     setTargetGameField([...gameField] as IMatrix);
-  }
+  };
+
   return (
     <div className="relative">
       <ImageCustom
