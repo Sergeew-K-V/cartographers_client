@@ -1,12 +1,14 @@
 import {
-  IFieldCell,
+  ICell,
   IGameCard,
   IGameCardData,
   IGameCardType,
   IGameSession,
   IGameSessionClient,
-  IMatrix,
   IUserGameData,
+  ICardMatrix,
+  IGameFieldMatrix,
+  IGameFieldCell,
 } from './types';
 
 interface IUser {
@@ -39,11 +41,13 @@ export type {
   IAlert,
   ILobby,
   IGameSession,
-  IFieldCell,
+  ICell,
   IUserGameData,
   IGameCardType,
   IGameCard,
   IGameSessionClient,
   IGameCardData,
-  IMatrix,
+  ICardMatrix,
+  IGameFieldMatrix,
+  IGameFieldCell,
 };

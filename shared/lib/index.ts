@@ -6,7 +6,7 @@ import {
   findLobbyByUserId,
   isHostLobby,
   countScore,
-  compareMatrix,
+  isEqualMatrix,
 } from './utils';
 
 export {
@@ -21,5 +21,5 @@ export {
   findLobbyByUserId,
   isHostLobby,
   countScore,
-  compareMatrix,
+  isEqualMatrix,
 };

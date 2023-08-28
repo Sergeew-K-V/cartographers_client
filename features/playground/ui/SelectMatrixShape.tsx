@@ -1,12 +1,12 @@
 'use client';
 
-import { IMatrix, IGameCard } from '@/shared/api';
-import { compareMatrix } from '@/shared/lib';
+import { ICardMatrix, IGameCard } from '@/shared/api';
+import { isEqualMatrix } from '@/shared/lib';
 
 interface SelectMatrixShapeProps {
   card: IGameCard;
-  matrix: IMatrix;
-  changeCardDataMatrix: (matrix: IMatrix) => void;
+  matrix: ICardMatrix;
+  changeCardDataMatrix: (matrix: ICardMatrix) => void;
 }
 
 const SelectMatrixShape = ({
@@ -17,8 +17,8 @@ const SelectMatrixShape = ({
   const isMatrix = card.matrix.length !== 0;
   const isCoinsMatrix = card.coinsMatrix;
 
-  const isActive = (matrix: IMatrix, cardMatrix: IMatrix) => {
-    return compareMatrix(matrix, cardMatrix)
+  const isActive = (matrix: ICardMatrix, cardMatrix: ICardMatrix) => {
+    return isEqualMatrix(matrix, cardMatrix)
       ? 'border-2 border-white border-dashed '
       : '';
   };
@@ -51,9 +51,9 @@ const SelectMatrixShape = ({
         className={
           'game-card-matrix-shape-coinsMatrix' +
           ' ' +
-          isActive(matrix, card.coinsMatrix as IMatrix)
+          isActive(matrix, card.coinsMatrix as ICardMatrix)
         }
-        onClick={() => changeCardDataMatrix(card.coinsMatrix as IMatrix)}
+        onClick={() => changeCardDataMatrix(card.coinsMatrix as ICardMatrix)}
       />
       <div
         className={

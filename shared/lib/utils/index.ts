@@ -1,4 +1,4 @@
-import compareMatrix from './compareMatrix';
+import isEqualMatrix from './isEqualMatrix';
 import countScore from './countScore';
 import findLobbyByLobbyId from './findLobbyByLobbyId';
 import findLobbyByUserId from './findLobbyByUserId';
@@ -9,5 +9,5 @@ export {
   findLobbyByUserId,
   isHostLobby,
   countScore,
-  compareMatrix,
+  isEqualMatrix,
 };

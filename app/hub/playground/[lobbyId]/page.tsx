@@ -17,8 +17,9 @@ import {
 import {
   IGameCardData,
   IGameSessionClient,
-  IMatrix,
   IUserGameData,
+  IGameFieldMatrix,
+  IGameCardType,
 } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button, Loader } from '@/shared/ui';
@@ -38,7 +39,32 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const [cardData, setCardData] = useState<IGameCardData | null>(null);
 
-  const [targetGameField, setTargetGameField] = useState<IMatrix | undefined>();
+  const matrixHandler = (row: number, column: number) => {
+    const newMatrix: IGameFieldMatrix =
+      playerData?.gameField as IGameFieldMatrix;
+    if (cardData?.matrix) {
+      for (let i = 0; i < cardData?.matrix.length; i++) {
+        for (let j = 0; j < cardData?.matrix[i].length; j++) {
+          const rowIndex = row + i;
+          const cellIndex = column + j;
+          if (
+            rowIndex >= 0 &&
+            rowIndex < newMatrix.length &&
+            cellIndex >= 0 &&
+            cellIndex < newMatrix[rowIndex].length
+          ) {
+            newMatrix[rowIndex][cellIndex] = cardData?.matrix[i][j]
+              ? { type: cardData.type as IGameCardType, value: 1 }
+              : newMatrix[rowIndex][cellIndex];
+          }
+        }
+      }
+      setPlayerData({
+        ...playerData,
+        gameField: newMatrix,
+      } as IUserGameData);
+    }
+  };
 
   const leaveLobbyHandler = () => {
     setIsLoading(true);
@@ -73,7 +99,6 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
     socket.on('GAME_SESSION_CREATED', (session) => {
       setGameSession(session);
       setPlayerData(findPlayerById(session, getUserId()));
-      setTargetGameField(findPlayerById(session, getUserId())?.gameField);
     });
 
     socket.on('GAME_SESSION_UPDATED', (data) => {
@@ -131,9 +156,7 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
           <div>
             <PlaygroundField
               playerData={playerData}
-              cardData={cardData}
-              targetGameField={targetGameField as IMatrix}
-              setTargetGameField={setTargetGameField}
+              matrixHandler={matrixHandler}
             />
           </div>
           <div className="relative">

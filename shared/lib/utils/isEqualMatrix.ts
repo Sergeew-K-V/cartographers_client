@@ -1,6 +1,6 @@
-import { IMatrix } from '@/shared/api';
+import { ICardMatrix } from '@/shared/api';
 
-const compareMatrix = (firstMatrix: IMatrix, secondMatrix: IMatrix) => {
+const isEqualMatrix = (firstMatrix: ICardMatrix, secondMatrix: ICardMatrix) => {
   if (firstMatrix.length !== secondMatrix.length) {
     return false;
   }
@@ -20,4 +20,4 @@ const compareMatrix = (firstMatrix: IMatrix, secondMatrix: IMatrix) => {
   return true;
 };
 
-export default compareMatrix;
+export default isEqualMatrix;

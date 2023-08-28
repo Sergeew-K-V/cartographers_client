@@ -8,9 +8,16 @@ type IGameCardType =
   | 'ruins'
   | 'cell';
 
-type IFieldCell = 1 | 0;
+type ICell = 1 | 0;
 
-type IMatrix = IFieldCell[][];
+type ICardMatrix = ICell[][];
+
+type IGameFieldMatrix = IGameFieldCell[][];
+
+interface IGameFieldCell {
+  value: ICell;
+  type: IGameCardType;
+}
 
 interface IGameCard {
   id: string;
@@ -18,8 +25,8 @@ interface IGameCard {
   name: string;
   cost: number;
   type: IGameCardType[];
-  matrix: IMatrix;
-  coinsMatrix?: IMatrix;
+  matrix: ICardMatrix;
+  coinsMatrix?: ICardMatrix;
 }
 
 interface IGameSession {
@@ -52,7 +59,7 @@ interface IGameSessionClient {
 interface IUserGameData {
   _id: string;
   nickname: string;
-  gameField: IMatrix;
+  gameField: IGameFieldMatrix;
   isReady: boolean;
   score: number;
   coins: number;
@@ -63,7 +70,7 @@ interface IUserGameData {
 interface IGameCardData {
   card: IGameCard | null;
   type: string | null;
-  matrix: IMatrix | null;
+  matrix: ICardMatrix | null;
 }
 
 export type {
@@ -72,7 +79,9 @@ export type {
   IGameSessionClient,
   IGameSession,
   IGameCard,
-  IMatrix,
-  IFieldCell,
+  ICardMatrix,
+  ICell,
   IGameCardType,
+  IGameFieldMatrix,
+  IGameFieldCell,
 };

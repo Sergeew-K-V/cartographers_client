@@ -1,54 +1,18 @@
 import { SeasonsCounter } from '@/entities/playground';
-import {
-  IGameCardData,
-  IGameCardType,
-  IMatrix,
-  IUserGameData,
-} from '@/shared/api';
+import { IUserGameData } from '@/shared/api';
 import { countScore } from '@/shared/lib';
 import { ImageCustom } from '@/shared/ui';
 import { renderCoins } from '../utils';
 
 interface PlaygroundFieldProps {
   playerData: IUserGameData;
-  cardData: IGameCardData | null;
-  targetGameField: IMatrix;
-  setTargetGameField: (data: IMatrix) => void;
+  matrixHandler: (row: number, column: number) => void;
 }
 
 const PlaygroundField = ({
   playerData,
-  cardData,
-  targetGameField,
-  setTargetGameField,
+  matrixHandler,
 }: PlaygroundFieldProps) => {
-  //need fix types, gameField, cause gameField correctly must be type of IGameCardType, but now it's IFieldCell with 1,0
-  const replaceElements = (
-    indexRow: number,
-    indexCell: number,
-    type: IGameCardType,
-    matrix: IMatrix,
-    gameField: IMatrix | IGameCardType[][]
-  ) => {
-    for (let i = 0; i < matrix.length; i++) {
-      for (let j = 0; j < matrix[i].length; j++) {
-        const rowIndex = indexRow + i;
-        const cellIndex = indexCell + j;
-        if (
-          rowIndex >= 0 &&
-          rowIndex < gameField.length &&
-          cellIndex >= 0 &&
-          cellIndex < gameField[rowIndex].length
-        ) {
-          gameField[rowIndex][cellIndex] = matrix[i][j]
-            ? type
-            : gameField[rowIndex][cellIndex];
-        }
-      }
-    }
-    setTargetGameField([...gameField] as IMatrix);
-  };
-
   return (
     <div className="relative">
       <ImageCustom
@@ -59,22 +23,13 @@ const PlaygroundField = ({
       />
       <div className="grid grid-cols-11 absolute top-[165px] left-12 z-10">
         {playerData.gameField.map((row, indexRow) =>
-          row.map((cell, indexCell) => (
+          row.map((cell, indexColumn) => (
             <ImageCustom
-              key={`${indexRow} + ${indexCell}`}
-              src={`/images/type_card/${cell}.png`}
-              alt={'cell'}
+              key={`${indexRow} + ${indexColumn}`}
+              src={`/images/type_card/${cell.type}.png`}
+              alt={cell.type + '.png'}
               className="w-[46px] h-[46px] hover:scale-[1.08] hover:border-2 hover:border-secondary-900 hover:border-dashed"
-              onClick={() =>
-                cardData &&
-                replaceElements(
-                  indexRow,
-                  indexCell,
-                  cardData.type as IGameCardType,
-                  cardData.matrix as IMatrix,
-                  targetGameField as IMatrix
-                )
-              }
+              onClick={() => matrixHandler(indexRow, indexColumn)}
             />
           ))
         )}

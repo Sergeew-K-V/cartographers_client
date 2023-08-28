@@ -1,21 +1,25 @@
 import {
-  IFieldCell,
+  ICell,
   IGameCard,
   IGameCardData,
   IGameCardType,
   IGameSession,
   IGameSessionClient,
-  IMatrix,
   IUserGameData,
+  ICardMatrix,
+  IGameFieldMatrix,
+  IGameFieldCell,
 } from './gameSession';
 
 export type {
-  IFieldCell,
+  ICell,
   IGameCard,
   IGameCardData,
   IGameCardType,
   IGameSession,
   IGameSessionClient,
-  IMatrix,
   IUserGameData,
+  ICardMatrix,
+  IGameFieldMatrix,
+  IGameFieldCell,
 };
