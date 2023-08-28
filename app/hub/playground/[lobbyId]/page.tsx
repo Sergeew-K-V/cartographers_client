@@ -40,20 +40,34 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
   const [cardData, setCardData] = useState<IGameCardData | null>(null);
 
   const matrixHandler = (row: number, column: number) => {
-    const newMatrix: IGameFieldMatrix =
-      playerData?.gameField as IGameFieldMatrix;
-    if (cardData?.matrix) {
-      for (let i = 0; i < cardData?.matrix.length; i++) {
-        for (let j = 0; j < cardData?.matrix[i].length; j++) {
-          const rowIndex = row + i;
-          const cellIndex = column + j;
+    if (cardData && cardData.matrix) {
+      const newMatrix: IGameFieldMatrix =
+        playerData?.gameField as IGameFieldMatrix;
+
+      for (let cardRow = 0; cardRow < cardData.matrix.length; cardRow++) {
+        for (
+          let cardCol = 0;
+          cardCol < cardData.matrix[cardRow].length;
+          cardCol++
+        ) {
+          const rowIndex = row + cardRow;
+          const cellIndex = column + cardCol;
+          console.log('matrixHandler ~ rowIndex:', rowIndex);
+          console.log('matrixHandler ~ cellIndex:', cellIndex);
           if (
             rowIndex >= 0 &&
             rowIndex < newMatrix.length &&
             cellIndex >= 0 &&
             cellIndex < newMatrix[rowIndex].length
           ) {
-            newMatrix[rowIndex][cellIndex] = cardData?.matrix[i][j]
+            // if (
+            //   newMatrix[rowIndex][cellIndex].value === 1 &&
+            //   cardData.matrix[cardRow][cardCol] !== 0
+            // ) {
+            //   console.log('there so blocked matrix');
+            //   return '';
+            // }
+            newMatrix[rowIndex][cellIndex] = cardData.matrix[cardRow][cardCol]
               ? { type: cardData.type as IGameCardType, value: 1 }
               : newMatrix[rowIndex][cellIndex];
           }
