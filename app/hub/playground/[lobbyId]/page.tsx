@@ -74,15 +74,6 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
       setGameSession(session);
       setPlayerData(findPlayerById(session, getUserId()));
       setTargetGameField(findPlayerById(session, getUserId())?.gameField);
-
-      if (session.currentCard) {
-        setCardData({
-          ...cardData,
-          card: session.currentCard,
-          type: session.currentCard.type[0],
-          matrix: session.currentCard.matrix,
-        });
-      }
     });
 
     socket.on('GAME_SESSION_UPDATED', (data) => {
