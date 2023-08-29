@@ -37,7 +37,7 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
 
   const matrixHandler = (row: number, column: number) => {
     if (playerData && cardData && cardData.matrix) {
-      const newMatrix = playerData.gameField;
+      const newMatrix = [...playerData.gameField.map((row) => [...row])];
 
       for (let cardRow = 0; cardRow < cardData.matrix.length; cardRow++) {
         for (
@@ -53,13 +53,13 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
             cellIndex >= 0 &&
             cellIndex < newMatrix[rowIndex].length
           ) {
-            // if (
-            //   newMatrix[rowIndex][cellIndex].value === 1 &&
-            //   cardData.matrix[cardRow][cardCol] !== 0
-            // ) {
-            //   console.log('there so blocked matrix');
-            //   return '';
-            // }
+            if (
+              newMatrix[rowIndex][cellIndex].value === 1 &&
+              cardData.matrix[cardRow][cardCol] !== 0
+            ) {
+              console.log('there is block');
+              return '';
+            }
 
             newMatrix[rowIndex][cellIndex] = cardData.matrix[cardRow][cardCol]
               ? { type: cardData.type, value: 1 }
