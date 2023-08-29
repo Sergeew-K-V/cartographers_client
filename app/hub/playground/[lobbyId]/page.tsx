@@ -14,12 +14,7 @@ import {
   GameSessionStages,
   GameSessionRules,
 } from '@/entities/playground';
-import {
-  IGameCardData,
-  IGameSessionClient,
-  IUserGameData,
-  IGameCardType,
-} from '@/shared/api';
+import { IGameCardData, IGameSessionClient, IUserGameData } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
 import { Button, Loader } from '@/shared/ui';
 import { findPlayerById, isSessionHost } from './utils';
