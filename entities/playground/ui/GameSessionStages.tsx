@@ -8,28 +8,28 @@ const GameSessionStages = () => {
         <ImageCustom
           src="/images/other/stage_a.png"
           alt="stage-a"
-          className="w-auto h-auto"
+          className="w-auto h-auto pointer-events-none"
         />
       </div>
       <div>
         <ImageCustom
           src="/images/other/stage_b.png"
           alt="stage-b"
-          className="w-auto h-auto"
+          className="w-auto h-auto pointer-events-none"
         />
       </div>
       <div>
         <ImageCustom
           src="/images/other/stage_c.png"
           alt="stage-c"
-          className="w-auto h-auto"
+          className="w-auto h-auto pointer-events-none"
         />
       </div>
       <div>
         <ImageCustom
           src="/images/other/stage_d.png"
           alt="stage-d"
-          className="w-auto h-auto"
+          className="w-auto h-auto pointer-events-none"
         />
       </div>
     </div>

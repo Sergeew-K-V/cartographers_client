@@ -38,7 +38,7 @@ const CardView = ({
             }
             width={600}
             height={600}
-            className="w-auto h-44 rounded-2xl"
+            className="w-auto h-44 rounded-2xl pointer-events-none"
             alt="Previous card"
           />
         </div>
@@ -54,7 +54,7 @@ const CardView = ({
             src="/images/other/explore_back.jpg"
             width={600}
             height={600}
-            className="w-auto h-44 rounded-2xl"
+            className="w-auto h-44 rounded-2xl pointer-events-none"
             alt="Previous card"
           />
         </div>

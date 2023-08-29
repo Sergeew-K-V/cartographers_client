@@ -52,7 +52,7 @@ const MatrixCursor = ({
               cellSize
             );
         } else {
-          ctx.strokeRect(col * cellSize, row * cellSize, cellSize, cellSize);
+          ctx.clearRect(col * cellSize, row * cellSize, cellSize, cellSize);
         }
       }
     }
