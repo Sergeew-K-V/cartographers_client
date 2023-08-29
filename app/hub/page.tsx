@@ -112,7 +112,7 @@ const HubPage = (): JSX.Element => {
         </h1>
         <div className="flex gap-4">
           <div className="relative w-fit h-96 overflow-y-auto shadow-md sm:rounded-lg">
-            <table className="text-sm text-left text-secondary-500 rounded-full">
+            <table className="text-sm text-left text-secondary-500 rounded-full min-w-[500px]">
               <thead className="text-xs text-secondary-700 uppercase bg-secondary-200">
                 <tr>
                   <th scope="col" className="px-6 py-3">
