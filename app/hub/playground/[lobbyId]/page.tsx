@@ -18,7 +18,6 @@ import {
   IGameCardData,
   IGameSessionClient,
   IUserGameData,
-  IGameFieldMatrix,
   IGameCardType,
 } from '@/shared/api';
 import { useAuth, useSocket } from '@/shared/lib';
@@ -42,9 +41,8 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
     useState<boolean>(false);
 
   const matrixHandler = (row: number, column: number) => {
-    if (cardData && cardData.matrix) {
-      const newMatrix: IGameFieldMatrix =
-        playerData?.gameField as IGameFieldMatrix;
+    if (playerData && cardData && cardData.matrix) {
+      const newMatrix = playerData.gameField;
 
       for (let cardRow = 0; cardRow < cardData.matrix.length; cardRow++) {
         for (
@@ -67,8 +65,9 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
             //   console.log('there so blocked matrix');
             //   return '';
             // }
+
             newMatrix[rowIndex][cellIndex] = cardData.matrix[cardRow][cardCol]
-              ? { type: cardData.type as IGameCardType, value: 1 }
+              ? { type: cardData.type, value: 1 }
               : newMatrix[rowIndex][cellIndex];
           }
         }
@@ -76,7 +75,7 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
       setPlayerData({
         ...playerData,
         gameField: newMatrix,
-      } as IUserGameData);
+      });
     }
   };
 

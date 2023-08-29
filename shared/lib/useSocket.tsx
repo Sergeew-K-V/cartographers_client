@@ -7,13 +7,13 @@ import { AppSocket } from '../api';
 interface ISocketContext {
   socket: AppSocket;
 }
+if (!process.env.NEXT_PUBLIC_SERVER_URL) {
+  throw new Error('NEXT_PUBLIC_SERVER_URL is not defined');
+}
 
-export const socket: AppSocket = io(
-  process.env.NEXT_PUBLIC_SERVER_URL as string,
-  {
-    autoConnect: false,
-  }
-);
+export const socket: AppSocket = io(process.env.NEXT_PUBLIC_SERVER_URL, {
+  autoConnect: false,
+});
 
 export const SocketContext = createContext<ISocketContext>({ socket });
 

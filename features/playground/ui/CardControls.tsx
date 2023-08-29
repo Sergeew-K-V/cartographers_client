@@ -1,12 +1,7 @@
 'use client';
 
 import { Dispatch, SetStateAction } from 'react';
-import {
-  ICardMatrix,
-  IGameCard,
-  IGameCardData,
-  IGameCardType,
-} from '@/shared/api';
+import { ICardMatrix, IGameCardData, IGameCardType } from '@/shared/api';
 import SelectMatrixShape from './SelectMatrixShape';
 import SelectMatrixType from './SelectMatrixType';
 
@@ -16,25 +11,25 @@ interface CardControlsProps {
 }
 
 const CardControls = ({ cardData, setCardData }: CardControlsProps) => {
-  const changeCardDataType = (type: string | null) => {
+  const changeCardDataType = (type: IGameCardType) => {
     cardData && setCardData({ ...cardData, type });
   };
 
-  const changeCardDataMatrix = (matrix: ICardMatrix | null) => {
+  const changeCardDataMatrix = (matrix: ICardMatrix) => {
     cardData && setCardData({ ...cardData, matrix });
   };
 
-  if (cardData) {
+  if (cardData && cardData.card && cardData.matrix) {
     return (
       <>
         <SelectMatrixType
-          card={cardData.card as IGameCard}
-          cardType={cardData.type as IGameCardType}
+          card={cardData.card}
+          cardType={cardData.type}
           changeCardDataType={changeCardDataType}
         />
         <SelectMatrixShape
-          card={cardData.card as IGameCard}
-          matrix={cardData.matrix as ICardMatrix}
+          card={cardData.card}
+          matrix={cardData.matrix}
           changeCardDataMatrix={changeCardDataMatrix}
         />
       </>

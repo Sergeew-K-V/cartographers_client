@@ -47,14 +47,18 @@ const SelectMatrixShape = ({
 
   return (
     <>
-      <div
-        className={
-          'game-card-matrix-shape-coinsMatrix' +
-          ' ' +
-          isActive(matrix, card.coinsMatrix as ICardMatrix)
-        }
-        onClick={() => changeCardDataMatrix(card.coinsMatrix as ICardMatrix)}
-      />
+      {card.coinsMatrix && (
+        <div
+          className={
+            'game-card-matrix-shape-coinsMatrix' +
+            ' ' +
+            isActive(matrix, card.coinsMatrix)
+          }
+          onClick={() =>
+            card.coinsMatrix && changeCardDataMatrix(card.coinsMatrix)
+          }
+        />
+      )}
       <div
         className={
           'game-card-matrix-shape-matrix' + ' ' + isActive(matrix, card.matrix)

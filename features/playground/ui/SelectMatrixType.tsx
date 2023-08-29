@@ -6,7 +6,7 @@ import CardTypePreview from './CardTypePreview';
 interface SelectMatrixTypeProps {
   card: IGameCard;
   cardType: IGameCardType;
-  changeCardDataType: (type: string | null) => void;
+  changeCardDataType: (type: IGameCardType) => void;
 }
 
 const SelectMatrixType = ({

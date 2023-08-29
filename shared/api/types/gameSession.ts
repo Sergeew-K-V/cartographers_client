@@ -69,7 +69,7 @@ interface IUserGameData {
 
 interface IGameCardData {
   card: IGameCard | null;
-  type: IGameCardType | null;
+  type: IGameCardType;
   matrix: ICardMatrix | null;
 }
 
