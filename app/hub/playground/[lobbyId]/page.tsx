@@ -38,6 +38,8 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
   const [playerData, setPlayerData] = useState<IUserGameData>();
   const [isLoading, setIsLoading] = useState(false);
   const [cardData, setCardData] = useState<IGameCardData | null>(null);
+  const [isVisibleMatrixCursor, setIsVisibleMatrixCursor] =
+    useState<boolean>(false);
 
   const matrixHandler = (row: number, column: number) => {
     if (cardData && cardData.matrix) {
@@ -52,8 +54,6 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
         ) {
           const rowIndex = row + cardRow;
           const cellIndex = column + cardCol;
-          console.log('matrixHandler ~ rowIndex:', rowIndex);
-          console.log('matrixHandler ~ cellIndex:', cellIndex);
           if (
             rowIndex >= 0 &&
             rowIndex < newMatrix.length &&
@@ -171,6 +171,9 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
             <PlaygroundField
               playerData={playerData}
               matrixHandler={matrixHandler}
+              cardData={cardData}
+              isVisibleMatrixCursor={isVisibleMatrixCursor}
+              setIsVisibleMatrixCursor={setIsVisibleMatrixCursor}
             />
           </div>
           <div className="relative">
