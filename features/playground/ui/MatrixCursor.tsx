@@ -56,7 +56,7 @@ const MatrixCursor = ({
         }
       }
     }
-  }, [matrix, rows, cols, cellSize, selectedType]);
+  }, [cols, matrix, rows, selectedType]);
 
   return (
     <canvas
