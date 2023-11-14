@@ -7,6 +7,7 @@ import {
   isHostLobby,
   countScore,
   isEqualMatrix,
+  isAbleToSetMatrix,
 } from './utils';
 
 export {
@@ -22,4 +23,5 @@ export {
   isHostLobby,
   countScore,
   isEqualMatrix,
+  isAbleToSetMatrix,
 };
