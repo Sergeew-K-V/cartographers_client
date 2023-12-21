@@ -15,7 +15,7 @@ import {
   GameSessionRules,
 } from '@/entities/playground';
 import { IGameCardData, IGameSessionClient, IUserGameData } from '@/shared/api';
-import { useAuth, useSocket } from '@/shared/lib';
+import { isAbleToSetMatrix, useAuth, useSocket } from '@/shared/lib';
 import { Button, Loader } from '@/shared/ui';
 import { findPlayerById, isSessionHost } from './utils';
 
@@ -37,40 +37,19 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
 
   const matrixHandler = (row: number, column: number) => {
     if (playerData && cardData && cardData.matrix) {
-      const newMatrix = [...playerData.gameField.map((row) => [...row])];
-
-      for (let cardRow = 0; cardRow < cardData.matrix.length; cardRow++) {
-        for (
-          let cardCol = 0;
-          cardCol < cardData.matrix[cardRow].length;
-          cardCol++
-        ) {
-          const rowIndex = row + cardRow;
-          const cellIndex = column + cardCol;
-          if (
-            rowIndex >= 0 &&
-            rowIndex < newMatrix.length &&
-            cellIndex >= 0 &&
-            cellIndex < newMatrix[rowIndex].length
-          ) {
-            if (
-              newMatrix[rowIndex][cellIndex].value === 1 &&
-              cardData.matrix[cardRow][cardCol] !== 0
-            ) {
-              console.log('there is block');
-              return '';
-            }
-
-            newMatrix[rowIndex][cellIndex] = cardData.matrix[cardRow][cardCol]
-              ? { type: cardData.type, value: 1 }
-              : newMatrix[rowIndex][cellIndex];
-          }
-        }
+      const newMatrix = isAbleToSetMatrix(
+        cardData.matrix,
+        playerData.gameField,
+        cardData.type,
+        column,
+        row
+      );
+      if (newMatrix) {
+        setPlayerData({
+          ...playerData,
+          gameField: newMatrix,
+        });
       }
-      setPlayerData({
-        ...playerData,
-        gameField: newMatrix,
-      });
     }
   };
 
