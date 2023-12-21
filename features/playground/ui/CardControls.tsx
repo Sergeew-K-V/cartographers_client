@@ -2,6 +2,7 @@
 
 import { Dispatch, SetStateAction } from 'react';
 import { ICardMatrix, IGameCardData, IGameCardType } from '@/shared/api';
+import { Button } from '@/shared/ui';
 import SelectMatrixShape from './SelectMatrixShape';
 import SelectMatrixType from './SelectMatrixType';
 
