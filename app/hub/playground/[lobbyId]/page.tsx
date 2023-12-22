@@ -74,16 +74,6 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
     }
   };
 
-  const rotateCardMatrix = (direction: 'left' | 'right') => {
-    if (cardData && cardData.matrix) {
-      const newMatrix =
-        direction === 'left'
-          ? cardData.matrix.map((row) => row.reverse())
-          : cardData.matrix.reverse();
-      setCardData({ ...cardData, matrix: newMatrix });
-    }
-  };
-
   useEffect(() => {
     if (!socket.connected) {
       socket.connect();
@@ -166,30 +156,7 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
               playedCards={gameSession.playedCards}
             />
             <CardControls cardData={cardData} setCardData={setCardData} />
-            <div className="grid gap-y-4 grid-cols-2 mt-4">
-              <div className="w-44">
-                <Button
-                  className="primary-button"
-                  onClick={() => rotateCardMatrix('left')}
-                >
-                  Rotate left
-                </Button>
-              </div>
-              <div className="w-44">
-                <Button className="primary-button">Mirror horizontally</Button>
-              </div>
-              <div className="w-44">
-                <Button
-                  className="primary-button"
-                  onClick={() => rotateCardMatrix('right')}
-                >
-                  Rotate right
-                </Button>
-              </div>
-              <div className="w-44">
-                <Button className="primary-button">Mirror vertically</Button>
-              </div>
-            </div>
+
             <div className="mt-4">
               <GameControls />
             </div>
