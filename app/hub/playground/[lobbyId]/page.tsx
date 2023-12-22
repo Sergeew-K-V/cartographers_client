@@ -156,6 +156,7 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
               playedCards={gameSession.playedCards}
             />
             <CardControls cardData={cardData} setCardData={setCardData} />
+
             <div className="mt-4">
               <GameControls />
             </div>
