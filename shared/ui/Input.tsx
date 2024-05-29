@@ -30,7 +30,7 @@ const Input = ({
   id,
 }: InputProps): JSX.Element => {
   const [focus, setFocus] = useState(false);
-  
+
   return (
     <div className="relative pb-6">
       <input
