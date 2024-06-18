@@ -13,50 +13,56 @@ const CardView = ({
   playedCards,
 }: CardViewProps) => {
   return (
-    <div className="flex justify-between h-fit gap-4">
-      <div className="flex flex-col gap-y-2 text-center justify-center">
+    <div className="flex justify-between gap-4">
+      <div className="flex flex-col gap-y-2 text-center shrink-0 basis-1/2">
         <span className="uppercase font-bold text-xl">Current card</span>
-        <ImageCustom
-          src={
-            currentCard
-              ? `/images/cards/${currentCard.img}`
-              : '/images/other/explore_back.jpg'
-          }
-          width={600}
-          height={600}
-          className="w-60 h-80 rounded-2xl"
-          alt="Current card"
-        />
-      </div>
-      <div className="flex flex-col">
-        <div className="flex flex-col gap-y-2 items-center">
-          <span className="font-bold">Previous card</span>
+        <div>
           <ImageCustom
             src={
-              playedCards[playedCards.length - 1] ||
-              '/images/other/explore_back.jpg'
+              currentCard
+                ? `/images/cards/${currentCard.img}`
+                : '/images/other/explore_back.jpg'
             }
             width={600}
             height={600}
-            className="w-auto h-44 rounded-2xl pointer-events-none"
-            alt="Previous card"
+            className="object-contain rounded-2xl"
+            alt="Current card"
           />
         </div>
-        <div className="flex flex-col gap-y-2 items-center">
-          <span className="font-bold">
+      </div>
+      <div className="flex flex-col gap-2 ">
+        <div className="flex flex-col gap-y-2 text-center items-center">
+          <span className="font-bold text-xl">Previous card</span>
+          <div className="w-[65%]">
+            <ImageCustom
+              src={
+                playedCards[playedCards.length - 1] ||
+                '/images/other/explore_back.jpg'
+              }
+              width={600}
+              height={600}
+              className="rounded-2xl pointer-events-none object-contain h-full"
+              alt="Previous card"
+            />
+          </div>
+        </div>
+        <div className="flex flex-col gap-y-2 text-center items-center">
+          <span className="font-bold text-xl">
             Remaining cards in the deck{' '}
             {currentCard
               ? poolOfCardsNumber - playedCards.length - 1
               : poolOfCardsNumber - playedCards.length}
             /{poolOfCardsNumber}
           </span>
-          <ImageCustom
-            src="/images/other/explore_back.jpg"
-            width={600}
-            height={600}
-            className="w-auto h-44 rounded-2xl pointer-events-none"
-            alt="Previous card"
-          />
+          <div className="w-[65%]">
+            <ImageCustom
+              src="/images/other/explore_back.jpg"
+              width={600}
+              height={600}
+              className="rounded-2xl pointer-events-none object-contain h-full"
+              alt="Previous card"
+            />
+          </div>
         </div>
       </div>
     </div>

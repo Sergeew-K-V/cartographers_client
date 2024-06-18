@@ -118,7 +118,7 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
   return (
     <div className="container min-w-full relative">
       {gameSession && playerData && (
-        <div className="grid grid-cols-3 w-full justify-items-center">
+        <div className="grid grid-cols-3 gap-x-4 w-full justify-items-center">
           <div className="">
             <GameSessionStages />
             <GameSessionRules gameSession={gameSession} />
@@ -133,22 +133,24 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
                 handleChangeGameStatus={handleChangeGameStatus}
                 rerollPointCardsHandler={rerollPointCardsHandler}
               />
+
               <div className="w-32">
                 <Button onClick={leaveLobbyHandler} className="primary-button">
                   Leave lobby
                 </Button>
               </div>
             </div>
+            <div className="mt-4">
+              <GameControls />
+            </div>
           </div>
-          <div>
-            <PlaygroundField
-              playerData={playerData}
-              matrixHandler={matrixHandler}
-              cardData={cardData}
-              isVisibleMatrixCursor={isVisibleMatrixCursor}
-              setIsVisibleMatrixCursor={setIsVisibleMatrixCursor}
-            />
-          </div>
+          <PlaygroundField
+            playerData={playerData}
+            matrixHandler={matrixHandler}
+            cardData={cardData}
+            isVisibleMatrixCursor={isVisibleMatrixCursor}
+            setIsVisibleMatrixCursor={setIsVisibleMatrixCursor}
+          />
           <div className="relative">
             <CardView
               currentCard={gameSession.currentCard}
@@ -156,10 +158,6 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
               playedCards={gameSession.playedCards}
             />
             <CardControls cardData={cardData} setCardData={setCardData} />
-
-            <div className="mt-4">
-              <GameControls />
-            </div>
           </div>
         </div>
       )}

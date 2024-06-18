@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { ICardMatrix, IGameCardType } from '@/shared/api';
 
 interface MatrixCursorProps {
@@ -19,7 +19,10 @@ const MatrixCursor = ({
   selectedType,
 }: MatrixCursorProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const cellSize = 46;
+  const cellSize = useMemo(() => {
+    return window.innerWidth > 1536 ? 46 : 35;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [window.innerWidth]);
   const rows = matrix.length;
   const cols = matrix[0].length;
   const width = cols * cellSize;
