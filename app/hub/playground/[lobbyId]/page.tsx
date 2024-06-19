@@ -156,6 +156,8 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
               currentCard={gameSession.currentCard}
               poolOfCardsNumber={gameSession.poolOfCardsNumber}
               playedCards={gameSession.playedCards}
+              cardData={cardData}
+              setCardData={setCardData}
             />
             <CardControls cardData={cardData} setCardData={setCardData} />
           </div>

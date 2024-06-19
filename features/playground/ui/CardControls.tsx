@@ -1,10 +1,8 @@
 'use client';
 
 import { Dispatch, SetStateAction } from 'react';
-import { ICardMatrix, IGameCardData, IGameCardType } from '@/shared/api';
+import { IGameCardData } from '@/shared/api';
 import { Button, ImageCustom } from '@/shared/ui';
-import SelectMatrixShape from './SelectMatrixShape';
-import SelectMatrixType from './SelectMatrixType';
 
 interface CardControlsProps {
   cardData: IGameCardData | null;
@@ -12,14 +10,6 @@ interface CardControlsProps {
 }
 
 const CardControls = ({ cardData, setCardData }: CardControlsProps) => {
-  const changeCardDataType = (type: IGameCardType) => {
-    cardData && setCardData({ ...cardData, type });
-  };
-
-  const changeCardDataMatrix = (matrix: ICardMatrix) => {
-    cardData && setCardData({ ...cardData, matrix });
-  };
-
   const rotateCardMatrix = (direction: 'left' | 'right') => {
     if (cardData && cardData.matrix) {
       const matrix = cardData.matrix;
@@ -45,61 +35,49 @@ const CardControls = ({ cardData, setCardData }: CardControlsProps) => {
   };
   if (cardData && cardData.card && cardData.matrix) {
     return (
-      <>
-        <SelectMatrixType
-          card={cardData.card}
-          cardType={cardData.type}
-          changeCardDataType={changeCardDataType}
-        />
-        <SelectMatrixShape
-          card={cardData.card}
-          matrix={cardData.matrix}
-          changeCardDataMatrix={changeCardDataMatrix}
-        />
-        <div className="mt-4">
-          <div className="flex">
-            <div className="w-44 m-4 ml-0">
-              <Button
-                className="primary-button flex justify-evenly items-center"
-                onClick={() => rotateCardMatrix('left')}
-              >
-                <ImageCustom
-                  src="/images/other/rotate-left.png"
-                  alt="rotate-left"
-                  className="w-8"
-                />
-                <span>Rotate left</span>
-              </Button>
-            </div>
-            <div className="w-44 m-4 ml-0">
-              <Button
-                className="primary-button flex justify-evenly items-center"
-                onClick={() => rotateCardMatrix('right')}
-              >
-                <ImageCustom
-                  src="/images/other/rotate-right.png"
-                  alt="rotate-right"
-                  className="w-8"
-                />
-                <span>Rotate right</span>
-              </Button>
-            </div>
-          </div>
-          <div className="w-44 m-4 ml-0 row-start-1">
+      <div className="mt-4">
+        <div className="flex">
+          <div className="w-44 m-4 ml-0">
             <Button
               className="primary-button flex justify-evenly items-center"
-              onClick={mirrorCardMatrix}
+              onClick={() => rotateCardMatrix('left')}
             >
               <ImageCustom
-                src="/images/other/flip.png"
+                src="/images/other/rotate-left.png"
+                alt="rotate-left"
+                className="w-8"
+              />
+              <span>Rotate left</span>
+            </Button>
+          </div>
+          <div className="w-44 m-4 ml-0">
+            <Button
+              className="primary-button flex justify-evenly items-center"
+              onClick={() => rotateCardMatrix('right')}
+            >
+              <ImageCustom
+                src="/images/other/rotate-right.png"
                 alt="rotate-right"
                 className="w-8"
               />
-              <span>Mirror</span>
+              <span>Rotate right</span>
             </Button>
           </div>
         </div>
-      </>
+        <div className="w-44 m-4 ml-0 row-start-1">
+          <Button
+            className="primary-button flex justify-evenly items-center"
+            onClick={mirrorCardMatrix}
+          >
+            <ImageCustom
+              src="/images/other/flip.png"
+              alt="rotate-right"
+              className="w-8"
+            />
+            <span>Mirror</span>
+          </Button>
+        </div>
+      </div>
     );
   } else {
     return null;

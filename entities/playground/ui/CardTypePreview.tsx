@@ -24,9 +24,7 @@ const CardTypePreview = ({
         className={
           'cursor-pointer' +
           ' ' +
-          (card.type.length !== 5
-            ? 'game-card-type-size-one-two'
-            : 'game-card-type-size-five') +
+          (card.type.length !== 5 ? 'w-[47px] h-[47px]' : 'w-[36px] h-[36px]') +
           ' ' +
           isActiveType
         }
@@ -46,9 +44,7 @@ const CardTypePreview = ({
     return (
       <div
         key={type}
-        className={
-          'cursor-pointer game-card-type-size-one-two' + ' ' + isActiveType
-        }
+        className={'cursor-pointer w-[48px] h-[48px]' + ' ' + isActiveType}
       >
         <ImageCustom
           width={100}
@@ -64,7 +60,7 @@ const CardTypePreview = ({
   return (
     <div
       key={type}
-      className={'cursor-pointer game-card-type-size-five' + ' ' + isActiveType}
+      className={'cursor-pointer w-[42px] h-[42px]' + ' ' + isActiveType}
     >
       <ImageCustom
         width={100}

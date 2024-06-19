@@ -1,19 +1,26 @@
 'use client';
 
-import { IGameCard, IGameCardType } from '@/shared/api';
+import { Dispatch, SetStateAction } from 'react';
+import { IGameCard, IGameCardData, IGameCardType } from '@/shared/api';
 import CardTypePreview from './CardTypePreview';
 
 interface SelectMatrixTypeProps {
   card: IGameCard;
   cardType: IGameCardType;
-  changeCardDataType: (type: IGameCardType) => void;
+  cardData: IGameCardData;
+  setCardData: Dispatch<SetStateAction<IGameCardData | null>>;
 }
 
 const SelectMatrixType = ({
   card,
   cardType,
-  changeCardDataType,
+  cardData,
+  setCardData,
 }: SelectMatrixTypeProps) => {
+  const changeCardDataType = (type: IGameCardType) => {
+    cardData && setCardData({ ...cardData, type });
+  };
+
   const renderCardType = (type: IGameCardType) => {
     switch (type) {
       case 'ruins':
@@ -33,10 +40,10 @@ const SelectMatrixType = ({
 
   const countOfType = () => {
     if (card.type.length === 1 && card.type[0] === 'enemy')
-      return 'game-card-type-position-1-enemy';
-    if (card.type.length === 1) return 'game-card-type-position-1';
-    if (card.type.length === 2) return 'game-card-type-position-2';
-    if (card.type.length === 5) return 'game-card-type-position-5';
+      return 'top-[38%] left-[9.4%]';
+    if (card.type.length === 1) return 'top-[15.3vw] left-[21.6%]';
+    if (card.type.length === 2) return 'gap-x-[4.2vw] top-[34.4%] left-[10.7%]';
+    if (card.type.length === 5) return 'gap-x-[0.35vw] top-[34.7%] left-[5.8%]';
   };
 
   return (

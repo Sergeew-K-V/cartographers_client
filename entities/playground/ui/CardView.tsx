@@ -1,16 +1,23 @@
-import { IGameCard } from '@/shared/api';
+import { Dispatch, SetStateAction } from 'react';
+import { IGameCard, IGameCardData } from '@/shared/api';
 import { ImageCustom } from '@/shared/ui';
+import SelectMatrixShape from './SelectMatrixShape';
+import SelectMatrixType from './SelectMatrixType';
 
 interface CardViewProps {
   currentCard: IGameCard | null;
   poolOfCardsNumber: number;
   playedCards: string[];
+  cardData: IGameCardData | null;
+  setCardData: Dispatch<SetStateAction<IGameCardData | null>>;
 }
 
 const CardView = ({
   currentCard,
   poolOfCardsNumber,
   playedCards,
+  cardData,
+  setCardData,
 }: CardViewProps) => {
   return (
     <div className="flex justify-between gap-4">
@@ -28,6 +35,22 @@ const CardView = ({
             className="object-contain rounded-2xl"
             alt="Current card"
           />
+          {cardData && cardData.card && cardData.matrix && (
+            <SelectMatrixType
+              card={cardData.card}
+              cardType={cardData.type}
+              setCardData={setCardData}
+              cardData={cardData}
+            />
+          )}
+          {cardData && cardData.card && cardData.matrix && (
+            <SelectMatrixShape
+              card={cardData.card}
+              matrix={cardData.matrix}
+              setCardData={setCardData}
+              cardData={cardData}
+            />
+          )}
         </div>
       </div>
       <div className="flex flex-col gap-2 ">
