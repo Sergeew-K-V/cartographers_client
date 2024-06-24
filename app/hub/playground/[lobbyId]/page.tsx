@@ -34,7 +34,10 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
   const [cardData, setCardData] = useState<IGameCardData | null>(null);
   const [isVisibleMatrixCursor, setIsVisibleMatrixCursor] =
     useState<boolean>(false);
-
+  useEffect(() => {
+    console.log('🚀 ~ useEffect ~ playerData:', playerData);
+    console.log('🚀 ~ useEffect ~ gameSession:', gameSession);
+  }, [gameSession, playerData]);
   const matrixHandler = (row: number, column: number) => {
     if (playerData && cardData && cardData.matrix) {
       const newMatrix = isAbleToSetMatrix(
@@ -123,24 +126,23 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
             <GameSessionStages />
             <GameSessionRules gameSession={gameSession} />
             <PlayerTable playerList={gameSession.players} />
-            <div className="flex gap-2 mt-4">
-              <HostControls
-                sessionStarted={gameSession.isStarted}
-                isSessionHost={isSessionHost(
-                  gameSession.host,
-                  playerData.nickname
-                )}
-                handleChangeGameStatus={handleChangeGameStatus}
-                rerollPointCardsHandler={rerollPointCardsHandler}
-              />
-
+            <div className="grid grid-cols-4 gap-2 mt-4">
+              {gameSession.host === playerData.nickname && (
+                <HostControls
+                  sessionStarted={gameSession.isStarted}
+                  isSessionHost={isSessionHost(
+                    gameSession.host,
+                    playerData.nickname
+                  )}
+                  handleChangeGameStatus={handleChangeGameStatus}
+                  rerollPointCardsHandler={rerollPointCardsHandler}
+                />
+              )}
               <div className="w-32">
                 <Button onClick={leaveLobbyHandler} className="primary-button">
                   Leave lobby
                 </Button>
               </div>
-            </div>
-            <div className="mt-4">
               <GameControls />
             </div>
           </div>
