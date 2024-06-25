@@ -6,7 +6,7 @@ const SeasonsCounter = ({ seasonsList }: SeasonsCounterProps) => {
   const [seasonFirst, seasonSecond, coins, enemy] = seasonsList;
   return (
     <div className="grid grid-cols-2 gap-2">
-      <div className="grid grid-cols-2 text-center gap-1">
+      <div className="grid grid-cols-2 text-center">
         <span>{seasonFirst}</span>
         <span>{seasonSecond}</span>
         <span>{coins}</span>

@@ -18,34 +18,4 @@
   .input-label-pseudo-label {
     @apply after:absolute after:content-[''] left-[20px] after:top-1/2 after:-z-10 after:-left-[2px] after:h-[1px] after:bg-secondary-50;
   }
-  .game-card-type-position-1 {
-    @apply top-[16rem] left-[6.2rem];
-  }
-  .game-card-type-position-2 {
-    @apply gap-x-[4rem] top-[16rem] left-[2.8rem];
-  }
-  .game-card-type-position-5 {
-    @apply gap-x-[0.2rem] top-[16.3rem] left-[1.3rem];
-  }
-  .game-card-type-position-1-enemy {
-    @apply top-[17.6rem] left-[3.1rem];
-  }
-  .game-card-type-size-one-two {
-    @apply w-[42px] h-[42px];
-  }
-  .game-card-type-size-five {
-    @apply w-[36px] h-[36px];
-  }
-  .game-card-matrix-shape-coinsMatrix {
-    @apply absolute top-[19rem] left-[0.8rem] w-[6.4rem] h-[4rem] cursor-pointer;
-  }
-  .game-card-matrix-shape-matrix {
-    @apply absolute top-[19rem] left-[7.8rem] w-[6.4rem] h-[4rem] cursor-pointer;
-  }
-  .game-card-matrix-without-coinsMatrix {
-    @apply absolute top-[19rem] left-[0.8rem] w-[13.4rem] h-[4rem] border-2 border-white border-dashed;
-  }
-  .game-card-matrix-enemy {
-    @apply absolute top-[15.3rem] left-[7.5rem] w-[6.7rem] h-[7.6rem] border-2 border-white border-dashed;
-  }
 }

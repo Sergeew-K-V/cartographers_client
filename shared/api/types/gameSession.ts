@@ -57,7 +57,7 @@ interface IGameSessionClient {
 }
 
 interface IUserGameData {
-  _id: string;
+  id: string;
   nickname: string;
   gameField: IGameFieldMatrix;
   isReady: boolean;

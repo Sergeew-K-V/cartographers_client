@@ -10,7 +10,7 @@ interface PlayerTableProps {
 const PlayerTable = ({ playerList }: PlayerTableProps) => {
   return (
     <div>
-      <div className="mb-2">Game stats</div>
+      <div className="mb-2 text-xl font-bold">Game stats</div>
       <table className="text-sm text-left text-secondary-500 shadow-xl bg-secondary-50 h-fit w-full">
         <thead className="text-xs text-secondary-700 uppercase bg-secondary-200 text-center">
           <tr>
@@ -32,7 +32,7 @@ const PlayerTable = ({ playerList }: PlayerTableProps) => {
                 isReady={player.isReady}
                 name={player.nickname}
                 score={countScore(player)}
-                key={player._id}
+                key={player.id}
               />
             );
           })}

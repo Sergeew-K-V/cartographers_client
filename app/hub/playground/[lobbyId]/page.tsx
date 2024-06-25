@@ -34,7 +34,10 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
   const [cardData, setCardData] = useState<IGameCardData | null>(null);
   const [isVisibleMatrixCursor, setIsVisibleMatrixCursor] =
     useState<boolean>(false);
-
+  useEffect(() => {
+    console.log('🚀 ~ useEffect ~ playerData:', playerData);
+    console.log('🚀 ~ useEffect ~ gameSession:', gameSession);
+  }, [gameSession, playerData]);
   const matrixHandler = (row: number, column: number) => {
     if (playerData && cardData && cardData.matrix) {
       const newMatrix = isAbleToSetMatrix(
@@ -72,6 +75,10 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
         socket.emit('START_GAME', gameSession.id);
       }
     }
+  };
+
+  const handleSubmitStep = () => {
+    socket.emit('PLAYER_SUBMIT_STEP', lobbyId, getUserId());
   };
 
   useEffect(() => {
@@ -118,48 +125,50 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
   return (
     <div className="container min-w-full relative">
       {gameSession && playerData && (
-        <div className="grid grid-cols-3 w-full justify-items-center">
+        <div className="grid grid-cols-3 gap-x-4 w-full justify-items-center">
           <div className="">
             <GameSessionStages />
             <GameSessionRules gameSession={gameSession} />
             <PlayerTable playerList={gameSession.players} />
-            <div className="flex gap-2 mt-4">
-              <HostControls
-                sessionStarted={gameSession.isStarted}
-                isSessionHost={isSessionHost(
-                  gameSession.host,
-                  playerData.nickname
-                )}
-                handleChangeGameStatus={handleChangeGameStatus}
-                rerollPointCardsHandler={rerollPointCardsHandler}
-              />
+            <div className="grid grid-cols-4 gap-2 mt-4">
+              {gameSession.host === playerData.nickname && (
+                <HostControls
+                  sessionStarted={gameSession.isStarted}
+                  isSessionHost={isSessionHost(
+                    gameSession.host,
+                    playerData.nickname
+                  )}
+                  handleChangeGameStatus={handleChangeGameStatus}
+                  rerollPointCardsHandler={rerollPointCardsHandler}
+                />
+              )}
               <div className="w-32">
                 <Button onClick={leaveLobbyHandler} className="primary-button">
                   Leave lobby
                 </Button>
               </div>
+              <GameControls
+                isSubmitted={playerData.isReady}
+                onSubmitStep={handleSubmitStep}
+              />
             </div>
           </div>
-          <div>
-            <PlaygroundField
-              playerData={playerData}
-              matrixHandler={matrixHandler}
-              cardData={cardData}
-              isVisibleMatrixCursor={isVisibleMatrixCursor}
-              setIsVisibleMatrixCursor={setIsVisibleMatrixCursor}
-            />
-          </div>
+          <PlaygroundField
+            playerData={playerData}
+            matrixHandler={matrixHandler}
+            cardData={cardData}
+            isVisibleMatrixCursor={isVisibleMatrixCursor}
+            setIsVisibleMatrixCursor={setIsVisibleMatrixCursor}
+          />
           <div className="relative">
             <CardView
               currentCard={gameSession.currentCard}
               poolOfCardsNumber={gameSession.poolOfCardsNumber}
               playedCards={gameSession.playedCards}
+              cardData={cardData}
+              setCardData={setCardData}
             />
             <CardControls cardData={cardData} setCardData={setCardData} />
-
-            <div className="mt-4">
-              <GameControls />
-            </div>
           </div>
         </div>
       )}

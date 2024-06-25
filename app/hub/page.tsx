@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { HubControl } from '@/features/hub';
 import { GameSessionInfoRows, UserInfo } from '@/entities/hub';
-import { ILobby, IUser, fetchLobby, fetchUser } from '@/shared/api';
+import { ILobby, IUser, getLobbies, getUser } from '@/shared/api';
 import {
   findLobbyByLobbyId,
   isHostLobby,
@@ -18,14 +18,14 @@ const HubPage = (): JSX.Element => {
   const { push } = useRouter();
   const { socket } = useSocket();
   const { getUserId, getToken, logout } = useAuth();
-  const [user, setUser] = useState<IUser>({ email: '', nickname: '' });
+  const [user, setUser] = useState<IUser | null>(null);
   const [lobbyList, setLobbyList] = useState<ILobby[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useQuery(
     'get-user',
     () => {
-      fetchUser(getUserId(), getToken())
+      getUser(getToken(), getUserId())
         .then((res) => {
           setUser(res.data);
         })
@@ -43,10 +43,10 @@ const HubPage = (): JSX.Element => {
     }
   );
 
-  const { refetch: refetchLobbyList } = useQuery(
+  const { refetch: refetchLobbies } = useQuery(
     'get-lobbies',
     () => {
-      fetchLobby(getToken())
+      getLobbies(getToken())
         .then((res) => {
           setLobbyList(res.data);
         })
@@ -66,8 +66,10 @@ const HubPage = (): JSX.Element => {
 
   useEffect(() => {
     if (!socket.connected) {
+      console.log('🚀 ~ useEffect ~ socket.connected1:', socket.connected);
       socket.connect();
     }
+    console.log('🚀 ~ useEffect ~ socket.connected2:', socket.connected);
 
     socket.on('LOBBY_CREATED', (targetLobby: ILobby) => {
       setLobbyList((prevLobbyList) => [...prevLobbyList, targetLobby]);
@@ -126,7 +128,7 @@ const HubPage = (): JSX.Element => {
                   </th>
                   <th scope="col" className="px-6 py-3 flex justify-center">
                     <Button
-                      onClick={() => refetchLobbyList()}
+                      onClick={() => refetchLobbies()}
                       className="primary-button"
                     >
                       Refresh
@@ -135,16 +137,17 @@ const HubPage = (): JSX.Element => {
                 </tr>
               </thead>
               <tbody>
-                {lobbyList.map((lobby) => (
-                  <GameSessionInfoRows
-                    hostName={lobby.host}
-                    numberOfPlayers={lobby.userList.length}
-                    status={lobby.isStarted}
-                    lobbyId={lobby.id}
-                    user={user}
-                    key={lobby.id}
-                  />
-                ))}
+                {user &&
+                  lobbyList.map((lobby) => (
+                    <GameSessionInfoRows
+                      hostName={lobby.host}
+                      numberOfPlayers={lobby.players.length}
+                      status={lobby.isStarted}
+                      lobbyId={lobby.id}
+                      user={user}
+                      key={lobby.id}
+                    />
+                  ))}
               </tbody>
             </table>
             {lobbyList.length === 0 && (
@@ -153,7 +156,7 @@ const HubPage = (): JSX.Element => {
               </div>
             )}
           </div>
-          <UserInfo user={user} />
+          {user && <UserInfo user={user} />}
           <HubControl />
         </div>
       </div>

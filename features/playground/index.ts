@@ -4,9 +4,6 @@ import {
   HostControls,
   CardControls,
   MatrixCursor,
-  CardTypePreview,
-  SelectMatrixShape,
-  SelectMatrixType,
 } from './ui';
 
 export {
@@ -14,8 +11,5 @@ export {
   GameControls,
   HostControls,
   CardControls,
-  SelectMatrixShape,
-  SelectMatrixType,
-  CardTypePreview,
   MatrixCursor,
 };

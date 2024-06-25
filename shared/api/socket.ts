@@ -28,6 +28,7 @@ interface ClientToServerEvents {
   CREATE_GAME_SESSION: (sessionId: string, userId: string) => void;
   REMOVE_GAME_SESSION: (sessionId: string, userId: string) => void;
   REROLL_POINT_CARDS: (sessionId: string, userId: string) => void;
+  PLAYER_SUBMIT_STEP: (lobbyId: string, userId: string) => void;
 
   START_GAME: (sessionId: string) => void;
   END_GAME: (sessionId: string) => void;

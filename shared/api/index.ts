@@ -1,6 +1,4 @@
-import fetchLobby from './fetchLobby';
-import fetchUser from './fetchUser';
-
+import { getLobbies } from './lobby';
 import type {
   IUser,
   IAlert,
@@ -21,8 +19,9 @@ import {
   ServerToClientEvents,
   AppSocket,
 } from './socket';
+import { getUser } from './user';
 
-export { fetchUser, fetchLobby };
+export { getUser, getLobbies };
 export type {
   IUser,
   IAlert,

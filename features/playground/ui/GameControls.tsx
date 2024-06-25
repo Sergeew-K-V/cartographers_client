@@ -1,16 +1,20 @@
 import React from 'react';
 import { Button } from '@/shared/ui';
 
-const GameControls = () => {
+type GameControlsProps = {
+  onSubmitStep: () => void;
+  isSubmitted: boolean;
+};
+
+const GameControls = ({ onSubmitStep, isSubmitted }: GameControlsProps) => {
   return (
-    <div className="flex gap-2">
+    <>
       <div className="w-32">
-        <Button className="primary-button">Submit step</Button>
+        <Button className="primary-button" onClick={onSubmitStep}>
+          {isSubmitted ? 'Reset step' : 'Submit step'}
+        </Button>
       </div>
-      <div className="w-32">
-        <Button className="primary-button">Reset step</Button>
-      </div>
-    </div>
+    </>
   );
 };
 

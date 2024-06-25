@@ -39,7 +39,7 @@ const PlaygroundField = ({
         />
         <div
           className={
-            'grid grid-cols-11 absolute top-[165px] left-12 z-10 ' +
+            'grid grid-cols-11 absolute top-[19%] left-[8%] z-10 w-[84%] ' +
             (isVisibleMatrixCursor ? 'cursor-none' : '')
           }
           onMouseEnter={() =>
@@ -56,31 +56,30 @@ const PlaygroundField = ({
                 src={`/images/type_card/${cell.type}.png`}
                 alt={cell.type + '.png'}
                 className={
-                  'w-[46px] h-[46px] ' +
-                  (!isVisibleMatrixCursor
+                  !isVisibleMatrixCursor
                     ? 'hover:scale-[1.08] hover:border-2 hover:border-secondary-900 hover:border-dashed'
-                    : '')
+                    : ''
                 }
                 onClick={() => matrixHandler(indexRow, indexColumn)}
               />
             ))
           )}
         </div>
-        <div className="absolute top-[50px] left-[37px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
+        <div className="absolute top-[6%] left-[6%] 2xl:text-base text-xs z-10 uppercase whitespace-nowrap font-bold text-primary-700">
           {playerData.nickname}
         </div>
-        <div className="absolute top-[110px] left-[37px] z-10 uppercase whitespace-nowrap font-bold text-primary-700">
+        <div className="absolute top-[13%] left-[6%] 2xl:text-base text-xs z-10 uppercase whitespace-nowrap font-bold text-primary-700">
           {playerData.rang}
         </div>
-        <div className="absolute bottom-[120px] left-[97px] z-10 w-[490px] h-[30px] grid grid-cols-15">
+        <div className="absolute bottom-[14%] left-[16.2%] z-10 w-[81.7%] h-[3.5%] grid grid-cols-15">
           {renderCoins(playerData.coins)}
         </div>
-        <div className="absolute bottom-[35px] left-[25px] grid grid-cols-4 w-[480px] z-10 uppercase whitespace-nowrap font-bold text-secodary-700">
+        <div className="absolute bottom-[3.3%] 2xl:bottom-[4.3%] left-[3.6%] grid grid-cols-4 w-[80%] z-10 uppercase whitespace-nowrap font-bold text-secondary-700">
           {playerData.points.map((seasonList, index) => (
             <SeasonsCounter seasonsList={seasonList} key={index} />
           ))}
         </div>
-        <div className="absolute w-[30px] text-center bottom-[60px] right-[47px] z-10 uppercase whitespace-nowrap font-bold text-secodary-700">
+        <div className="absolute w-[5%] text-center bottom-[7%] right-[7.9%] z-10 uppercase whitespace-nowrap font-bold text-secondary-700">
           {countScore(playerData)}
         </div>
       </div>
