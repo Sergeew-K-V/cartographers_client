@@ -77,6 +77,10 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
     }
   };
 
+  const handleSubmitStep = () => {
+    socket.emit('PLAYER_SUBMIT_STEP', lobbyId, getUserId());
+  };
+
   useEffect(() => {
     if (!socket.connected) {
       socket.connect();
@@ -102,6 +106,7 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
     return () => {
       socket.removeAllListeners('GAME_SESSION_CREATED');
       socket.removeAllListeners('GAME_SESSION_UPDATED');
+      socket.emit('DISCONNECT');
     };
   }, [gameSession]);
 
@@ -143,7 +148,10 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
                   Leave lobby
                 </Button>
               </div>
-              <GameControls />
+              <GameControls
+                isSubmitted={playerData.isReady}
+                onSubmitStep={handleSubmitStep}
+              />
             </div>
           </div>
           <PlaygroundField
