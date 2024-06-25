@@ -106,7 +106,6 @@ const PlaygroundPage = ({ params }: PlaygroundPageProps): JSX.Element => {
     return () => {
       socket.removeAllListeners('GAME_SESSION_CREATED');
       socket.removeAllListeners('GAME_SESSION_UPDATED');
-      socket.emit('DISCONNECT');
     };
   }, [gameSession]);
 

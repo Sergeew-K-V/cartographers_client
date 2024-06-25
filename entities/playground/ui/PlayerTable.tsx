@@ -32,7 +32,7 @@ const PlayerTable = ({ playerList }: PlayerTableProps) => {
                 isReady={player.isReady}
                 name={player.nickname}
                 score={countScore(player)}
-                key={player._id}
+                key={player.id}
               />
             );
           })}
