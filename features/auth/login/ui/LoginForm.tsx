@@ -8,11 +8,13 @@ import { Button, Input, LinkButton, Loader } from '@/shared/ui';
 import { fetchLogin } from '../api';
 
 const LoginForm = (): JSX.Element => {
-  const [loginUser, setLoginUser] = useState<IUser>({
-    email: 'admin@admin.com',
+  const [loginUser, setLoginUser] = useState<
+    Omit<IUser, 'id' | 'rang' | 'gameStats'>
+  >({
+    email: '',
     nickname: '',
   });
-  const [password, setPassword] = useState<string>('admin@admin.com');
+  const [password, setPassword] = useState<string>('');
   const { login } = useAuth();
   const { setAlert } = useAlert();
   const [isLoading, setIsLoading] = useState<boolean>(false);
