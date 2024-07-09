@@ -10,7 +10,9 @@ import { fetchRegister } from '../api';
 
 const RegisterForm = () => {
   const { push } = useRouter();
-  const [registerUser, setRegisterUser] = useState<IUser>({
+  const [registerUser, setRegisterUser] = useState<
+    Omit<IUser, 'id' | 'rang' | 'gameStats'>
+  >({
     email: '',
     nickname: '',
   });
