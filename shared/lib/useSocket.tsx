@@ -12,6 +12,7 @@ if (!process.env.NEXT_PUBLIC_SERVER_URL) {
 }
 
 export const socket: AppSocket = io(process.env.NEXT_PUBLIC_SERVER_URL, {
+  path: '/socket/',
   autoConnect: false,
 });
 
